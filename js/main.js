@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCitySelector();
   initKeyboardAccessibility();
   initVideoModal();
+  initAntCursorFollower();
 });
 
 /* ==========================================
@@ -403,4 +404,99 @@ function initKeyboardAccessibility() {
       }
     }
   });
+}
+
+/* ==========================================
+   7. HORMIGUITA INTERACTIVA SEGUIDORA DE CURSOR (PC & MOBILE)
+   ========================================== */
+function initAntCursorFollower() {
+  let antContainer = document.getElementById('ant-cursor-container');
+  if (!antContainer) {
+    antContainer = document.createElement('div');
+    antContainer.id = 'ant-cursor-container';
+    antContainer.className = 'fixed top-0 left-0 pointer-events-none z-50 transition-opacity duration-500 opacity-0';
+    antContainer.innerHTML = `
+      <div id="ant-follower" class="w-7 h-7 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center filter drop-shadow-md">
+        <svg viewBox="0 0 100 100" class="w-full h-full fill-navy-950 stroke-accent-orange">
+          <!-- Ant Head -->
+          <ellipse cx="50" cy="20" rx="10" ry="12" fill="#081129" />
+          <!-- Ant Antennas -->
+          <path d="M 45 12 Q 35 2 25 5" fill="none" stroke="#E67E22" stroke-width="4" stroke-linecap="round" />
+          <path d="M 55 12 Q 65 2 75 5" fill="none" stroke="#E67E22" stroke-width="4" stroke-linecap="round" />
+          <!-- Ant Eyes -->
+          <circle cx="44" cy="18" r="2.5" fill="#4CAF50" />
+          <circle cx="56" cy="18" r="2.5" fill="#4CAF50" />
+          <!-- Ant Thorax -->
+          <ellipse cx="50" cy="45" rx="12" ry="14" fill="#0D1B3E" />
+          <!-- Ant Abdomen -->
+          <ellipse cx="50" cy="78" rx="16" ry="20" fill="#081129" />
+          <!-- Ant Legs -->
+          <path d="M 40 40 Q 20 30 10 40" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path d="M 60 40 Q 80 30 90 40" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path d="M 40 48 Q 15 48 5 55" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path d="M 60 48 Q 85 48 95 55" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path d="M 40 56 Q 20 70 12 80" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path d="M 60 56 Q 80 70 88 80" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+        </svg>
+      </div>
+    `;
+    document.body.appendChild(antContainer);
+  }
+
+  let posX = window.innerWidth / 2;
+  let posY = window.innerHeight / 2;
+  let targetX = posX;
+  let targetY = posY;
+  let currentAngle = 0;
+  let idleTimeout = null;
+
+  function updatePosition(x, y) {
+    targetX = x;
+    targetY = y;
+    antContainer.classList.remove('opacity-0');
+    antContainer.classList.add('opacity-90');
+
+    clearTimeout(idleTimeout);
+    idleTimeout = setTimeout(() => {
+      antContainer.classList.remove('opacity-90');
+      antContainer.classList.add('opacity-0');
+    }, 3500);
+  }
+
+  // Mouse / Pointer Listener
+  window.addEventListener('pointermove', (e) => {
+    updatePosition(e.clientX, e.clientY);
+  }, { passive: true });
+
+  // Touch Listeners for Mobile devices
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches[0]) {
+      updatePosition(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches[0]) {
+      updatePosition(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+
+  // Smooth Motion Loop
+  function animLoop() {
+    const dx = targetX - posX;
+    const dy = targetY - posY;
+    const dist = Math.hypot(dx, dy);
+
+    if (dist > 1.5) {
+      posX += dx * 0.08;
+      posY += dy * 0.08;
+      const targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+      currentAngle += (targetAngle - currentAngle) * 0.12;
+    }
+
+    antContainer.style.transform = `translate3d(${posX}px, ${posY}px, 0px) rotate(${currentAngle}deg)`;
+    requestAnimationFrame(animLoop);
+  }
+
+  requestAnimationFrame(animLoop);
 }
