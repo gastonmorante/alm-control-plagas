@@ -114,6 +114,27 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-accent-green selection:text-white pb-20 md:pb-0">
 
+  <!-- After Effects Style Logo Reveal Intro Overlay -->
+  <div id="intro-overlay">
+    <canvas id="intro-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+    <button id="skip-intro" type="button" class="skip-intro-btn">Saltar Intro ✕</button>
+    
+    <!-- Shockwave Rings -->
+    <div class="shockwave-ring"></div>
+    <div class="shockwave-ring" style="animation-delay: 0.8s;"></div>
+
+    <!-- Center Isologo Graphic (Strictly Isologo, no text) -->
+    <div class="isologo-wrapper mb-2">
+      <img src="./isologo_transparent.png" alt="ALM Isologo" class="h-36 sm:h-48 w-auto object-contain">
+    </div>
+
+    <!-- Motion Reveal Headlines -->
+    <div class="text-center z-10 px-4">
+      <h2 class="intro-tagline text-2xl sm:text-4xl font-extrabold tracking-widest text-white">ALM</h2>
+      <p class="intro-subtext text-xs sm:text-sm font-semibold text-accent-green">Servicios Especializados de Blindaje Sanitario</p>
+    </div>
+  </div>
+
   <!-- Top Bar Contact & Badges -->
   <div class="bg-navy-950 text-slate-300 text-xs py-2 px-4 border-b border-navy-800">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">

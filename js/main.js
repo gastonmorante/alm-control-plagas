@@ -4,11 +4,93 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initLogoRevealIntro();
   initSanityCalculator();
   initFormHandler();
   initSmoothScroll();
   initCitySelector();
 });
+
+/* ==========================================
+   0. AFTER EFFECTS STYLE INTRO LOGO REVEAL
+   ========================================== */
+function initLogoRevealIntro() {
+  const overlay = document.getElementById('intro-overlay');
+  const canvas = document.getElementById('intro-canvas');
+  const skipBtn = document.getElementById('skip-intro');
+
+  if (!overlay || !canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let animationFrameId;
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // Particle Engine
+  const colors = ['#4CAF50', '#E67E22', '#3498DB', '#FFFFFF'];
+  for (let i = 0; i < 45; i++) {
+    particles.push({
+      x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+      y: canvas.height / 2 + (Math.random() - 0.5) * 200,
+      radius: Math.random() * 3 + 1,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - 0.5) * 2.5,
+      vy: (Math.random() - 0.5) * 2.5,
+      alpha: Math.random() * 0.7 + 0.3
+    });
+  }
+
+  function renderParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = p.color;
+      ctx.fill();
+      ctx.restore();
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.alpha -= 0.003;
+
+      if (p.alpha <= 0) {
+        p.x = canvas.width / 2 + (Math.random() - 0.5) * 150;
+        p.y = canvas.height / 2 + (Math.random() - 0.5) * 150;
+        p.alpha = Math.random() * 0.7 + 0.3;
+      }
+    });
+
+    animationFrameId = requestAnimationFrame(renderParticles);
+  }
+
+  renderParticles();
+
+  function dismissIntro() {
+    overlay.classList.add('fade-out');
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      cancelAnimationFrame(animationFrameId);
+    }, 850);
+  }
+
+  if (skipBtn) {
+    skipBtn.addEventListener('click', dismissIntro);
+  }
+
+  // Auto dismiss after After Effects sequence completes (3.4 seconds)
+  setTimeout(dismissIntro, 3400);
+}
 
 /* ==========================================
    1. CALCULADORA INTERACTIVA DE RIESGO COFEPRIS

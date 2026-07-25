@@ -169,29 +169,156 @@ input[type=range]::-webkit-slider-thumb:hover {
   color: #1565C0;
 }
 
-/* Loading Spinner */
-.spinner {
-  border: 3px solid rgba(255, 255, 255, 0.3);
+/* ==========================================================================
+   AFTER EFFECTS STYLE LOGO REVEAL INTRO ANIMATIONS
+   ========================================================================== */
+
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle at center, #0F2352 0%, #081129 60%, #030712 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#intro-overlay.fade-out {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
+/* Energy Shockwave Ring */
+.shockwave-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border-top: 3px solid #ffffff;
-  width: 20px;
-  height: 20px;
-  animation: spin 0.8s linear infinite;
+  border: 2px solid var(--accent-green);
+  box-shadow: 0 0 30px var(--accent-green), inset 0 0 20px var(--accent-green);
+  opacity: 0;
+  animation: shockwavePulse 2.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes shockwavePulse {
+  0% {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
 }
 
-/* Typing Dots Animation for AI Chat */
-.typing-dot {
-  animation: typingBounce 1.4s infinite ease-in-out both;
+/* Isologo Container & Glow */
+.isologo-wrapper {
+  position: relative;
+  z-index: 10;
+  transform: scale(0);
+  opacity: 0;
+  animation: isologoReveal 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s forwards;
+  filter: drop-shadow(0 0 25px rgba(76, 175, 80, 0.6)) drop-shadow(0 0 50px rgba(230, 126, 34, 0.4));
 }
-.typing-dot:nth-child(1) { animation-delay: -0.32s; }
-.typing-dot:nth-child(2) { animation-delay: -0.16s; }
 
-@keyframes typingBounce {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1.0); }
+@keyframes isologoReveal {
+  0% {
+    transform: scale(0) rotate(-15deg);
+    opacity: 0;
+    filter: blur(15px) drop-shadow(0 0 0px var(--accent-green));
+  }
+  60% {
+    transform: scale(1.15) rotate(2deg);
+    opacity: 1;
+    filter: blur(0px) drop-shadow(0 0 40px var(--accent-green));
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 25px rgba(76, 175, 80, 0.6)) drop-shadow(0 0 50px rgba(230, 126, 34, 0.4));
+  }
 }
+
+/* Metallic Light Sweep Effect on Isologo */
+.isologo-wrapper::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent 40%, rgba(255, 255, 255, 0.6) 50%, transparent 60%);
+  transform: translateX(-100%);
+  animation: lightSweep 2.5s ease-in-out 1.2s infinite;
+  pointer-events: none;
+}
+
+@keyframes lightSweep {
+  0% { transform: translateX(-100%); }
+  40%, 100% { transform: translateX(100%); }
+}
+
+/* Cinematic Tagline Reveal */
+.intro-tagline {
+  margin-top: 1.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: taglineFadeIn 0.8s ease 1.2s forwards;
+  text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+}
+
+@keyframes taglineFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sub-headline text reveal */
+.intro-subtext {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #94A3B8;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: taglineFadeIn 0.8s ease 1.6s forwards;
+}
+
+/* Skip Intro Button */
+.skip-intro-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #E2E8F0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.skip-intro-btn:hover {
+  background: rgba(76, 175, 80, 0.25);
+  border-color: var(--accent-green);
+  color: #FFFFFF;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+}
+
