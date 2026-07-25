@@ -9,12 +9,13 @@
     silos: "Para el sector industrial, silos y transporte de carga en Veracruz, realizamos tratamientos especializados de fumigación y desinfección sanitaria. Recomendamos mantener un programa mensual de protección para asegurar el cumplimiento fitosanitario.",
     seguridad: "Utilizamos exclusivamente productos ecológicos de baja toxicidad registrados ante COFEPRIS. Marisela Reyes y nuestro equipo técnico te proporcionarán la ficha técnica y tiempos de reingreso seguros.",
     cobertura: "Brindamos atención inmediata en Córdoba, Fortín, Orizaba, Veracruz puerto, Boca del Río, Xalapa y Tierra Blanca.",
-    contacto: "Puedes contactar a nuestro Director Técnico Justino González al 271 140 7953 o a Marisela Reyes (Atención y Agenda) al 271 715 7830. ¿Te gustaría que agendemos tu cotización sin costo con el 5% de descuento?",
+    contacto: "Puedes contactarnos directamente al WhatsApp 271 152 8442 o a nuestras oficinas 271 140 7953 / 271 715 7830. ¿Te gustaría que registremos tus datos para enviarte una cotización sin costo con el 5% de descuento?",
     descuento: "¡Así es! Por solicitar tu servicio a través de nuestra web obtienes Cotización Sin Costo + 5% de Descuento en tu primer servicio."
   };
 
   let chatHistory = [];
   let isChatOpen = false;
+  let capturedLead = { nombre: '', telefono: '', email: '' };
 
   document.addEventListener('DOMContentLoaded', () => {
     initChatWidgetUI();
@@ -26,7 +27,6 @@
     const closeBtn = document.getElementById('ai-chat-close');
     const sendBtn = document.getElementById('ai-chat-send');
     const inputField = document.getElementById('ai-chat-input');
-    const messagesContainer = document.getElementById('ai-chat-messages');
 
     if (!triggerBtn || !modal) return;
 
@@ -37,7 +37,7 @@
         modal.classList.add('active');
         inputField.focus();
         if (chatHistory.length === 0) {
-          sendBotMessage("¡Hola! Con gusto te atiendo en ALM Control de Plagas. 🛡️\n\nSoy el asistente técnico de Ing. Justino González y Marisela Reyes. ¿En qué ciudad te encuentras hoy?\n\n✨ Recuérdalo: Todas nuestras cotizaciones en web son SIN COSTO e incluyen 5% DE DESCUENTO en tu primer servicio.");
+          sendBotMessage("¡Hola! Con gusto te atiendo en ALM Control de Plagas. 🛡️\n\nSoy el asistente virtual de Ing. Justino González y Marisela Reyes. Para enviarte tu Cotización sin Costo + 5% de Descuento, ¿me compartes tu Nombre, Teléfono/WhatsApp y Correo Electrónico?");
         }
       } else {
         modal.classList.remove('active');
@@ -93,6 +93,9 @@
     container.appendChild(msgDiv);
     scrollToBottom();
     chatHistory.push({ role: 'user', content: text });
+
+    // Auto Lead Capture & Forward to Google Sheets CRM
+    detectAndForwardLeadData(text);
   }
 
   function sendBotMessage(text, showWaCta = false) {
@@ -106,7 +109,7 @@
     if (showWaCta) {
       ctaHtml = `
         <div class="mt-2 pt-2 border-t border-slate-150">
-          <a href="https://wa.me/522711407953?text=${encodeURIComponent('Hola, me gustaría agendar una inspección técnica con ALM.')}" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-3 py-1.5 rounded-lg transition-colors">
+          <a href="https://wa.me/522711528442?text=${encodeURIComponent('Hola ALM, me gustaría agendar una inspección técnica con el 5% de descuento.')}" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-3 py-1.5 rounded-lg transition-colors">
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
             Contactar por WhatsApp Directo
           </a>
@@ -157,6 +160,40 @@
     if (el) el.remove();
   }
 
+  // Detect email / phone in conversation and auto post lead to GAS CRM
+  function detectAndForwardLeadData(text) {
+    const emailMatch = text.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/);
+    const phoneMatch = text.match(/\b\d{10}\b|\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/);
+
+    if (emailMatch && !capturedLead.email) {
+      capturedLead.email = emailMatch[0];
+    }
+    if (phoneMatch && !capturedLead.telefono) {
+      capturedLead.telefono = phoneMatch[0];
+    }
+
+    if ((capturedLead.email || capturedLead.telefono) && window.ALM_GAS_ENDPOINT) {
+      const payload = {
+        nombre: 'Lead Conversacional Chat IA',
+        empresa: 'Por Clasificar',
+        telefono: capturedLead.telefono || 'Ver Chat',
+        email: capturedLead.email || 'Ver Chat',
+        ciudad: 'Veracruz',
+        servicio: 'Consulta Chat IA',
+        comentarios: `[Lead capturado por Chatbot Gemini IA]\nMensaje: ${text}`,
+        origen: 'Widget Gemini IA 2026',
+        timestamp: new Date().toISOString()
+      };
+
+      fetch(window.ALM_GAS_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(err => console.warn('GAS Auto Post Error:', err));
+    }
+  }
+
   async function processUserQuery(query) {
     showTypingIndicator();
     const qLower = query.toLowerCase();
@@ -186,11 +223,11 @@
       } else if (qLower.includes('seguridad') || qLower.includes('toxico') || qLower.includes('reingreso') || qLower.includes('ecologico')) {
         sendBotMessage(SYSTEM_KNOWLEDGE.seguridad, true);
       } else if (qLower.includes('cotiz') || qLower.includes('precio') || qLower.includes('costo') || qLower.includes('cuanto')) {
-        sendBotMessage("Nuestras cotizaciones se calculan según el área (m² / m³), tipo de plaga y giro del establecimiento para garantizar la técnica más efectiva. ¿Te gustaría dejar tus datos en el formulario o hablar directo con un técnico por WhatsApp?", true);
+        sendBotMessage("Nuestras cotizaciones se calculan según el área (m² / m³), tipo de plaga y giro. Para darte el 5% de descuento, compárteme tu Nombre, Teléfono/WhatsApp y Correo Electrónico.", true);
       } else if (qLower.includes('cobertura') || qLower.includes('cordoba') || qLower.includes('orizaba') || qLower.includes('veracruz') || qLower.includes('xalapa')) {
         sendBotMessage(SYSTEM_KNOWLEDGE.cobertura, true);
       } else {
-        sendBotMessage(`Con gusto podemos apoyarte en tu servicio de blindaje sanitario. En ALM Control de Plagas atendemos al sector industrial, comercial y residencial con garantía por escrito y productos autorizados por COFEPRIS.\n\n¿Quieres comunicarte con nuestro equipo técnico ahora mismo?`, true);
+        sendBotMessage(`Con gusto te apoyamos. En ALM Control de Plagas (Licencia COFEPRIS) atendemos al sector industrial, silos, transporte de carga, comercial y residencial.\n\n¿Me compartes tu Nombre, Teléfono y Email para agendar tu inspección sin costo con 5% de descuento?`, true);
       }
     }, 900);
   }
@@ -199,7 +236,14 @@
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`;
     const payload = {
       system_instruction: {
-        parts: [{ text: "Eres el asistente técnico de ALM Control de Plagas en Veracruz, México. Responde siempre con profesionalismo, enfatizando el cumplimiento de la NOM-256-SSA1-2012, licencias COFEPRIS y el uso de productos ecológicos de baja toxicidad para silos, transporte de carga, plantas de alimentos y residencias." }]
+        parts: [{
+          text: `Eres el Asistente Técnico y Agente Comercial de ALM Control de Plagas en Veracruz, México (empresa del Ing. Justino González Heredia y Marisela Reyes).
+Entrenado con la NOM-256-SSA1-2012, regulación COFEPRIS y servicios de fumigación de silos, almacenamiento de granos, transporte de carga e industria alimentaria.
+Tus funciones clave son:
+1. Responder a cualquier duda técnica de manera natural, amigable, cercana y profesional.
+2. De primera instancia, solicitar amablemente al prospecto sus datos de contacto: Nombre completo, Teléfono/WhatsApp y Correo Electrónico (Email) para aplicarles su Cotización Sin Costo + 5% DE DESCUENTO.
+3. Explicar que todos los productos son ecológicos de baja toxicidad y que se entrega Certificado Oficial con validez ante COFEPRIS y SESVER.`
+        }]
       },
       contents: [{
         parts: [{ text: prompt }]

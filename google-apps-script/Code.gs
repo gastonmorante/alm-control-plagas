@@ -32,19 +32,21 @@ function doPost(e) {
         "Nombre",
         "Empresa",
         "Teléfono",
+        "Email",
         "Ciudad",
         "Servicio Requerido",
         "Comentarios / Notas",
         "Origen Lead",
         "Estatus CRM"
       ]);
-      sheet.getRange(1, 1, 1, 9).setFontWeight("bold").setBackground("#0D1B3E").setFontColor("#FFFFFF");
+      sheet.getRange(1, 1, 1, 10).setFontWeight("bold").setBackground("#0D1B3E").setFontColor("#FFFFFF");
     }
 
     const timestamp = data.timestamp || new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City" });
     const nombre = data.nombre || "Sin Nombre";
     const empresa = data.empresa || "Particular";
     const telefono = data.telefono || "Sin Teléfono";
+    const email = data.email || "Sin Email";
     const ciudad = data.ciudad || "No especificada";
     const servicio = data.servicio || "General";
     const comentarios = data.comentarios || "";
@@ -57,6 +59,7 @@ function doPost(e) {
       nombre,
       empresa,
       telefono,
+      email,
       ciudad,
       servicio,
       comentarios,
@@ -70,6 +73,7 @@ function doPost(e) {
       nombre,
       empresa,
       telefono,
+      email,
       ciudad,
       servicio,
       comentarios
@@ -119,6 +123,7 @@ function sendLeadEmailNotification(lead) {
 • Nombre: ${lead.nombre}
 • Empresa: ${lead.empresa}
 • Teléfono: ${lead.telefono}
+• Email: ${lead.email}
 • Ciudad / Zona: ${lead.ciudad}
 • Servicio Requerido: ${lead.servicio}
 • Fecha y Hora: ${lead.timestamp}

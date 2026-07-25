@@ -210,6 +210,7 @@ function initFormHandler() {
       nombre: formData.get('nombre'),
       empresa: formData.get('empresa') || 'Particular / No especificado',
       telefono: formData.get('telefono'),
+      email: formData.get('email') || 'No especificado',
       ciudad: formData.get('ciudad'),
       servicio: formData.get('servicio'),
       comentarios: formData.get('comentarios') || '',
@@ -249,8 +250,8 @@ function initFormHandler() {
 
       // Send conversion ping to WhatsApp if requested
       setTimeout(() => {
-        const msg = encodeURIComponent(`Hola ALM Control de Plagas. Acabo de solicitar una cotización en su sitio web.\nNombre: ${data.nombre}\nEmpresa: ${data.empresa}\nCiudad: ${data.ciudad}\nServicio: ${data.servicio}`);
-        const waUrl = `https://wa.me/522711407953?text=${msg}`;
+        const msg = encodeURIComponent(`Hola ALM Control de Plagas. Acabo de solicitar una cotización en su sitio web.\nNombre: ${data.nombre}\nEmpresa: ${data.empresa}\nEmail: ${data.email}\nCiudad: ${data.ciudad}\nServicio: ${data.servicio}`);
+        const waUrl = `https://wa.me/522711528442?text=${msg}`;
         const waLink = document.createElement('a');
         waLink.href = waUrl;
         waLink.target = '_blank';
@@ -262,7 +263,7 @@ function initFormHandler() {
       statusAlert.className = 'mt-4 p-4 rounded-xl text-sm font-medium bg-amber-50 text-amber-800 border border-amber-200 block';
       statusAlert.innerHTML = `
         <p class="font-bold">Nota de conexión:</p>
-        <p class="text-xs">Tu mensaje se ha preparado. Puedes comunicarte directamente al WhatsApp de respuesta rápida: <a href="https://wa.me/522711407953" target="_blank" class="underline font-bold">271 140 7953</a>.</p>
+        <p class="text-xs">Tu mensaje se ha preparado. Puedes comunicarte directamente al WhatsApp de respuesta rápida: <a href="https://wa.me/522711528442" target="_blank" class="underline font-bold">271 152 8442</a>.</p>
       `;
     } finally {
       submitBtn.disabled = false;
