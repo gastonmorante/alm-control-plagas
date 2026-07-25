@@ -311,7 +311,7 @@ function initCitySelector() {
 
       const cityName = btn.dataset.city;
       if (cityTitle) cityTitle.textContent = cityName;
-      if (cityPhone) cityPhone.textContent = 'Atención directa: 271 140 7953 / 271 715 7830';
+      if (cityPhone) cityPhone.textContent = 'Atención WhatsApp & Directa: 271 152 8442 / 271 140 7953';
     });
   });
 }

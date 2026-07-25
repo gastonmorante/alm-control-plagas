@@ -301,28 +301,3 @@ input[type=range]::-webkit-slider-thumb:hover {
   animation: taglineFadeIn 0.8s ease 1.6s forwards;
 }
 
-/* Skip Intro Button */
-.skip-intro-btn {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 20;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #E2E8F0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.skip-intro-btn:hover {
-  background: rgba(76, 175, 80, 0.25);
-  border-color: var(--accent-green);
-  color: #FFFFFF;
-  box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
-}
-
