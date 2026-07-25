@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initCitySelector();
   initKeyboardAccessibility();
+  initVideoModal();
 });
 
 /* ==========================================
@@ -314,7 +315,54 @@ function initCitySelector() {
 }
 
 /* ==========================================
-   5. ACCESIBILIDAD Y TECLA ESCAPE
+   5. REPRODUCTOR INTERACTIVO Y MODAL DE VIDEO
+   ========================================== */
+function initVideoModal() {
+  const openCardBtn = document.getElementById('open-video-btn-silos');
+  const openLinkBtn = document.getElementById('open-video-link-silos');
+  const videoModal = document.getElementById('video-modal');
+  const vlogPlayer = document.getElementById('vlog-player');
+  const closeBtn = document.getElementById('close-video-btn');
+  const closeBtnBottom = document.getElementById('close-video-btn-bottom');
+  const ctaBtn = document.getElementById('video-modal-cta');
+
+  if (!videoModal || !vlogPlayer) return;
+
+  function openModal() {
+    videoModal.classList.remove('hidden');
+    videoModal.classList.add('flex');
+    vlogPlayer.play().catch(err => console.log('Autoplay deferred:', err));
+  }
+
+  function closeModal() {
+    vlogPlayer.pause();
+    vlogPlayer.currentTime = 0;
+    videoModal.classList.add('hidden');
+    videoModal.classList.remove('flex');
+  }
+
+  if (openCardBtn) openCardBtn.addEventListener('click', openModal);
+  if (openLinkBtn) openLinkBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (closeBtnBottom) closeBtnBottom.addEventListener('click', closeModal);
+
+  if (ctaBtn) {
+    ctaBtn.addEventListener('click', closeModal);
+  }
+
+  // Close when clicking dark backdrop outside modal box
+  videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+      closeModal();
+    }
+  });
+
+  // Store closeModal globally for ESC key handler
+  window.closeALMVideoModal = closeModal;
+}
+
+/* ==========================================
+   6. ACCESIBILIDAD Y TECLA ESCAPE
    ========================================== */
 function initKeyboardAccessibility() {
   document.addEventListener('keydown', (e) => {
@@ -322,6 +370,9 @@ function initKeyboardAccessibility() {
       const aiModal = document.getElementById('ai-chat-modal');
       if (aiModal && aiModal.classList.contains('active')) {
         aiModal.classList.remove('active');
+      }
+      if (window.closeALMVideoModal) {
+        window.closeALMVideoModal();
       }
     }
   });
