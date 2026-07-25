@@ -4,19 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- SEO Primary Meta Tags -->
+  <!-- SEO Primary & Local Pack Meta Tags -->
   <title>ALM Control de Plagas | Fumigación Industrial, Silos y Transporte en Veracruz</title>
   <meta name="title" content="ALM Control de Plagas | Fumigación Industrial, Silos y Transporte en Veracruz">
   <meta name="description" content="Control de Plagas y Blindaje Sanitario en Veracruz. Licencia COFEPRIS vigente y cumplimiento NOM-256-SSA1-2012. Fumigación de silos, transporte de carga, plantas de alimentos y residencias.">
   <meta name="keywords" content="fumigación industrial veracruz, control de plagas cordoba, certificado cofepris fumigación, fumigación de silos y transporte, manejo integrado de plagas veracruz, fumigación orizaba, desinfección sanitaria xalapa">
   <meta name="author" content="NegocioUp - Gastón">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://almcontrol.com/">
+
+  <!-- Geo Local SEO Meta Tags (Google Local Pack & Maps Priority) -->
+  <meta name="geo.region" content="MX-VER">
+  <meta name="geo.placename" content="Córdoba, Veracruz">
+  <meta name="geo.position" content="18.8943;-96.9351">
+  <meta name="ICBM" content="18.8943, -96.9351">
+  <meta name="theme-color" content="#0D1B3E">
 
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="ALM Control de Plagas | Blindaje Sanitario Certificado">
+  <meta property="og:url" content="https://almcontrol.com/">
+  <meta property="og:title" content="ALM Control de Plagas | Blindaje Sanitario Certificado COFEPRIS">
   <meta property="og:description" content="Fumigación industrial, silos y transporte de carga en Veracruz. Licencia COFEPRIS y Certificados Oficiales NOM-256. Cotiza hoy mismo.">
-  <meta property="og:image" content="./aml logo.png">
+  <meta property="og:image" content="./logo_transparent.png">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
@@ -61,61 +70,101 @@
     window.ALM_GEMINI_API_KEY = window.localStorage.getItem('ALM_GEMINI_API_KEY') || "";
   </script>
 
-  <!-- LocalBusiness & IndustrialService Schema Markup (JSON-LD) -->
+  <!-- LocalBusiness, PestControlService & FAQPage Schema Markup (JSON-LD) -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "ALM CONTROL DE PLAGAS",
-    "image": "https://almcontrol.com/aml-logo.png",
-    "telephone": "+522711528442",
-    "alternateTelephone": "+522711407953",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Calle 13 #906 entre Av. 7 y 11, Colonia Centro",
-      "addressLocality": "Córdoba",
-      "addressRegion": "Veracruz",
-      "postalCode": "94500",
-      "addressCountry": "MX"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 18.8943,
-      "longitude": -96.9351
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "18:00"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "PestControlService",
+      "@id": "https://almcontrol.com/#business",
+      "name": "ALM CONTROL DE PLAGAS",
+      "image": "https://almcontrol.com/logo_transparent.png",
+      "telephone": "+522711528442",
+      "alternateTelephone": "+522711407953",
+      "url": "https://almcontrol.com/",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle 13 #906 entre Av. 7 y 11, Colonia Centro",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Veracruz",
+        "postalCode": "94500",
+        "addressCountry": "MX"
       },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "09:00",
-        "closes": "15:00"
-      }
-    ],
-    "areaServed": [
-      "Córdoba",
-      "Fortín",
-      "Orizaba",
-      "Veracruz",
-      "Boca del Río",
-      "Xalapa",
-      "Tierra Blanca"
-    ],
-    "priceRange": "$$",
-    "slogan": "Control de Plagas y Blindaje Sanitario",
-    "knowsAbout": [
-      "Fumigación de silos y granos almacenados",
-      "Control sanitario en transporte de carga",
-      "Norma Oficial Mexicana NOM-256-SSA1-2012",
-      "Licencia Sanitaria COFEPRIS",
-      "Manejo Integrado de Plagas (MIP)"
-    ]
-  }
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 18.8943,
+        "longitude": -96.9351
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "15:00"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "48",
+        "bestRating": "5"
+      },
+      "areaServed": [
+        "Córdoba",
+        "Fortín",
+        "Orizaba",
+        "Veracruz",
+        "Boca del Río",
+        "Xalapa",
+        "Tierra Blanca"
+      ],
+      "priceRange": "$$",
+      "slogan": "Control de Plagas y Blindaje Sanitario",
+      "knowsAbout": [
+        "Fumigación de silos y granos almacenados",
+        "Control sanitario en transporte de carga",
+        "Norma Oficial Mexicana NOM-256-SSA1-2012",
+        "Licencia Sanitaria COFEPRIS",
+        "Manejo Integrado de Plagas (MIP)"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿ALM cuenta con Licencia Sanitaria COFEPRIS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, ALM Control de Plagas opera con Licencia Sanitaria oficial emitida por COFEPRIS y expedimos Certificados Sanitarios válidos ante SESVER y la NOM-256-SSA1-2012."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la frecuencia de fumigación recomendada para silos y transporte de carga?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para el sector industrial, silos graneleros y transporte de carga se recomienda un programa mensual para asegurar el cumplimiento fitosanitario y evitar inmovilizaciones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué ciudades atiende ALM Control de Plagas en Veracruz?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Brindamos cobertura inmediata en Córdoba, Fortín, Orizaba, Veracruz Puerto, Boca del Río, Xalapa y Tierra Blanca."
+          }
+        }
+      ]
+    }
+  ]
   </script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-accent-green selection:text-white pb-20 md:pb-0">
@@ -539,11 +588,21 @@
           </div>
         </div>
 
-        <!-- Case Study 2: Pipas Especializadas -->
+        <!-- Case Study 2: Pipas Especializadas (Con Video Demostración Integrado) -->
         <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-lg transition-shadow">
           <div>
-            <div class="overflow-hidden rounded-2xl mb-5 shadow-sm border border-slate-200">
-              <img src="./img_pipas_case.jpg" alt="Caso de Éxito Sanitización de Pipas Especializadas en Veracruz" class="w-full h-48 sm:h-56 object-cover transform hover:scale-105 transition-transform duration-500">
+            <!-- Video Trigger Container -->
+            <div id="open-video-btn-pipas" class="relative overflow-hidden rounded-2xl mb-5 shadow-sm border border-slate-200 group cursor-pointer" title="Hacer clic para ver demostración en video">
+              <img src="./img_pipas_case.jpg" alt="Caso de Éxito Sanitización de Pipas Especializadas en Veracruz" class="w-full h-48 sm:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-navy-950/40 group-hover:bg-navy-950/20 transition-colors flex items-center justify-center">
+                <div class="w-14 h-14 rounded-full bg-accent-green text-white flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
+                  <svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+              <span class="absolute bottom-3 left-3 bg-navy-900/90 text-white text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1.5 border border-white/20 shadow-md">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                ▶ Ver Video de Operación en Pipas
+              </span>
             </div>
 
             <div class="flex items-center justify-between mb-4">
@@ -565,10 +624,16 @@
             </div>
           </div>
 
-          <a href="#cotizacion" class="inline-flex items-center gap-2 text-xs font-bold text-accent-green hover:text-accent-green-hover pt-2">
-            <span>Solicitar Certificación de Flotillas</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-          </a>
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200/60">
+            <button type="button" id="open-video-link-pipas" class="inline-flex items-center gap-1.5 bg-navy-900 hover:bg-navy-950 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">
+              <svg class="w-3.5 h-3.5 fill-current text-accent-green" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <span>Ver Demostración en Video</span>
+            </button>
+            <a href="#cotizacion" class="inline-flex items-center gap-1 text-xs font-bold text-accent-green hover:text-accent-green-hover">
+              <span>Cotizar Flotillas</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
         </div>
 
       </div>

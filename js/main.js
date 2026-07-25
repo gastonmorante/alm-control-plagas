@@ -1,9 +1,11 @@
-/**
- * ALM CONTROL DE PLAGAS - MAIN JAVASCRIPT
- * Lead Developer: Gastón | NegocioUp
- */
+// Force page to always start at the Hero section on refresh/reload
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
   initLogoRevealIntro();
   initSanityCalculator();
   initFormHandler();
@@ -318,17 +320,39 @@ function initCitySelector() {
    5. REPRODUCTOR INTERACTIVO Y MODAL DE VIDEO
    ========================================== */
 function initVideoModal() {
-  const openCardBtn = document.getElementById('open-video-btn-silos');
-  const openLinkBtn = document.getElementById('open-video-link-silos');
+  const openSilosCardBtn = document.getElementById('open-video-btn-silos');
+  const openSilosLinkBtn = document.getElementById('open-video-link-silos');
+  const openPipasCardBtn = document.getElementById('open-video-btn-pipas');
+  const openPipasLinkBtn = document.getElementById('open-video-link-pipas');
+
   const videoModal = document.getElementById('video-modal');
   const vlogPlayer = document.getElementById('vlog-player');
+  const videoTitle = videoModal ? videoModal.querySelector('h3') : null;
   const closeBtn = document.getElementById('close-video-btn');
   const closeBtnBottom = document.getElementById('close-video-btn-bottom');
   const ctaBtn = document.getElementById('video-modal-cta');
 
   if (!videoModal || !vlogPlayer) return;
 
-  function openModal() {
+  const VIDEOS = {
+    silos: {
+      src: './videos/Industrial_grain_protection_tech._202607251809.mp4',
+      title: 'Demostración Técnica: Fitosanidad y Control en Silos de Granos'
+    },
+    pipas: {
+      src: './videos/Tanker_trucks_bio-security_deplo._202607251819.mp4',
+      title: 'Demostración Técnica: Blindaje Fitosanitario en Pipas y Tolvas'
+    }
+  };
+
+  function openModal(videoKey) {
+    const info = VIDEOS[videoKey] || VIDEOS.silos;
+    if (vlogPlayer.src !== info.src) {
+      vlogPlayer.src = info.src;
+      vlogPlayer.load();
+    }
+    if (videoTitle) videoTitle.textContent = info.title;
+
     videoModal.classList.remove('hidden');
     videoModal.classList.add('flex');
     vlogPlayer.play().catch(err => console.log('Autoplay deferred:', err));
@@ -341,8 +365,11 @@ function initVideoModal() {
     videoModal.classList.remove('flex');
   }
 
-  if (openCardBtn) openCardBtn.addEventListener('click', openModal);
-  if (openLinkBtn) openLinkBtn.addEventListener('click', openModal);
+  if (openSilosCardBtn) openSilosCardBtn.addEventListener('click', () => openModal('silos'));
+  if (openSilosLinkBtn) openSilosLinkBtn.addEventListener('click', () => openModal('silos'));
+  if (openPipasCardBtn) openPipasCardBtn.addEventListener('click', () => openModal('pipas'));
+  if (openPipasLinkBtn) openPipasLinkBtn.addEventListener('click', () => openModal('pipas'));
+
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (closeBtnBottom) closeBtnBottom.addEventListener('click', closeModal);
 
