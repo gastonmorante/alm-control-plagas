@@ -1,6 +1,6 @@
 /**
  * ALM CONTROL DE PLAGAS - AI AGENT WIDGET (Gemini 1.5 Pro Bridge)
- * Lead Developer: Gastón | NegocioUp
+ * Developer: NegocioUp
  */
 
 (function () {
