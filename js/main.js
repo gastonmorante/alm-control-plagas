@@ -337,26 +337,34 @@ function initVideoModal() {
 
   const VIDEOS = {
     silos: {
-      src: './videos/Industrial_grain_protection_tech._202607251809.mp4',
+      src: './videos/video_silos.mp4',
       title: 'Demostración Técnica: Fitosanidad y Control en Silos de Granos'
     },
     pipas: {
-      src: './videos/Tanker_trucks_bio-security_deplo._202607251819.mp4',
+      src: './videos/video_pipas.mp4',
       title: 'Demostración Técnica: Blindaje Fitosanitario en Pipas y Tolvas'
     }
   };
 
   function openModal(videoKey) {
     const info = VIDEOS[videoKey] || VIDEOS.silos;
-    if (vlogPlayer.src !== info.src) {
-      vlogPlayer.src = info.src;
-      vlogPlayer.load();
-    }
+    vlogPlayer.src = info.src;
+    vlogPlayer.load();
+
     if (videoTitle) videoTitle.textContent = info.title;
 
     videoModal.classList.remove('hidden');
     videoModal.classList.add('flex');
-    vlogPlayer.play().catch(err => console.log('Autoplay deferred:', err));
+
+    const playPromise = vlogPlayer.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => {
+        console.warn('Reproducción asistida por política de navegador:', err);
+        // If unmuted playback is restricted, play muted as fallback
+        vlogPlayer.muted = true;
+        vlogPlayer.play().catch(e => console.error('Play error:', e));
+      });
+    }
   }
 
   function closeModal() {
