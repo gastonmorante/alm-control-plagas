@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormHandler();
   initSmoothScroll();
   initCitySelector();
+  initKeyboardAccessibility();
 });
 
 /* ==========================================
@@ -138,7 +139,6 @@ function initSanityCalculator() {
         riskColor = 'text-amber-600 bg-amber-50 border-amber-200';
         recommendation = 'Recomendado servicio trimestral de Manejo Integrado de Plagas (MIP) con bitácora oficial.';
       }
-    } else {
       if (monthsSince >= 4) {
         riskLevel = 'MEDIO';
         riskColor = 'text-blue-600 bg-blue-50 border-blue-200';
@@ -146,9 +146,6 @@ function initSanityCalculator() {
       } else {
         riskLevel = 'BAJO (EN REGLA)';
         riskColor = 'text-green-600 bg-green-50 border-green-200';
-        recommendation = 'Cumplimiento adecuado. Mantener bitácora al día.';
-      }
-    }
         recommendation = 'Cumplimiento adecuado. Mantener bitácora al día.';
       }
     }
@@ -317,5 +314,19 @@ function initCitySelector() {
       if (cityTitle) cityTitle.textContent = cityName;
       if (cityPhone) cityPhone.textContent = 'Atención directa: 271 140 7953 / 271 715 7830';
     });
+  });
+}
+
+/* ==========================================
+   5. ACCESIBILIDAD Y TECLA ESCAPE
+   ========================================== */
+function initKeyboardAccessibility() {
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const aiModal = document.getElementById('ai-chat-modal');
+      if (aiModal && aiModal.classList.contains('active')) {
+        aiModal.classList.remove('active');
+      }
+    }
   });
 }
