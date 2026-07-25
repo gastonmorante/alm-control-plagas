@@ -52,7 +52,7 @@
   <!-- Apps Script & Gemini Configuration Keys -->
   <script>
     window.ALM_GAS_ENDPOINT = ""; // Configurable por Gastón en el despliegue de Apps Script
-    window.ALM_GEMINI_API_KEY = ""; // Configurable para Gemini 1.5 Pro API Key
+    window.ALM_GEMINI_API_KEY = window.localStorage.getItem('ALM_GEMINI_API_KEY') || "";
   </script>
 
   <!-- LocalBusiness & IndustrialService Schema Markup (JSON-LD) -->
