@@ -89,8 +89,8 @@ function initLogoRevealIntro() {
     skipBtn.addEventListener('click', dismissIntro);
   }
 
-  // Auto dismiss exact 3 seconds after logo deploy
-  setTimeout(dismissIntro, 3000);
+  // Auto dismiss triggers fade-out at 2.4s and fully completes at 3.0s total
+  setTimeout(dismissIntro, 2400);
 }
 
 /* ==========================================
