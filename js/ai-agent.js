@@ -233,8 +233,17 @@
     }, 900);
   }
 
+  let geminiApiHistory = [];
+
   async function callGeminiApi(prompt, apiKey) {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
+
+    // Maintain max 10 messages context history for Gemini multi-turn
+    geminiApiHistory.push({ role: 'user', parts: [{ text: prompt }] });
+    if (geminiApiHistory.length > 10) {
+      geminiApiHistory = geminiApiHistory.slice(-10);
+    }
+
     const payload = {
       system_instruction: {
         parts: [{
@@ -246,9 +255,7 @@ Tus funciones clave son:
 3. Explicar que todos los productos son ecológicos de baja toxicidad y que se entrega Certificado Oficial con validez ante COFEPRIS y SESVER.`
         }]
       },
-      contents: [{
-        parts: [{ text: prompt }]
-      }]
+      contents: geminiApiHistory
     };
 
     const res = await fetch(url, {
@@ -258,7 +265,13 @@ Tus funciones clave son:
     });
 
     const data = await res.json();
-    return data.candidates[0].content.parts[0].text;
+    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+      const botText = data.candidates[0].content.parts[0].text;
+      geminiApiHistory.push({ role: 'model', parts: [{ text: botText }] });
+      return botText;
+    } else {
+      throw new Error('Respuesta inválida del servidor de Gemini');
+    }
   }
 
   function scrollToBottom() {
