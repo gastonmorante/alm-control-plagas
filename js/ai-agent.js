@@ -5,11 +5,12 @@
 
 (function () {
   const SYSTEM_KNOWLEDGE = {
-    cofepris: "ALM Control de Plagas opera estrictamente bajo Licencia Sanitaria expedida por la COFEPRIS y cumple con la Norma Oficial Mexicana NOM-256-SSA1-2012. Todos nuestros tratamientos incluyen Certificado Oficial de Fumigación válido ante inspecciones sanitarias estatales y federales.",
-    silos: "Para el sector industrial, agrícola y de transporte de carga en Veracruz, realizamos tratamiento especializado de fumigación de silos, bodegas de almacenamiento de granos y desinfección sanitaria de flotillas y remolques, protegiendo contra picudos, gorgojos y roedores.",
-    seguridad: "Utilizamos exclusivamente productos ecológicos de baja toxicidad registrados ante COFEPRIS. Proporcionamos ficha técnica de seguridad y tiempos de reingreso seguros (habitualmente de 2 a 4 horas según la técnica aplicada).",
+    cofepris: "ALM Control de Plagas opera bajo Licencia Sanitaria expedida por la COFEPRIS y cumple con la NOM-256-SSA1-2012. Todos nuestros servicios son supervisados por nuestro Director Técnico, Ing. Justino González Heredia, e incluyen Certificado Oficial válido ante inspecciones sanitarias. ¡Además, al solicitar tu servicio en la web obtienes 5% de descuento!",
+    silos: "Para el sector industrial, silos y transporte de carga en Veracruz, realizamos tratamientos especializados de fumigación y desinfección sanitaria. Recomendamos mantener un programa mensual de protección para asegurar el cumplimiento fitosanitario.",
+    seguridad: "Utilizamos exclusivamente productos ecológicos de baja toxicidad registrados ante COFEPRIS. Marisela Reyes y nuestro equipo técnico te proporcionarán la ficha técnica y tiempos de reingreso seguros.",
     cobertura: "Brindamos atención inmediata en Córdoba, Fortín, Orizaba, Veracruz puerto, Boca del Río, Xalapa y Tierra Blanca.",
-    contacto: "Nuestros teléfonos de atención técnica 24/7 son 271 140 7953 y 271 715 7830. ¿Deseas que agendemos una inspección en tu empresa?"
+    contacto: "Puedes contactar a nuestro Director Técnico Justino González al 271 140 7953 o a Marisela Reyes (Atención y Agenda) al 271 715 7830. ¿Te gustaría que agendemos tu cotización sin costo con el 5% de descuento?",
+    descuento: "¡Así es! Por solicitar tu servicio a través de nuestra web obtienes Cotización Sin Costo + 5% de Descuento en tu primer servicio."
   };
 
   let chatHistory = [];
@@ -36,7 +37,7 @@
         modal.classList.add('active');
         inputField.focus();
         if (chatHistory.length === 0) {
-          sendBotMessage("¡Hola! Soy el Asistente Técnico de ALM Control de Plagas. 🛡️\n\n¿En qué sector o plaga necesitas asistencia hoy? Puedo informarte sobre cumplimiento de la NOM-256, certificados COFEPRIS o tratamientos para transporte e industria.");
+          sendBotMessage("¡Hola! Con gusto te atiendo en ALM Control de Plagas. 🛡️\n\nSoy el asistente técnico de Ing. Justino González y Marisela Reyes. ¿En qué ciudad te encuentras hoy?\n\n✨ Recuérdalo: Todas nuestras cotizaciones en web son SIN COSTO e incluyen 5% DE DESCUENTO en tu primer servicio.");
         }
       } else {
         modal.classList.remove('active');

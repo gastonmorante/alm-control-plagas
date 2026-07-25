@@ -41,33 +41,36 @@ function initSanityCalculator() {
     let recommendation = 'Requiere inspección sanitaria preventiva en los próximos 15 días.';
 
     if (sector === 'industrial_silos' || sector === 'transporte') {
-      if (monthsSince >= 3 || size > 1000) {
+      if (monthsSince >= 2 || size > 1000) {
         riskLevel = 'CRÍTICO - ALTO RIESGO DE CLAUSURA';
         riskColor = 'text-red-600 bg-red-50 border-red-300 animate-pulse';
-        recommendation = '⚠️ Sujeto a clausura inmediata e inmovilización de granos/mercancía por SESVER/COFEPRIS.';
+        recommendation = '⚠️ Excedido el ciclo recomendado (mensual). Sujeto a sanción e inmovilización de granos por COFEPRIS. ¡Aprovecha 5% de descuento en tu regularización!';
       } else {
-        riskLevel = 'ALTO';
+        riskLevel = 'ALTO (REQUERIDO PROGRAMA MENSUAL)';
         riskColor = 'text-orange-600 bg-orange-50 border-orange-200';
-        recommendation = 'Requiere certificado bimestral de fumigación NOM-256 para maniobras de carga y descarga.';
+        recommendation = 'Se requiere certificado mensual de fumigación NOM-256 para maniobras de carga y silos. ¡Aplica 5% OFF!';
       }
     } else if (sector === 'alimentos_restaurantes' || sector === 'salud_hospitales') {
-      if (monthsSince >= 2) {
-        riskLevel = 'CRÍTICO';
+      if (monthsSince >= 3) {
+        riskLevel = 'CRÍTICO - REVISE NOM-251';
         riskColor = 'text-red-600 bg-red-50 border-red-300';
-        recommendation = 'Violación directa a NOM-251-SSA1-2009. Suspensión temporal de actividades probable.';
+        recommendation = 'Excedido el límite trimestral obligatorio. Suspensión temporal de actividades probable por SESVER.';
       } else {
-        riskLevel = 'MEDIO - ALTO';
+        riskLevel = 'MEDIO (PROGRAMA TRIMESTRAL)';
         riskColor = 'text-amber-600 bg-amber-50 border-amber-200';
-        recommendation = 'Programar servicio mensual de Manejo Integrado de Plagas (MIP).';
+        recommendation = 'Recomendado servicio trimestral de Manejo Integrado de Plagas (MIP) con bitácora oficial.';
       }
     } else {
-      if (monthsSince >= 6) {
+      if (monthsSince >= 4) {
         riskLevel = 'MEDIO';
         riskColor = 'text-blue-600 bg-blue-50 border-blue-200';
-        recommendation = 'Se recomienda refuerzo sanitario preventivo por temporada.';
+        recommendation = 'Se recomienda refuerzo sanitario preventivo cada 3 meses.';
       } else {
         riskLevel = 'BAJO (EN REGLA)';
         riskColor = 'text-green-600 bg-green-50 border-green-200';
+        recommendation = 'Cumplimiento adecuado. Mantener bitácora al día.';
+      }
+    }
         recommendation = 'Cumplimiento adecuado. Mantener bitácora al día.';
       }
     }
