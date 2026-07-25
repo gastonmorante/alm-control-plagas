@@ -77,19 +77,20 @@ function initLogoRevealIntro() {
   renderParticles();
 
   function dismissIntro() {
+    overlay.style.pointerEvents = 'none';
     overlay.classList.add('fade-out');
     setTimeout(() => {
       overlay.style.display = 'none';
       cancelAnimationFrame(animationFrameId);
-    }, 850);
+    }, 600);
   }
 
   if (skipBtn) {
     skipBtn.addEventListener('click', dismissIntro);
   }
 
-  // Auto dismiss after After Effects sequence completes (3.4 seconds)
-  setTimeout(dismissIntro, 3400);
+  // Auto dismiss exact 3 seconds after logo deploy
+  setTimeout(dismissIntro, 3000);
 }
 
 /* ==========================================
