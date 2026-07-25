@@ -91,12 +91,12 @@ function initLogoRevealIntro() {
 
 /* ==========================================
    1. CALCULADORA INTERACTIVA DE RIESGO COFEPRIS
-   ========================================== */
-function initSanityCalculator() {
+   ========================================== */function initSanityCalculator() {
   const sectorSelect = document.getElementById('calc-sector');
   const sizeInput = document.getElementById('calc-size');
   const sizeValueDisplay = document.getElementById('calc-size-val');
   const lastFumigationSelect = document.getElementById('calc-last-fumigation');
+  const licenseSelect = document.getElementById('calc-license');
 
   const riskBadge = document.getElementById('calc-risk-badge');
   const fineEstimateDisplay = document.getElementById('calc-fine-estimate');
@@ -109,70 +109,65 @@ function initSanityCalculator() {
     const sector = sectorSelect.value;
     const size = parseInt(sizeInput.value, 10);
     const monthsSince = parseInt(lastFumigationSelect.value, 10);
+    const license = licenseSelect ? licenseSelect.value : 'incompleta';
 
     sizeValueDisplay.textContent = size.toLocaleString('es-MX') + ' m² / m³';
 
-    // Base multiplier based on legal vulnerability per NOM-256 / NOM-251
-    let riskLevel = 'MEDIO';
+    // Legal parameters calculation based on Ley General de Salud Arts 194, 198, 417, 421 & NOM-256-SSA1-2012
+    let riskLevel = 'MEDIO - REQUIERE PREVENCIÓN';
     let minFine = 226280; // 2,000 UMAS
     let maxFine = 678840; // 6,000 UMAS
-    let riskColor = 'text-amber-500 bg-amber-50 border-amber-200';
-    let recommendation = 'Requiere inspección sanitaria preventiva en los próximos 15 días.';
+    let riskColor = 'text-amber-600 bg-amber-50 border-amber-300';
+    let recommendation = 'Se recomienda inspección técnica y actualización de bitácora sanitaria en los próximos 15 días.';
 
-    if (sector === 'industrial_silos' || sector === 'transporte') {
-      if (monthsSince >= 2 || size > 1000) {
-        riskLevel = 'CRÍTICO - ALTO RIESGO DE CLAUSURA';
-        riskColor = 'text-red-600 bg-red-50 border-red-300 animate-pulse';
-        recommendation = '⚠️ Excedido el ciclo recomendado (mensual). Sujeto a sanción e inmovilización de granos por COFEPRIS. ¡Aprovecha 5% de descuento en tu regularización!';
-      } else {
-        riskLevel = 'ALTO (REQUERIDO PROGRAMA MENSUAL)';
-        riskColor = 'text-orange-600 bg-orange-50 border-orange-200';
-        recommendation = 'Se requiere certificado mensual de fumigación NOM-256 para maniobras de carga y silos. ¡Aplica 5% OFF!';
-      }
-    } else if (sector === 'alimentos_restaurantes' || sector === 'salud_hospitales') {
-      if (monthsSince >= 3) {
-        riskLevel = 'CRÍTICO - REVISE NOM-251';
-        riskColor = 'text-red-600 bg-red-50 border-red-300';
-        recommendation = 'Excedido el límite trimestral obligatorio. Suspensión temporal de actividades probable por SESVER.';
-      } else {
-        riskLevel = 'MEDIO (PROGRAMA TRIMESTRAL)';
-        riskColor = 'text-amber-600 bg-amber-50 border-amber-200';
-        recommendation = 'Recomendado servicio trimestral de Manejo Integrado de Plagas (MIP) con bitácora oficial.';
-      }
-      if (monthsSince >= 4) {
-        riskLevel = 'MEDIO';
-        riskColor = 'text-blue-600 bg-blue-50 border-blue-200';
-        recommendation = 'Se recomienda refuerzo sanitario preventivo cada 3 meses.';
-      } else {
-        riskLevel = 'BAJO (EN REGLA)';
-        riskColor = 'text-green-600 bg-green-50 border-green-200';
-        recommendation = 'Cumplimiento adecuado. Mantener bitácora al día.';
-      }
+    const isIndustrialOrLogistics = (sector === 'industrial_silos' || sector === 'transporte');
+
+    if (license === 'ninguna' || (isIndustrialOrLogistics && monthsSince >= 2) || (monthsSince >= 7)) {
+      riskLevel = '🚨 CRÍTICO - RIESGO DE CLAUSURA E INMOVILIZACIÓN';
+      riskColor = 'text-red-600 bg-red-50 border-red-300 font-extrabold animate-pulse';
+      minFine = 350000;
+      maxFine = 678840;
+      recommendation = '⚠️ EXPOSICIÓN ALTA A SANCIÓN (Arts. 417 y 421 Ley General de Salud). Carecer de certificado mensual/trimestral o bitácora NOM-256 autoriza a COFEPRIS/SESVER a suspender actividades o inmovilizar granos/mercancía. ¡Regularízate hoy con 5% OFF!';
+    } else if (license === 'incompleta' || monthsSince >= 3) {
+      riskLevel = '⚠️ ALTO - VULNERABLE A INSPECION SESVER';
+      riskColor = 'text-orange-600 bg-orange-50 border-orange-300 font-bold';
+      minFine = 226280;
+      maxFine = 450000;
+      recommendation = 'Excedido el periodo de mantenimiento recomendado. Se requiere emisión urgente de Certificado Fitosanitario Oficial con validez COFEPRIS para evitar observaciones en bitácora.';
+    } else if (license === 'vigente' && monthsSince === 1) {
+      riskLevel = '✅ ESTATUS EN REGLA (PROTEGIDO)';
+      riskColor = 'text-emerald-700 bg-emerald-50 border-emerald-300 font-bold';
+      minFine = 0;
+      maxFine = 0;
+      recommendation = '¡Excelente! Tu establecimiento cuenta con blindaje sanitario activo. Recuerda renovar tu certificado según la frecuencia de tu giro (mensual para silos/transporte, trimestral comercial).';
     }
 
     // Format Fine output
-    const minFineFormatted = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(minFine);
-    const maxFineFormatted = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(maxFine);
+    let fineText = `${new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(minFine)} - ${new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(maxFine)} MXN (2,000 a 6,000 UMA)`;
+    if (minFine === 0) {
+      fineText = '$0 MXN (Sin Exposición a Sanción Sanitaria)';
+    }
 
-    riskBadge.className = `inline-block px-3 py-1 text-xs sm:text-sm font-bold rounded-full border ${riskColor}`;
+    riskBadge.className = `inline-block px-3 py-1 text-xs sm:text-sm rounded-full border ${riskColor}`;
     riskBadge.textContent = riskLevel;
 
-    fineEstimateDisplay.textContent = `${minFineFormatted} - ${maxFineFormatted} MXN (2,000 a 6,000 UMA)`;
+    fineEstimateDisplay.textContent = fineText;
     actionRecommendation.textContent = recommendation;
   }
 
   sectorSelect.addEventListener('change', calculateRisk);
   sizeInput.addEventListener('input', calculateRisk);
   lastFumigationSelect.addEventListener('change', calculateRisk);
+  if (licenseSelect) licenseSelect.addEventListener('change', calculateRisk);
 
   if (calcCtaBtn) {
     calcCtaBtn.addEventListener('click', () => {
       const formSection = document.getElementById('cotizacion');
       if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth' });
-        const commentsField = document.getElementById('lead-comentarios');
+        const commentsField = document.querySelector('textarea[name="comentarios"]');
         if (commentsField) {
-          commentsField.value = `[Evaluación desde Calculadora COFEPRIS]\nSector: ${sectorSelect.options[sectorSelect.selectedIndex].text}\nSuperficie: ${sizeInput.value}m²\nÚltima fumigación: ${lastFumigationSelect.options[lastFumigationSelect.selectedIndex].text}`;
+          commentsField.value = `[Evaluación desde Calculadora COFEPRIS]\nGiro: ${sectorSelect.options[sectorSelect.selectedIndex].text}\nSuperficie/Capacidad: ${sizeInput.value}m²\nÚltima Fumigación: ${lastFumigationSelect.options[lastFumigationSelect.selectedIndex].text}\nEstatus Licencia: ${licenseSelect ? licenseSelect.options[licenseSelect.selectedIndex].text : 'N/A'}`;
         }
       }
     });
