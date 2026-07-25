@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function initLogoRevealIntro() {
   const overlay = document.getElementById('intro-overlay');
   const canvas = document.getElementById('intro-canvas');
-  const skipBtn = document.getElementById('skip-intro');
 
   if (!overlay || !canvas) return;
 
@@ -83,10 +82,6 @@ function initLogoRevealIntro() {
       overlay.style.display = 'none';
       cancelAnimationFrame(animationFrameId);
     }, 600);
-  }
-
-  if (skipBtn) {
-    skipBtn.addEventListener('click', dismissIntro);
   }
 
   // Auto dismiss triggers fade-out at 2.4s and fully completes at 3.0s total
