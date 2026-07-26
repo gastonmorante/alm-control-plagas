@@ -415,7 +415,7 @@ function initKeyboardAccessibility() {
 }
 
 /* ==========================================
-   7. HORMIGUITA INTERACTIVA SEGUIDORA DE CURSOR (PC & MOBILE)
+   7. HORMIGUITA INTERACTIVA SEGUIDORA DE CURSOR CON ANIMACIÓN DE PATITAS (PC & MOBILE)
    ========================================== */
 function initAntCursorFollower() {
   let antContainer = document.getElementById('ant-cursor-container');
@@ -424,7 +424,7 @@ function initAntCursorFollower() {
     antContainer.id = 'ant-cursor-container';
     antContainer.className = 'fixed top-0 left-0 pointer-events-none z-50 transition-opacity duration-500 opacity-0';
     antContainer.innerHTML = `
-      <div id="ant-follower" class="w-7 h-7 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center filter drop-shadow-md">
+      <div id="ant-follower" class="w-8 h-8 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center filter drop-shadow-md">
         <svg viewBox="0 0 100 100" class="w-full h-full fill-navy-950 stroke-accent-orange">
           <!-- Ant Head -->
           <ellipse cx="50" cy="20" rx="10" ry="12" fill="#081129" />
@@ -438,13 +438,13 @@ function initAntCursorFollower() {
           <ellipse cx="50" cy="45" rx="12" ry="14" fill="#0D1B3E" />
           <!-- Ant Abdomen -->
           <ellipse cx="50" cy="78" rx="16" ry="20" fill="#081129" />
-          <!-- Ant Legs -->
-          <path d="M 40 40 Q 20 30 10 40" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
-          <path d="M 60 40 Q 80 30 90 40" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
-          <path d="M 40 48 Q 15 48 5 55" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
-          <path d="M 60 48 Q 85 48 95 55" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
-          <path d="M 40 56 Q 20 70 12 80" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
-          <path d="M 60 56 Q 80 70 88 80" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <!-- Ant Animated Legs (6 Legs) -->
+          <path id="ant-leg-l1" d="M 40 40 Q 20 30 10 40" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path id="ant-leg-r1" d="M 60 40 Q 80 30 90 40" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path id="ant-leg-l2" d="M 40 48 Q 15 48 5 55" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path id="ant-leg-r2" d="M 60 48 Q 85 48 95 55" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path id="ant-leg-l3" d="M 40 56 Q 20 70 12 80" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
+          <path id="ant-leg-r3" d="M 60 56 Q 80 70 88 80" fill="none" stroke="#081129" stroke-width="4" stroke-linecap="round" />
         </svg>
       </div>
     `;
@@ -456,7 +456,15 @@ function initAntCursorFollower() {
   let targetX = posX;
   let targetY = posY;
   let currentAngle = 0;
+  let stepCycle = 0;
   let idleTimeout = null;
+
+  const legL1 = antContainer.querySelector('#ant-leg-l1');
+  const legR1 = antContainer.querySelector('#ant-leg-r1');
+  const legL2 = antContainer.querySelector('#ant-leg-l2');
+  const legR2 = antContainer.querySelector('#ant-leg-r2');
+  const legL3 = antContainer.querySelector('#ant-leg-l3');
+  const legR3 = antContainer.querySelector('#ant-leg-r3');
 
   function updatePosition(x, y) {
     targetX = x;
@@ -489,17 +497,29 @@ function initAntCursorFollower() {
     }
   }, { passive: true });
 
-  // Smooth Motion Loop
+  // Smooth Motion Loop with Realistic Ant Leg Wiggling Animation
   function animLoop() {
     const dx = targetX - posX;
     const dy = targetY - posY;
     const dist = Math.hypot(dx, dy);
 
     if (dist > 1.5) {
-      posX += dx * 0.08;
-      posY += dy * 0.08;
+      posX += dx * 0.09;
+      posY += dy * 0.09;
       const targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
-      currentAngle += (targetAngle - currentAngle) * 0.12;
+      currentAngle += (targetAngle - currentAngle) * 0.15;
+
+      // Leg Walking Dynamics (Alternating Tripod Gait)
+      stepCycle += Math.min(dist * 0.18, 0.45);
+      const swing1 = Math.sin(stepCycle) * 7;
+      const swing2 = Math.cos(stepCycle) * 7;
+
+      if (legL1) legL1.setAttribute('d', `M 40 40 Q 20 ${30 + swing1} 10 ${40 + swing1}`);
+      if (legR1) legR1.setAttribute('d', `M 60 40 Q 80 ${30 - swing1} 90 ${40 - swing1}`);
+      if (legL2) legL2.setAttribute('d', `M 40 48 Q 15 ${48 - swing2} 5 ${55 - swing2}`);
+      if (legR2) legR2.setAttribute('d', `M 60 48 Q 85 ${48 + swing2} 95 ${55 + swing2}`);
+      if (legL3) legL3.setAttribute('d', `M 40 56 Q 20 ${70 + swing1} 12 ${80 + swing1}`);
+      if (legR3) legR3.setAttribute('d', `M 60 56 Q 80 ${70 - swing1} 88 ${80 - swing1}`);
     }
 
     antContainer.style.transform = `translate3d(${posX}px, ${posY}px, 0px) rotate(${currentAngle}deg)`;
