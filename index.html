@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- SEO Primary & Local Pack Meta Tags -->
-  <title>ALM Control de Plagas | Fumigación Industrial, Silos y Transporte en Veracruz</title>
-  <meta name="title" content="ALM Control de Plagas | Fumigación Industrial, Silos y Transporte en Veracruz">
+  <title>ALM Control de Plagas | Blindaje Sanitario Industrial en Veracruz</title>
+  <meta name="title" content="ALM Control de Plagas | Blindaje Sanitario Industrial en Veracruz">
   <meta name="description" content="Control de Plagas y Blindaje Sanitario en Veracruz. Licencia COFEPRIS vigente y cumplimiento NOM-256-SSA1-2012. Fumigación de silos, transporte de carga, plantas de alimentos y residencias.">
   <meta name="keywords" content="fumigación industrial veracruz, control de plagas cordoba, certificado cofepris fumigación, fumigación de silos y transporte, manejo integrado de plagas veracruz, fumigación orizaba, desinfección sanitaria xalapa">
   <meta name="author" content="NegocioUp">
@@ -18,7 +18,7 @@
   <meta name="geo.placename" content="Córdoba, Veracruz">
   <meta name="geo.position" content="18.8943;-96.9351">
   <meta name="ICBM" content="18.8943, -96.9351">
-  <meta name="theme-color" content="#0D1B3E">
+  <meta name="theme-color" content="#006c49">
 
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
@@ -32,45 +32,65 @@
   <meta property="twitter:title" content="ALM Control de Plagas | Fumigación Industrial Veracruz">
   <meta property="twitter:description" content="Control de Plagas y Blindaje Sanitario con Licencia COFEPRIS en Veracruz.">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+  <!-- Tailwind CSS CDN + Material & Lexend Fonts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800&family=Outfit:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Custom Tailwind Design Tokens -->
+  <script id="tailwind-config">
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            navy: {
+            "primary": "#006c49",
+            "primary-container": "#10b981",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#00422b",
+            "primary-fixed": "#6ffbbe",
+            "primary-fixed-dim": "#4edea3",
+            "secondary": "#515d84",
+            "on-secondary-fixed": "#0b1a3d",
+            "secondary-container": "#c4d0fd",
+            "accent-orange": "#E67E22",
+            "accent-orange-hover": "#D35400",
+            "background": "#f7f9fb",
+            "on-background": "#191c1e",
+            "surface": "#f7f9fb",
+            "surface-container": "#eceef0",
+            "surface-container-high": "#e6e8ea",
+            "surface-variant": "#e0e3e5",
+            "outline": "#6c7a71",
+            "outline-variant": "#bbcabf",
+            "navy": {
               700: '#1E293B',
               800: '#0F172A',
               900: '#0D1B3E',
               950: '#081129',
-            },
-            accent: {
-              green: '#4CAF50',
-              orange: '#E67E22',
-              blue: '#3498DB'
             }
+          },
+          fontFamily: {
+            "sans": ["Lexend", "Inter", "sans-serif"],
+            "heading": ["Outfit", "Lexend", "sans-serif"]
           }
         }
       }
     }
   </script>
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-
   <!-- Custom Styles System -->
   <link rel="stylesheet" href="./css/styles.css">
 
   <!-- Apps Script & Gemini Configuration Keys -->
   <script>
-    window.ALM_GAS_ENDPOINT = ""; // Configurable por Gastón en el despliegue de Apps Script
+    window.ALM_GAS_ENDPOINT = ""; // Configurable por Gastón en Apps Script
     window.ALM_GEMINI_API_KEY = window.localStorage.getItem('ALM_GEMINI_API_KEY') || "";
   </script>
 
-  <!-- LocalBusiness, PestControlService & FAQPage Schema Markup (JSON-LD) -->
+  <!-- Schema Markup (JSON-LD) -->
   <script type="application/ld+json">
   [
     {
@@ -167,760 +187,607 @@
   ]
   </script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-accent-green selection:text-white pb-20 md:pb-0">
+<body class="bg-background text-on-background font-sans selection:bg-primary-container selection:text-on-primary-container pb-16 md:pb-0">
 
   <!-- After Effects Style Logo Reveal Intro Overlay -->
   <div id="intro-overlay">
     <canvas id="intro-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
-    
-    <!-- Shockwave Rings -->
     <div class="shockwave-ring"></div>
-    <div class="shockwave-ring" style="animation-delay: 0.8s;"></div>
-
-    <!-- Center Isologo Graphic (Strictly Isologo, no text) -->
-    <div class="isologo-wrapper mb-2">
-      <img src="./isologo_transparent.png" alt="ALM Isologo" class="h-36 sm:h-48 w-auto object-contain">
+    <div class="isologo-wrapper mb-4">
+      <img src="./logo_transparent.png" alt="ALM Control de Plagas" class="w-36 h-36 sm:w-44 sm:h-44 object-contain">
     </div>
-
-    <!-- Motion Reveal Headline -->
-    <div class="text-center z-10 px-4">
-      <h2 class="intro-tagline text-2xl sm:text-4xl font-extrabold tracking-widest text-white">ALM</h2>
+    <div class="text-center px-4">
+      <h2 class="intro-tagline text-lg sm:text-2xl font-extrabold text-white">ALM CONTROL DE PLAGAS</h2>
+      <p class="intro-subtext text-xs sm:text-sm text-slate-300 tracking-widest mt-1">BLINDAJE SANITARIO &amp; CERTIFICACIÓN COFEPRIS</p>
     </div>
   </div>
 
-  <!-- Top Bar Contact & Badges -->
-  <div class="bg-navy-950 text-slate-300 text-xs py-2 px-4 border-b border-navy-800">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-      <div class="flex items-center gap-4 flex-wrap">
-        <span class="flex items-center gap-1.5 text-accent-green font-semibold">
-          <span class="w-2 h-2 rounded-full bg-accent-green animate-pulse"></span>
-          Licencia Sanitaria COFEPRIS Vigente
-        </span>
-        <span class="hidden sm:inline text-slate-400">|</span>
-        <span class="hidden sm:inline">Cumplimiento NOM-256-SSA1-2012</span>
-        <span class="hidden md:inline text-slate-400">|</span>
-        <span class="hidden md:inline text-accent-orange font-bold">🎁 Cotización Sin Costo + 5% OFF en Web</span>
+  <!-- Top Navigation Bar -->
+  <nav class="fixed top-0 w-full z-40 flex justify-between items-center px-4 sm:px-8 py-3.5 bg-navy-900/95 backdrop-blur-md border-b border-navy-800 transition-all">
+    <a href="#inicio" class="flex items-center gap-3 group">
+      <img alt="ALM Control Logo" class="h-11 sm:h-13 w-auto object-contain transform group-hover:scale-105 transition-transform" src="./logo_transparent.png"/>
+      <div class="flex flex-col">
+        <span class="font-heading font-extrabold text-white text-base sm:text-lg tracking-tight leading-none">ALM CONTROL</span>
+        <span class="text-[10px] sm:text-xs text-primary-fixed-dim font-bold tracking-wider uppercase mt-0.5">Blindaje Sanitario</span>
       </div>
-      <div class="flex items-center gap-4">
-        <span>Atención & WhatsApp:</span>
-        <a href="tel:2711528442" title="WhatsApp & Atención Principal ALM" class="hover:text-accent-green transition-colors font-bold flex items-center gap-1 text-white">
-          <svg class="w-3.5 h-3.5 text-accent-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-          271 152 8442
-        </a>
-        <a href="https://wa.me/522711528442" target="_blank" title="WhatsApp Directo ALM" class="hidden md:inline hover:text-accent-green transition-colors font-bold text-emerald-400">
-          WhatsApp Directo
-        </a>
-      </div>
+    </a>
+    
+    <div class="hidden md:flex items-center gap-7 text-xs sm:text-sm font-semibold text-slate-300">
+      <a href="#inicio" class="hover:text-primary-fixed transition-colors">Inicio</a>
+      <a href="#servicios" class="hover:text-primary-fixed transition-colors">Servicios</a>
+      <a href="#industria" class="hover:text-primary-fixed transition-colors">Especialización</a>
+      <a href="#casos-exito" class="hover:text-primary-fixed transition-colors">Casos de Éxito</a>
+      <a href="#proceso" class="hover:text-primary-fixed transition-colors">Metodología MIP</a>
+      <a href="#resenas" class="hover:text-primary-fixed transition-colors">Opiniones Google</a>
+      <a href="#cobertura" class="hover:text-primary-fixed transition-colors">Cobertura</a>
     </div>
-  </div>
 
-  <!-- Header / Navigation -->
-  <header class="sticky top-0 z-40 bg-navy-900/95 backdrop-blur-md border-b border-navy-800 shadow-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
-      
-      <!-- Brand Logo (Transparent High Resolution PNG) -->
-      <a href="#" class="flex items-center gap-3 group">
-        <img src="./logo_transparent.png" alt="ALM Control de Plagas Logo" class="h-12 w-auto object-contain transition-transform group-hover:scale-105 filter drop-shadow-md">
+    <div class="flex items-center gap-3">
+      <a href="https://wa.me/522711528442" target="_blank" class="hidden lg:inline-flex text-emerald-400 font-bold text-xs hover:underline">
+        271 152 8442
       </a>
+      <a href="#cotizacion" class="bg-primary-container text-on-primary-container font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm hover:scale-95 transition-all duration-150 shadow-md">
+        COTIZAR -5%
+      </a>
+    </div>
+  </nav>
 
-      <!-- Desktop Nav Links -->
-      <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-200">
-        <a href="#inicio" class="hover:text-accent-green transition-colors">Inicio</a>
-        <a href="#servicios" class="hover:text-accent-green transition-colors">Servicios</a>
-        <a href="#normativa" class="hover:text-accent-green transition-colors">NOM-256</a>
-        <a href="#casos-exito" class="hover:text-accent-green transition-colors">Casos de Éxito</a>
-        <a href="#resenas" class="hover:text-accent-green transition-colors">Opiniones Google</a>
-      </nav>
-
-      <!-- Header CTA Buttons -->
-      <div class="flex items-center gap-3">
-        <a href="https://wa.me/522711528442?text=Hola%20ALM,%20solicito%20mi%20cotización%20sin%20costo%20con%205%25%20de%20descuento." target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-4 py-2 rounded-xl text-xs sm:text-sm shadow-md transition-all">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-          WhatsApp Directo
-        </a>
-        <a href="#cotizacion" class="bg-accent-orange hover:bg-accent-orange-hover text-white font-bold px-4 py-2 rounded-xl text-xs sm:text-sm shadow-lg shadow-orange-900/20 transition-all transform hover:-translate-y-0.5">
-          Cotizar 5% OFF
-        </a>
+  <main class="pt-20">
+    
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-[88vh] flex items-center overflow-hidden bg-navy-950 text-white">
+      <div class="absolute inset-0 z-0">
+        <div class="w-full h-full bg-cover bg-center brightness-[0.32]" style="background-image: url('./img_silos_case.jpg')"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/80 to-transparent"></div>
       </div>
 
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="inicio" class="relative bg-gradient-hero text-white pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <!-- Hero Text Content -->
-        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-          
-          <!-- Badge Header -->
-          <div class="inline-flex items-center gap-2 bg-navy-800/90 border border-accent-green/40 px-3.5 py-1.5 rounded-full text-xs font-semibold text-accent-green shadow-inner">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-            Blindaje Sanitario Especializado para la Industria
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex gap-3 items-center px-3.5 py-1.5 rounded-full bg-primary/20 border border-primary/40 backdrop-blur-md">
+            <span class="bg-primary text-on-primary px-3 py-0.5 text-[11px] font-bold tracking-widest rounded-full uppercase">Certificación Federal</span>
+            <span class="text-white/80 font-bold text-xs">SESVER / COFEPRIS / NOM-256</span>
           </div>
 
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading tracking-tight leading-tight text-white">
-            Fumigación Certificada y Control de Plagas para <span class="text-gradient-green">Silos, Transporte e Industria</span> en Veracruz
+          <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+            Blindaje Sanitario y <span class="text-primary-fixed-dim">Control Fitosanitario</span> en Veracruz.
           </h1>
 
-          <p class="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-            Protegemos la integridad fitosanitaria de tus instalaciones con <strong>Licencia Sanitaria COFEPRIS</strong>. Certificados oficiales de cumplimiento con la <strong>NOM-256-SSA1-2012</strong> para evitar sanciones, clausuras y pérdida de mercancía.
+          <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
+            Protección de alta gama para la industria alimentaria, transporte de carga y silos graneleros. Implementamos el Manejo Integrado de Plagas (MIP) con rigor técnico y legal.
           </p>
 
-          <!-- Promo Incentive Banner -->
-          <div class="bg-amber-500/20 border border-amber-400/40 p-3.5 rounded-2xl flex items-center gap-3 text-xs sm:text-sm text-amber-200">
-            <span class="text-2xl">🎁</span>
-            <div>
-              <strong class="text-white block font-bold">¡Promoción Web Exclusiva ALM!</strong>
-              <span>Solicita tu cotización desde este sitio web y obtén <strong>Diagnóstico sin Costo + 5% DE DESCUENTO</strong> en tu primer servicio.</span>
-            </div>
-          </div>
-
-          <!-- Hero Value Highlights Grid -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 max-w-xl mx-auto lg:mx-0 text-xs sm:text-sm">
-            <div class="bg-navy-900/60 border border-slate-700/60 p-3 rounded-xl flex items-center gap-2.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-accent-green flex-shrink-0"></span>
-              <span class="font-medium text-slate-200">Licencia COFEPRIS</span>
-            </div>
-            <div class="bg-navy-900/60 border border-slate-700/60 p-3 rounded-xl flex items-center gap-2.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-accent-blue flex-shrink-0"></span>
-              <span class="font-medium text-slate-200">Garantía por Escrito</span>
-            </div>
-            <div class="bg-navy-900/60 border border-slate-700/60 p-3 rounded-xl flex items-center gap-2.5 col-span-2 sm:col-span-1">
-              <span class="w-2.5 h-2.5 rounded-full bg-accent-orange flex-shrink-0"></span>
-              <span class="font-medium text-slate-200">Baja Toxicidad</span>
-            </div>
-          </div>
-
-          <!-- Hero Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-            <a href="#cotizacion" class="bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold px-7 py-4 rounded-xl shadow-xl shadow-orange-900/30 text-center text-base transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-              <span>Solicitar Inspección (5% OFF)</span>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#cotizacion" class="bg-primary-container text-on-primary-container px-7 py-3.5 rounded-xl font-bold text-sm sm:text-base flex items-center gap-3 hover:shadow-xl transition-all hover:scale-105">
+              <span>AGENDAR INSPECCIÓN</span>
+              <span class="material-symbols-outlined">shield_with_heart</span>
             </a>
+            <div class="flex items-center gap-3 bg-white/10 backdrop-blur px-5 py-3 rounded-xl border border-white/20">
+              <span class="material-symbols-outlined text-primary-fixed text-3xl">verified</span>
+              <div>
+                <p class="text-white font-bold leading-none text-xs sm:text-sm">NOM-256-SSA1-2012</p>
+                <p class="text-white/70 text-[10px] tracking-wider uppercase font-semibold">Cumplimiento Total</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-white/10 grid grid-cols-3 gap-4 text-left">
+            <div>
+              <p class="text-xl sm:text-2xl font-bold text-primary-fixed-dim font-heading">100%</p>
+              <p class="text-[11px] text-slate-400">Validez COFEPRIS</p>
+            </div>
+            <div>
+              <p class="text-xl sm:text-2xl font-bold text-accent-orange font-heading">2,500m³</p>
+              <p class="text-[11px] text-slate-400">Capacidad en Silos</p>
+            </div>
+            <div>
+              <p class="text-xl sm:text-2xl font-bold text-emerald-400 font-heading">24 hrs</p>
+              <p class="text-[11px] text-slate-400">Respuesta Urgente</p>
+            </div>
           </div>
 
         </div>
 
-        <!-- Hero Card / Quick Quote Box -->
+        <!-- Fast Conversion Lead Form -->
         <div class="lg:col-span-5">
-          <div class="glass-panel-dark p-6 sm:p-8 rounded-3xl shadow-2xl relative border border-white/10">
-            
-            <div class="absolute -top-3 right-6 bg-accent-green text-navy-950 text-[11px] font-extrabold uppercase px-3 py-1 rounded-full shadow-md">
-              Respuesta en &lt; 15 min
-            </div>
+          <div class="bg-navy-900/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border-t-4 border-primary border-slate-700/60">
+            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white mb-1">Presupuesto Inmediato</h3>
+            <p class="text-slate-300 text-xs mb-5">Obtén un 5% de descuento en tu primer servicio industrial.</p>
 
-            <h3 class="text-xl font-bold font-heading text-white mb-1">Solicitud Exprés de Cotización</h3>
-            <p class="text-xs text-accent-green font-semibold mb-4">✨ Incluye Cotización Sin Costo + 5% de Descuento</p>
-            <p class="text-xs text-slate-300 mb-6">Atención inmediata para empresas de transporte, silos, industrias y establecimientos en Veracruz.</p>
-
-            <form id="hero-quick-form" action="#cotizacion" method="GET" class="space-y-4">
+            <form id="alm-lead-form" class="space-y-3.5">
               <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Tu Nombre o Nombre de Empresa</label>
-                <input type="text" placeholder="Ej. Transportes del Golfo / Juan Pérez" required class="w-full bg-navy-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-green">
+                <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">Nombre Completo *</label>
+                <input type="text" name="nombre" required placeholder="Ej. Ing. Roberto Morales" class="w-full bg-navy-950/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary-container">
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">Empresa / Giro</label>
+                  <input type="text" name="empresa" placeholder="Ej. Transportes del Golfo" class="w-full bg-navy-950/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary-container">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">Teléfono / WhatsApp *</label>
+                  <input type="tel" name="telefono" required placeholder="271 123 4567" class="w-full bg-navy-950/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary-container">
+                </div>
               </div>
 
               <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Teléfono o WhatsApp de Contacto</label>
-                <input type="tel" placeholder="271 XXX XXXX" required class="w-full bg-navy-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-green">
+                <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">Correo Electrónico *</label>
+                <input type="email" name="email" required placeholder="ejemplo@empresa.com" class="w-full bg-navy-950/90 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary-container">
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">Ciudad *</label>
+                  <select name="ciudad" required class="w-full bg-navy-950/90 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-primary-container">
+                    <option value="Córdoba">Córdoba</option>
+                    <option value="Fortín">Fortín</option>
+                    <option value="Orizaba">Orizaba</option>
+                    <option value="Veracruz Puerto">Veracruz Puerto</option>
+                    <option value="Boca del Río">Boca del Río</option>
+                    <option value="Xalapa">Xalapa</option>
+                    <option value="Tierra Blanca">Tierra Blanca</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">Instalación *</label>
+                  <select name="servicio" required class="w-full bg-navy-950/90 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-primary-container">
+                    <option value="Silos de Grano">Silos de Grano</option>
+                    <option value="Transporte de Carga">Transporte de Carga / Pipas</option>
+                    <option value="Planta de Alimentos">Planta de Alimentos</option>
+                    <option value="Almacén Logístico">Almacén Logístico / Comercio</option>
+                    <option value="Sector Salud">Sector Salud / Residencial</option>
+                  </select>
+                </div>
               </div>
 
               <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Sector / Tipo de Instalación</label>
-                <select class="w-full bg-navy-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-accent-green">
-                  <option value="transporte">Transporte de Carga / Remolques / Cajas</option>
-                  <option value="silos">Silos / Almacén de Granos</option>
-                  <option value="alimentos">Planta Procesadora / Comedor / Restaurante</option>
-                  <option value="comercial">Comercio / Bodega / Hotel</option>
-                  <option value="residencial">Casa / Residencia</option>
-                </select>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">Detalles de Necesidad</label>
+                <textarea name="comentarios" rows="2" placeholder="Describe brevemente tus instalaciones..." class="w-full bg-navy-950/90 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary-container"></textarea>
               </div>
 
-              <button type="submit" class="w-full bg-accent-green hover:bg-accent-green-hover text-white font-bold py-3 px-4 rounded-xl text-sm transition-all shadow-lg shadow-green-900/30 flex items-center justify-center gap-2">
-                <span>Continuar a Cotización Detallada</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+              <button id="form-submit-btn" type="submit" class="w-full bg-accent-orange hover:bg-accent-orange-hover text-white py-3.5 font-bold rounded-xl transition-all shadow-lg text-xs sm:text-sm flex justify-center items-center gap-2">
+                <span id="form-btn-text">SOLICITAR COTIZACIÓN</span>
+                <span id="form-btn-spinner" class="hidden w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                <span class="material-symbols-outlined text-base">send</span>
               </button>
             </form>
 
-            <div class="mt-4 pt-4 border-t border-slate-800 text-center">
-              <span class="text-[11px] text-slate-400">¿Prefieres asistencia técnica automatizada? Prueba nuestro <button type="button" id="hero-ai-trigger" class="text-accent-green font-bold underline">Asistente Virtual IA</button></span>
-            </div>
-
+            <div id="form-status-alert" class="mt-4 p-4 rounded-xl text-sm font-medium hidden"></div>
           </div>
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Legal & Regulatory Compliance Section (NOM-256-SSA1-2012) -->
-  <section id="normativa" class="py-16 bg-white border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs font-bold text-accent-blue uppercase tracking-wider bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">Cumplimiento Legal Obligatorio</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-navy-900 mt-3">
-          ¿Tu empresa cuenta con el Certificado Sanitario NOM-256 vigente?
-        </h2>
-        <p class="text-sm sm:text-base text-slate-600 mt-2">
-          De acuerdo con la Ley General de Salud y la <strong>NOM-256-SSA1-2012</strong>, todos los giros industriales, de transporte, alimentarios y comerciales están obligados a contar con un certificado emitido por una empresa autorizada ante COFEPRIS.
-        </p>
+    <!-- Industrial Specialization (Bento Grid) -->
+    <section id="industria" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="mb-12">
+        <p class="text-primary font-bold tracking-widest text-xs uppercase mb-2">Especialización Técnica</p>
+        <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-navy-900">Capacidad Industrial Instalada</h2>
       </div>
 
-      <!-- Legal Info Cards Grid -->
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
         
-        <!-- Card 1: Licencia COFEPRIS -->
-        <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl relative shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-12 h-12 rounded-xl bg-navy-900 text-accent-green flex items-center justify-center p-3 mb-4 shadow-md">
-            <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+        <!-- Silos Bento Card (Con Video Demostración) -->
+        <div id="open-video-btn-silos" class="md:col-span-8 group relative overflow-hidden rounded-3xl bg-navy-950 border border-slate-200 transition-all hover:border-primary shadow-lg cursor-pointer min-h-[360px]">
+          <div class="absolute inset-0 opacity-50 group-hover:scale-105 transition-transform duration-700 bg-cover bg-center" style="background-image: url('./img_silos_case.jpg')"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent"></div>
+          
+          <div class="relative z-10 p-6 sm:p-8 h-full flex flex-col justify-end">
+            <div class="flex items-center justify-between mb-3">
+              <span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-xs font-bold">SECTOR AGRÍCOLA Y SILOS</span>
+              <button type="button" id="open-video-link-silos" class="bg-accent-orange text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-md">
+                ▶ Ver Video Demostración
+              </button>
+            </div>
+            <h3 class="text-white font-heading text-2xl sm:text-3xl font-extrabold mb-2">Control en Silos y Almacenaje (2,500 m³)</h3>
+            <p class="text-slate-300 text-xs sm:text-sm max-w-xl leading-relaxed">
+              Manejo especializado de granos almacenados y desgasificación hermética con fosfuro de aluminio bajo NOM-256. 100% libre de gorgojo y larva.
+            </p>
           </div>
-          <h3 class="text-lg font-bold text-navy-900 mb-2">Licencia Sanitaria COFEPRIS</h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Emitida conforme a los Arts. 194 y 198 de la Ley General de Salud. Garantiza que el personal técnico, equipos y productos utilizados son legalmente reconocidos ante las autoridades sanitarias.
-          </p>
-          <ul class="mt-4 space-y-1.5 text-xs text-slate-700 font-medium">
-            <li class="flex items-center gap-2 text-emerald-700">✓ Válido ante verificaciones de SESVER</li>
-            <li class="flex items-center gap-2 text-emerald-700">✓ Firma de Responsable Técnico Acreditado</li>
+        </div>
+
+        <!-- Transport & Pipas Bento Card (Con Video Demostración) -->
+        <div id="open-video-btn-pipas" class="md:col-span-4 bg-slate-50 border border-slate-200 p-6 sm:p-8 rounded-3xl flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="material-symbols-outlined text-primary text-4xl">local_shipping</span>
+              <button type="button" id="open-video-link-pipas" class="bg-navy-900 text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                ▶ Ver Video
+              </button>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-navy-900 mb-2">Logística, Pipas &amp; Carga</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Desinfección de pipas alimentarias, tolvas y cajas refrigeradas con biocidas ecológicos. Expedición de certificados válidos en aduanas.
+            </p>
+          </div>
+          <ul class="space-y-2 pt-4 border-t border-slate-200">
+            <li class="flex items-center gap-2 text-slate-700 font-bold text-xs">
+              <span class="material-symbols-outlined text-primary text-base">check_circle</span> DESINFECCIÓN GRADO ALIMENTICIO
+            </li>
+            <li class="flex items-center gap-2 text-slate-700 font-bold text-xs">
+              <span class="material-symbols-outlined text-primary text-base">check_circle</span> LIBERACIÓN RÁPIDA DE UNIDADES
+            </li>
           </ul>
         </div>
 
-        <!-- Card 2: Evita Multas Sanitaria UMAS -->
-        <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl relative shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-12 h-12 rounded-xl bg-navy-900 text-accent-orange flex items-center justify-center p-3 mb-4 shadow-md">
-            <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm1 14h-2v-2h2v2zm0-4h-2V8h2v4z"/></svg>
+        <!-- Food Plants Bento Card -->
+        <div class="md:col-span-4 bg-primary text-on-primary p-6 sm:p-8 rounded-3xl flex flex-col justify-between border border-primary">
+          <div>
+            <span class="material-symbols-outlined text-3xl mb-3 text-primary-fixed">factory</span>
+            <h3 class="font-heading text-xl font-bold mb-2">Plantas Procesadoras</h3>
+            <p class="text-xs text-on-primary/80 leading-relaxed">
+              Cumplimiento estricto con protocolos HACCP, auditorías AIB e inocuidad alimentaria.
+            </p>
           </div>
-          <h3 class="text-lg font-bold text-navy-900 mb-2">Protección Contra Multas</h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Las sanciones administrativas por carecer de certificado o aplicar químicos de forma irregular van desde <strong>2,000 a 6,000 UMAS</strong> (de $226,280 MXN a $678,840 MXN) y suspensión de actividades.
-          </p>
-          <ul class="mt-4 space-y-1.5 text-xs text-slate-700 font-medium">
-            <li class="flex items-center gap-2 text-amber-800">✓ Blindaje jurídico preventivo</li>
-            <li class="flex items-center gap-2 text-amber-800">✓ Bitácora oficial de servicio</li>
-          </ul>
+          <div class="mt-6 pt-6 border-t border-white/20 flex items-center justify-between">
+            <div>
+              <span class="text-3xl font-extrabold font-heading">100%</span>
+              <p class="text-[10px] text-white/70 uppercase tracking-wider font-semibold">Cumplimiento HACCP</p>
+            </div>
+            <span class="material-symbols-outlined text-4xl text-primary-fixed opacity-80">verified_user</span>
+          </div>
         </div>
 
-        <!-- Card 3: Productos Ecológicos de Baja Toxicidad -->
-        <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl relative shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-12 h-12 rounded-xl bg-navy-900 text-accent-blue flex items-center justify-center p-3 mb-4 shadow-md">
-            <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M17 8C8 10 59 16.17 3.82 21.34l1.41 1.41C10.03 17.95 15 13 17 8zM12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L14.38 8.2C13.68 5.14 12 3 12 3z"/></svg>
+        <!-- Certification & COFEPRIS Bento Card -->
+        <div class="md:col-span-8 flex flex-col sm:flex-row items-center justify-between bg-white border border-slate-200 p-6 sm:p-8 rounded-3xl group hover:shadow-lg transition-all gap-6">
+          <div class="max-w-md">
+            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Garantía COFEPRIS</span>
+            <h3 class="font-heading text-xl sm:text-2xl font-bold text-navy-900 mb-2">Blindaje Sanitario Certificado</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Validación oficial ante SESVER y cumplimiento con la NOM-256-SSA1-2012 para el manejo responsable de plaguicidas urbanos e industriales.
+            </p>
           </div>
-          <h3 class="text-lg font-bold text-navy-900 mb-2">Baja Toxicidad y Seguridad</h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Priorizamos insumos de la más alta calidad y seguridad biológica. Aplicaciones con tiempos mínimos de reingreso para no interrumpir operaciones de logística o producción.
-          </p>
-          <ul class="mt-4 space-y-1.5 text-xs text-slate-700 font-medium">
-            <li class="flex items-center gap-2 text-blue-800">✓ Fichas técnicas y Hoja de Seguridad (MSDS)</li>
-            <li class="flex items-center gap-2 text-blue-800">✓ Cero contaminación de alimentos y granos</li>
-          </ul>
+          <div class="flex gap-4">
+            <div class="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+              <span class="material-symbols-outlined text-3xl text-primary">health_and_safety</span>
+            </div>
+            <div class="w-16 h-16 rounded-2xl bg-orange-50 border border-orange-200 flex items-center justify-center">
+              <span class="material-symbols-outlined text-3xl text-accent-orange">assignment_turned_in</span>
+            </div>
+          </div>
         </div>
 
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- Industrial & Commercial Services Showcase -->
-  <section id="servicios" class="py-16 lg:py-24 bg-slate-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-        <div>
-          <span class="text-xs font-bold text-accent-green uppercase tracking-wider bg-green-50 border border-green-200 px-3 py-1 rounded-full">Especialización Fitosanitaria</span>
-          <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-navy-900 mt-2">
-            Nuestros Servicios de Blindaje Sanitario
+    <!-- Technical Case Studies Section (#casos-exito) -->
+    <section id="casos-exito" class="py-20 bg-slate-100/70 border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-bold text-accent-orange uppercase tracking-wider bg-orange-100 border border-orange-200 px-3.5 py-1 rounded-full">Casos de Éxito &amp; Bitácora Operativa</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-navy-900 mt-3">
+            Resultados Comprobados en la Industria de Veracruz
           </h2>
-        </div>
-        <p class="text-sm text-slate-600 max-w-md">
-          Soluciones diseñadas específicamente para los requerimientos de la industria pesada, transporte de carga, silos y sector comercial en el estado de Veracruz.
-        </p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Service 1: Silos y Granos -->
-        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
-          <div>
-            <div class="w-14 h-14 rounded-2xl bg-navy-900 text-accent-orange flex items-center justify-center p-3.5 mb-5 group-hover:scale-110 transition-transform shadow-md">
-              <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H5V4h14v16zM7 6h10v2H7V6zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/></svg>
-            </div>
-            <span class="text-[11px] font-bold text-accent-orange uppercase tracking-wider">Sector Agroindustrial</span>
-            <h3 class="text-lg font-bold text-navy-900 mt-1 mb-2">Fumigación de Silos y Granos</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
-              Tratamiento fitosanitario contra gorgojos, picudos y plagas de almacén en bodegas graneleras y silos con fosfuro de aluminio y desgasificación controlada.
-            </p>
-          </div>
-          <a href="#cotizacion" class="text-xs font-bold text-navy-900 group-hover:text-accent-green flex items-center gap-1 transition-colors pt-4 border-t border-slate-100">
-            <span>Cotizar Tratamiento de Silos</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-          </a>
+          <p class="text-xs sm:text-sm text-slate-600 mt-2">
+            Conoce cómo el equipo técnico de ALM resuelve problemas complejos de infestación y garantiza la certificación fitosanitaria.
+          </p>
         </div>
 
-        <!-- Service 2: Transporte de Carga -->
-        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
-          <div>
-            <div class="w-14 h-14 rounded-2xl bg-navy-900 text-accent-green flex items-center justify-center p-3.5 mb-5 group-hover:scale-110 transition-transform shadow-md">
-              <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-            </div>
-            <span class="text-[11px] font-bold text-accent-green uppercase tracking-wider">Sector Logístico & Pipas</span>
-            <h3 class="text-lg font-bold text-navy-900 mt-1 mb-2">Desinfección de Transporte</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
-              Sanitización y blindaje fitosanitario para pipas alimentarias, tolvas, remolques, cajas secas y flotillas de transporte logístico.
-            </p>
-          </div>
-          <a href="#cotizacion" class="text-xs font-bold text-navy-900 group-hover:text-accent-green flex items-center gap-1 transition-colors pt-4 border-t border-slate-100">
-            <span>Cotizar Flotilla de Carga</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-          </a>
-        </div>
-
-        <!-- Service 3: Planta de Alimentos y Comedores -->
-        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
-          <div>
-            <div class="w-14 h-14 rounded-2xl bg-navy-900 text-accent-blue flex items-center justify-center p-3.5 mb-5 group-hover:scale-110 transition-transform shadow-md">
-              <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M8.1 13.34l2.83-2.83-6.36-6.36c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l6.36 6.36zm12.73-8.49c-.78-.78-2.05-.78-2.83 0l-4.24 4.24 2.83 2.83 4.24-4.24c.78-.78.78-2.05 0-2.83zM14.5 13.5l-2.83-2.83-7.07 7.07c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l7.07-7.07z"/></svg>
-            </div>
-            <span class="text-[11px] font-bold text-accent-blue uppercase tracking-wider">NOM-251 Cumplimiento</span>
-            <h3 class="text-lg font-bold text-navy-900 mt-1 mb-2">Industria Alimentaria (MIP)</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
-              Manejo Integrado de Plagas para empacadoras, procesadoras, restaurantes y comedores industriales con trampas de monitoreo y bitácora oficial.
-            </p>
-          </div>
-          <a href="#cotizacion" class="text-xs font-bold text-navy-900 group-hover:text-accent-green flex items-center gap-1 transition-colors pt-4 border-t border-slate-100">
-            <span>Cotizar Plan MIP</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-          </a>
-        </div>
-
-        <!-- Service 4: Comercial y Residencial -->
-        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
-          <div>
-            <div class="w-14 h-14 rounded-2xl bg-navy-900 text-purple-400 flex items-center justify-center p-3.5 mb-5 group-hover:scale-110 transition-transform shadow-md">
-              <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 2.54L17.5 10H6.5L12 5.54zM7 18v-6h10v6H7z"/></svg>
-            </div>
-            <span class="text-[11px] font-bold text-purple-600 uppercase tracking-wider">Comercio & Hogar</span>
-            <h3 class="text-lg font-bold text-navy-900 mt-1 mb-2">Comercial & Residencial</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
-              Control especializado de cucarachas, chinches, roedores, termitas y mosquitos en hoteles, escuelas, locales y casas particulares.
-            </p>
-          </div>
-          <a href="#cotizacion" class="text-xs font-bold text-navy-900 group-hover:text-accent-green flex items-center gap-1 transition-colors pt-4 border-t border-slate-100">
-            <span>Cotizar Local o Casa</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-          </a>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Section: Casos de Éxito Reales (Blog / Casos de Estudio) -->
-  <section id="casos-exito" class="py-16 bg-white border-y border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs font-bold text-accent-orange uppercase tracking-wider bg-orange-50 border border-orange-200 px-3.5 py-1 rounded-full">Casos de Éxito &amp; Bitácora Operativa</span>
-        <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-navy-900 mt-3">
-          Resultados Comprobados en la Industria de Veracruz
-        </h2>
-        <p class="text-sm text-slate-600 mt-2">
-          Conoce cómo nuestro equipo técnico liderado por el Ing. Justino González resuelve problemas complejos de infestación y garantiza el cumplimiento normativo.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        
-        <!-- Case Study 1: Silos (Con Video Demostración Integrado) -->
-        <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-lg transition-shadow">
-          <div>
-            <!-- Video Trigger Container -->
-            <div id="open-video-btn-silos" class="relative overflow-hidden rounded-2xl mb-5 shadow-sm border border-slate-200 group cursor-pointer" title="Hacer clic para ver demostración en video">
-              <img src="./img_silos_case.jpg" alt="Caso de Éxito Fumigación de Silos de Granos en Córdoba Veracruz" class="w-full h-48 sm:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
-              <div class="absolute inset-0 bg-navy-950/40 group-hover:bg-navy-950/20 transition-colors flex items-center justify-center">
-                <div class="w-14 h-14 rounded-full bg-accent-orange text-white flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
-                  <svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <div class="grid md:grid-cols-2 gap-8">
+          
+          <!-- Case 1: Silos -->
+          <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl transition-shadow">
+            <div>
+              <div class="overflow-hidden rounded-2xl mb-5 border border-slate-200 relative group cursor-pointer" id="open-video-btn-silos-card">
+                <img src="./img_silos_case.jpg" alt="Caso de Éxito Fumigación de Silos" class="w-full h-52 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-navy-950/40 group-hover:bg-navy-950/20 transition-colors flex items-center justify-center">
+                  <div class="w-14 h-14 rounded-full bg-accent-orange text-white flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
+                    <span class="material-symbols-outlined text-3xl">play_arrow</span>
+                  </div>
                 </div>
+                <span class="absolute bottom-3 left-3 bg-navy-900/90 text-white text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1.5 border border-white/20">
+                  <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                  ▶ Ver Video de Operación en Silos
+                </span>
               </div>
-              <span class="absolute bottom-3 left-3 bg-navy-900/90 text-white text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1.5 border border-white/20 shadow-md">
-                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                ▶ Ver Video de Operación en Silos
-              </span>
+
+              <div class="flex items-center justify-between mb-3">
+                <span class="bg-navy-900 text-accent-orange text-xs font-bold px-3 py-1 rounded-full">Caso 1: Silos de Granos</span>
+                <span class="text-xs text-slate-500 font-medium">📍 Córdoba, Veracruz</span>
+              </div>
+
+              <h3 class="text-lg sm:text-xl font-bold font-heading text-navy-900 mb-2">
+                Erradicación Fitosanitaria y Desgasificación en Silos Graneleros (2,500 m³)
+              </h3>
+
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                <strong>Reto:</strong> Infestación activa de gorgojo de los cereales (Sitophilus granarius) en silos de grano almacenado previo a distribución.
+              </p>
+
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 p-4 rounded-2xl border border-slate-200 mb-4">
+                <p><strong>Solución ALM:</strong> Tratamiento de gasificación hermética con fosfuro de aluminio bajo NOM-256-SSA1-2012 durante 72 horas.</p>
+                <p class="text-emerald-700 font-semibold">✓ Resultado: 100% de eliminación de plaga sin alterar la calidad del grano, con Certificado COFEPRIS.</p>
+              </div>
             </div>
 
-            <div class="flex items-center justify-between mb-4">
-              <span class="bg-navy-900 text-accent-orange text-xs font-bold px-3 py-1 rounded-full">Caso 1: Silos de Granos</span>
-              <span class="text-xs text-slate-500 font-medium">📍 Córdoba, Veracruz</span>
-            </div>
-
-            <h3 class="text-xl font-bold font-heading text-navy-900 mb-3">
-              Erradicación Fitosanitaria y Desgasificación en Silos Graneleros (2,500 m³)
-            </h3>
-
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-              <strong>Reto:</strong> Detección de infestación activa de gorgojo de los cereales (Sitophilus granarius) y larva en silos de grano almacenado antes de embarque industrial.
-            </p>
-
-            <div class="space-y-2 text-xs text-slate-700 bg-white p-4 rounded-2xl border border-slate-200 mb-4">
-              <p><strong>Solución ALM:</strong> Aplicación de tratamiento de gasificación hermética con fosfuro de aluminio bajo protocolos de seguridad NOM-256-SSA1-2012 y monitoreo continuo de gasificación durante 72 horas.</p>
-              <p class="text-emerald-700 font-semibold">✓ Resultado: 100% de eliminación de larva y gorgojo adulto sin alterar la calidad del grano, garantizando el Certificado Sanitario COFEPRIS para distribución.</p>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+              <button type="button" id="open-video-link-silos-btn" class="inline-flex items-center gap-1.5 bg-navy-900 hover:bg-navy-950 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all">
+                <span class="material-symbols-outlined text-accent-orange text-sm">play_circle</span>
+                <span>Ver Video en Vivo</span>
+              </button>
+              <a href="#cotizacion" class="text-xs font-bold text-accent-orange hover:underline">
+                Cotizar Silos &rarr;
+              </a>
             </div>
           </div>
 
-          <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200/60">
-            <button type="button" id="open-video-link-silos" class="inline-flex items-center gap-1.5 bg-navy-900 hover:bg-navy-950 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">
-              <svg class="w-3.5 h-3.5 fill-current text-accent-orange" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              <span>Ver Demostración en Video</span>
-            </button>
-            <a href="#cotizacion" class="inline-flex items-center gap-1 text-xs font-bold text-accent-orange hover:text-accent-orange-hover">
-              <span>Cotizar Silos</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          <!-- Case 2: Pipas -->
+          <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-xl transition-shadow">
+            <div>
+              <div class="overflow-hidden rounded-2xl mb-5 border border-slate-200 relative group cursor-pointer" id="open-video-btn-pipas-card">
+                <img src="./img_pipas_case.jpg" alt="Caso de Éxito Sanitización de Pipas" class="w-full h-52 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-navy-950/40 group-hover:bg-navy-950/20 transition-colors flex items-center justify-center">
+                  <div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
+                    <span class="material-symbols-outlined text-3xl">play_arrow</span>
+                  </div>
+                </div>
+                <span class="absolute bottom-3 left-3 bg-navy-900/90 text-white text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1.5 border border-white/20">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                  ▶ Ver Video de Operación en Pipas
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between mb-3">
+                <span class="bg-navy-900 text-primary-fixed-dim text-xs font-bold px-3 py-1 rounded-full">Caso 2: Pipas Especializadas</span>
+                <span class="text-xs text-slate-500 font-medium">📍 Veracruz Puerto</span>
+              </div>
+
+              <h3 class="text-lg sm:text-xl font-bold font-heading text-navy-900 mb-2">
+                Blindaje Sanitario y Certificación de Flotilla de Pipas Alimentarias
+              </h3>
+
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                <strong>Reto:</strong> Sanitización periódica y certificación oficial NOM-256 para 18 pipas de grado alimenticio sin detener su logística.
+              </p>
+
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 p-4 rounded-2xl border border-slate-200 mb-4">
+                <p><strong>Solución ALM:</strong> Programa express de termonebulización con biocidas ecológicos con reingreso menor a 2 horas.</p>
+                <p class="text-emerald-700 font-semibold">✓ Resultado: Certificación instantánea por unidad y 100% de aprobación en inspecciones SESVER.</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+              <button type="button" id="open-video-link-pipas-btn" class="inline-flex items-center gap-1.5 bg-navy-900 hover:bg-navy-950 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-sm">play_circle</span>
+                <span>Ver Video en Vivo</span>
+              </button>
+              <a href="#cotizacion" class="text-xs font-bold text-primary hover:underline">
+                Cotizar Flotilla &rarr;
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Technical Process Section (MIP Methodology) -->
+    <section id="proceso" class="bg-navy-900 text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-bold text-primary-fixed uppercase tracking-wider bg-primary/20 px-3 py-1 rounded-full">Proceso Fitosanitario Certificado</span>
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white mt-3">Metodología de Blindaje MIP</h2>
+          <p class="text-slate-300 text-xs sm:text-sm mt-2">Nuestro proceso técnico garantiza la eliminación de riesgos biológicos conforme a la NOM-256.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+          
+          <div class="relative z-10 text-center bg-navy-950/60 p-6 rounded-3xl border border-navy-800 hover:border-primary transition-all">
+            <div class="w-16 h-16 bg-primary text-white rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-lg">
+              <span class="material-symbols-outlined text-3xl">search_insights</span>
+            </div>
+            <h4 class="font-heading text-base font-bold mb-1">1. Diagnóstico</h4>
+            <p class="text-slate-400 text-xs leading-relaxed">Mapeo de puntos críticos de control y análisis de riesgo.</p>
+          </div>
+
+          <div class="relative z-10 text-center bg-navy-950/60 p-6 rounded-3xl border border-navy-800 hover:border-primary transition-all">
+            <div class="w-16 h-16 bg-primary-container text-navy-950 rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-lg font-bold">
+              <span class="material-symbols-outlined text-3xl">design_services</span>
+            </div>
+            <h4 class="font-heading text-base font-bold mb-1">2. Estrategia MIP</h4>
+            <p class="text-slate-400 text-xs leading-relaxed">Diseño de programa personalizado bajo normativa NOM-256.</p>
+          </div>
+
+          <div class="relative z-10 text-center bg-navy-950/60 p-6 rounded-3xl border border-navy-800 hover:border-primary transition-all">
+            <div class="w-16 h-16 bg-accent-orange text-white rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-lg">
+              <span class="material-symbols-outlined text-3xl">verified</span>
+            </div>
+            <h4 class="font-heading text-base font-bold mb-1">3. Aplicación</h4>
+            <p class="text-slate-400 text-xs leading-relaxed">Ejecución con químicos biológicos certificados y nebulización industrial.</p>
+          </div>
+
+          <div class="relative z-10 text-center bg-navy-950/60 p-6 rounded-3xl border border-navy-800 hover:border-primary transition-all">
+            <div class="w-16 h-16 bg-emerald-600 text-white rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-lg">
+              <span class="material-symbols-outlined text-3xl">description</span>
+            </div>
+            <h4 class="font-heading text-base font-bold mb-1">4. Certificado</h4>
+            <p class="text-slate-400 text-xs leading-relaxed">Emisión de documentación legal válida ante COFEPRIS y SESVER.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Google Reviews Section (#resenas) -->
+    <section id="resenas" class="py-20 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full text-xs font-bold text-amber-800 mb-2">
+              <span class="text-amber-500">★★★★★</span> 4.9 de 5 Estrellas en Google Maps
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-navy-900">Opiniones de Clientes Verificados</h2>
+          </div>
+          <a href="https://maps.google.com" target="_blank" class="bg-navy-900 hover:bg-navy-950 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-md">
+            <span class="material-symbols-outlined text-base text-amber-400">star</span>
+            <span>Ver Ficha en Google Maps</span>
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-slate-50 border border-slate-200 p-6 rounded-3xl">
+            <div class="flex items-center gap-1 text-amber-400 mb-3 text-sm">★★★★★</div>
+            <p class="text-xs text-slate-700 leading-relaxed mb-4">"Excelente servicio en nuestros silos graneleros en Córdoba. El Ing. Justino nos entregó la bitácora NOM-256 en orden y pasamos la auditoría sin ninguna observación."</p>
+            <div class="font-bold text-xs text-navy-900">Ing. Fernando Salgado</div>
+            <div class="text-[10px] text-slate-500">Gerente de Operaciones Agroindustriales</div>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-6 rounded-3xl">
+            <div class="flex items-center gap-1 text-amber-400 mb-3 text-sm">★★★★★</div>
+            <p class="text-xs text-slate-700 leading-relaxed mb-4">"Sanitizan nuestra flotilla de 15 pipas alimentarias en Veracruz Puerto. Rapidez, certificados oficiales al instante y cero retardo en logística."</p>
+            <div class="font-bold text-xs text-navy-900">Transportes Logísticos del Golfo</div>
+            <div class="text-[10px] text-slate-500">Coordinación de Logística</div>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-6 rounded-3xl">
+            <div class="flex items-center gap-1 text-amber-400 mb-3 text-sm">★★★★★</div>
+            <p class="text-xs text-slate-700 leading-relaxed mb-4">"Atención súper profesional y rápida por parte de Marisela. Nos fumigan el hotel en Orizaba cada 3 meses con productos sin olor y seguros."</p>
+            <div class="font-bold text-xs text-navy-900">Roberto Morales</div>
+            <div class="text-[10px] text-slate-500">Administrador de Hospedaje</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Location Coverage Section (#cobertura) -->
+    <section id="cobertura" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs font-bold text-primary uppercase tracking-wider bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">Cobertura Inmediata</span>
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-navy-900">Brigadas de Respuesta Rápida en Veracruz</h2>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Mantenemos técnicos certificados desplegados en los principales polos industriales y logísticos del estado.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            <div class="border-l-4 border-primary pl-4 py-1 bg-slate-50 rounded-r-xl border border-slate-200">
+              <h4 class="font-bold text-sm text-navy-900">Córdoba / Fortín</h4>
+              <p class="text-[11px] text-slate-500">Oficina Central &amp; Silos</p>
+            </div>
+            <div class="border-l-4 border-primary pl-4 py-1 bg-slate-50 rounded-r-xl border border-slate-200">
+              <h4 class="font-bold text-sm text-navy-900">Veracruz / Boca del Río</h4>
+              <p class="text-[11px] text-slate-500">Sector Portuario &amp; Pipas</p>
+            </div>
+            <div class="border-l-4 border-primary pl-4 py-1 bg-slate-50 rounded-r-xl border border-slate-200">
+              <h4 class="font-bold text-sm text-navy-900">Orizaba</h4>
+              <p class="text-[11px] text-slate-500">Sector Industrial &amp; Textil</p>
+            </div>
+            <div class="border-l-4 border-primary pl-4 py-1 bg-slate-50 rounded-r-xl border border-slate-200">
+              <h4 class="font-bold text-sm text-navy-900">Xalapa &amp; Tierra Blanca</h4>
+              <p class="text-[11px] text-slate-500">Comercial &amp; Ferrocarril</p>
+            </div>
+          </div>
+
+          <div class="bg-navy-900 text-white p-5 rounded-2xl flex items-center justify-between gap-4">
+            <div>
+              <p class="font-bold text-xs text-primary-fixed-dim">Atención Urgente 24/7</p>
+              <p class="text-[11px] text-slate-300">Contingencias fitosanitarias inmediatas.</p>
+            </div>
+            <a href="tel:2711528442" class="bg-primary-container text-navy-950 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1 hover:scale-105 transition-transform">
+              <span class="material-symbols-outlined text-base">call</span>
+              <span>271 152 8442</span>
             </a>
           </div>
         </div>
 
-        <!-- Case Study 2: Pipas Especializadas (Con Video Demostración Integrado) -->
-        <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-lg transition-shadow">
-          <div>
-            <!-- Video Trigger Container -->
-            <div id="open-video-btn-pipas" class="relative overflow-hidden rounded-2xl mb-5 shadow-sm border border-slate-200 group cursor-pointer" title="Hacer clic para ver demostración en video">
-              <img src="./img_pipas_case.jpg" alt="Caso de Éxito Sanitización de Pipas Especializadas en Veracruz" class="w-full h-48 sm:h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
-              <div class="absolute inset-0 bg-navy-950/40 group-hover:bg-navy-950/20 transition-colors flex items-center justify-center">
-                <div class="w-14 h-14 rounded-full bg-accent-green text-white flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
-                  <svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-              </div>
-              <span class="absolute bottom-3 left-3 bg-navy-900/90 text-white text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1.5 border border-white/20 shadow-md">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                ▶ Ver Video de Operación en Pipas
-              </span>
-            </div>
-
-            <div class="flex items-center justify-between mb-4">
-              <span class="bg-navy-900 text-accent-green text-xs font-bold px-3 py-1 rounded-full">Caso 2: Pipas Especializadas</span>
-              <span class="text-xs text-slate-500 font-medium">📍 Veracruz Puerto / Logística</span>
-            </div>
-
-            <h3 class="text-xl font-bold font-heading text-navy-900 mb-3">
-              Blindaje Sanitario y Certificación de Flotilla de Pipas y Tolvas Alimentarias
-            </h3>
-
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-              <strong>Reto:</strong> Una empresa de transporte logístico requería sanitización periódica y certificación oficial NOM-256 para su flota de 18 pipas de grado alimenticio sin interrumpir sus rutas.
-            </p>
-
-            <div class="space-y-2 text-xs text-slate-700 bg-white p-4 rounded-2xl border border-slate-200 mb-4">
-              <p><strong>Solución ALM:</strong> Diseño de un programa express de termonebulización y desinfección sanitaria con biocidas ecológicos de baja toxicidad con tiempo de reingreso menor a 2 horas.</p>
-              <p class="text-emerald-700 font-semibold">✓ Resultado: Certificación instantánea por unidad, cero retardo en logística de transporte y superación del 100% de inspecciones de SESVER.</p>
-            </div>
+        <div class="lg:col-span-6 bg-navy-950 p-6 sm:p-8 rounded-3xl border border-slate-800 text-white shadow-xl relative overflow-hidden">
+          <div class="mb-4 flex items-center justify-between">
+            <span class="text-xs font-bold text-accent-orange uppercase tracking-wider">Directorio de Sucursales</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
           </div>
 
-          <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200/60">
-            <button type="button" id="open-video-link-pipas" class="inline-flex items-center gap-1.5 bg-navy-900 hover:bg-navy-950 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">
-              <svg class="w-3.5 h-3.5 fill-current text-accent-green" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              <span>Ver Demostración en Video</span>
-            </button>
-            <a href="#cotizacion" class="inline-flex items-center gap-1 text-xs font-bold text-accent-green hover:text-accent-green-hover">
-              <span>Cotizar Flotillas</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </a>
+          <div class="space-y-4 text-xs">
+            <div class="bg-navy-900/80 p-4 rounded-2xl border border-navy-800">
+              <h4 class="font-bold text-white text-sm">Oficina Central Córdoba</h4>
+              <p class="text-slate-300 mt-1">Calle 13 #906 entre Av. 7 y 11, Col. Centro, C.P. 94500, Córdoba, Veracruz.</p>
+              <p class="text-emerald-400 font-bold mt-2">WhatsApp: 271 152 8442 | Tel: 271 140 7953</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 text-[11px] text-slate-300">
+              <div class="bg-navy-900/50 p-3 rounded-xl border border-navy-800">
+                <p class="font-bold text-white">Horario de Atención:</p>
+                <p>Lun - Vie: 09:00 - 18:00</p>
+                <p>Sáb: 09:00 - 15:00</p>
+              </div>
+              <div class="bg-navy-900/50 p-3 rounded-xl border border-navy-800">
+                <p class="font-bold text-white">Directiva ALM:</p>
+                <p>Ing. Justino González H.</p>
+                <p>Marisela Reyes Pérez</p>
+              </div>
+            </div>
           </div>
         </div>
 
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- Section: Google Maps Reviews & Ecosystem Integration -->
-  <section id="resenas" class="py-16 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-10">
-        <div class="inline-flex items-center gap-2 bg-white border border-slate-200 px-4 py-1.5 rounded-full shadow-sm text-xs font-bold text-navy-900 mb-3">
-          <svg class="w-4 h-4 fill-current text-amber-400" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          Google Business Profile &amp; Maps Conectado
-        </div>
-
-        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-navy-900">
-          Lo que dicen nuestros clientes en Google Maps
-        </h2>
-        <p class="text-sm text-slate-600 mt-2">
-          Calificación Promedio <strong>4.9 ★★★★★</strong> basada en opiniones de empresas de transporte, plantas alimentarias y comercios en Veracruz.
+    <!-- Lead Form Anchored Target Section (#cotizacion) -->
+    <section id="cotizacion" class="py-16 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-xs font-bold text-accent-orange uppercase tracking-wider bg-orange-100 px-3 py-1 rounded-full border border-orange-200">Contacto Directo</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-navy-900 mt-3 mb-2">¿Listo para Proteger tus Instalaciones?</h2>
+        <p class="text-xs sm:text-sm text-slate-600 mb-8 max-w-xl mx-auto">
+          Solicita tu inspección técnica sin costo y obtén un <strong>5% de descuento adicional</strong> al registrar tu solicitud web.
         </p>
-      </div>
-
-      <!-- Google Review Cards Grid -->
-      <div class="grid md:grid-cols-3 gap-6 mb-10">
-        
-        <!-- Review 1 -->
-        <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm relative">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div class="w-9 h-9 rounded-full bg-navy-900 text-white font-bold text-xs flex items-center justify-center">FS</div>
-              <div>
-                <h4 class="text-xs font-bold text-navy-900 leading-tight">Ing. Fernando Salgado</h4>
-                <span class="text-[10px] text-slate-500">Planta Granelera Córdoba</span>
-              </div>
-            </div>
-            <span class="text-xs font-bold text-amber-500">5.0 ★★★★★</span>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed italic">
-            "Excelente servicio en el tratamiento de nuestros silos. El certificado NOM-256 fue entregado de inmediato y aceptado sin observaciones por las autoridades sanitarias."
-          </p>
-          <span class="text-[10px] text-slate-400 block mt-3">✓ Reseña Verificada en Google Maps</span>
-        </div>
-
-        <!-- Review 2 -->
-        <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm relative">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div class="w-9 h-9 rounded-full bg-emerald-700 text-white font-bold text-xs flex items-center justify-center">TV</div>
-              <div>
-                <h4 class="text-xs font-bold text-navy-900 leading-tight">Transportes Logísticos de Veracruz</h4>
-                <span class="text-[10px] text-slate-500">Veracruz Puerto</span>
-              </div>
-            </div>
-            <span class="text-xs font-bold text-amber-500">5.0 ★★★★★</span>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed italic">
-            "Sanitización y fumigación impecable de nuestras pipas y tolvas alimentarias. Marisela y Justino atienden con gran rapidez. 100% recomendados."
-          </p>
-          <span class="text-[10px] text-slate-400 block mt-3">✓ Reseña Verificada en Google Maps</span>
-        </div>
-
-        <!-- Review 3 -->
-        <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm relative">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div class="w-9 h-9 rounded-full bg-blue-700 text-white font-bold text-xs flex items-center justify-center">RM</div>
-              <div>
-                <h4 class="text-xs font-bold text-navy-900 leading-tight">Roberto Morales</h4>
-                <span class="text-[10px] text-slate-500">Hotel &amp; Comedor Orizaba</span>
-              </div>
-            </div>
-            <span class="text-xs font-bold text-amber-500">5.0 ★★★★★</span>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed italic">
-            "Productos ecológicos de baja toxicidad sin olores molestos en nuestras instalaciones. Cumplimiento puntual de la NOM-251. Muy profesionales."
-          </p>
-          <span class="text-[10px] text-slate-400 block mt-3">✓ Reseña Verificada en Google Maps</span>
-        </div>
-
-      </div>
-
-      <div class="text-center">
-        <a href="https://maps.google.com/?q=ALM+CONTROL+DE+PLAGAS+CORDOBA+VERACRUZ" target="_blank" class="inline-flex items-center gap-2 bg-navy-900 hover:bg-navy-950 text-white font-bold px-6 py-3 rounded-xl text-xs sm:text-sm shadow-md transition-all">
-          <svg class="w-4 h-4 fill-current text-accent-green" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          <span>Ver Ficha y Opiniones en Google Maps</span>
+        <a href="#inicio" class="inline-flex items-center gap-2 bg-primary hover:bg-emerald-700 text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg transition-all text-sm">
+          <span>Ir al Formulario de Inspección</span>
+          <span class="material-symbols-outlined text-base">arrow_upward</span>
         </a>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- Lead Capture Form Section -->
-  <section id="cotizacion" class="py-16 lg:py-24 bg-slate-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
-        
-        <!-- Form Header -->
-        <div class="bg-navy-900 text-white p-6 sm:p-10 text-center relative">
-          <span class="text-xs font-bold text-accent-green uppercase tracking-wider bg-navy-800 px-3 py-1 rounded-full border border-navy-700">Cotización Directa & Sin Compromiso</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading mt-3">
-            Solicita la Inspección y Presupuesto para tu Empresa
-          </h2>
-          <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-xl mx-auto">
-            Completa tus datos y un técnico certificado de ALM te contactará para evaluar tu instalación y emitir tu propuesta con garantía por escrito.
-          </p>
-        </div>
-
-        <!-- Form Body -->
-        <form id="alm-lead-form" class="p-6 sm:p-10 space-y-6">
-          
-          <div class="grid md:grid-cols-2 gap-6">
-            
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nombre Completo *</label>
-              <input type="text" name="nombre" required placeholder="Ej. Ing. Carlos Mendoza" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-accent-green">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Empresa / Razón Social</label>
-              <input type="text" name="empresa" placeholder="Ej. Harinas y Granos de Veracruz S.A." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-accent-green">
-            </div>
-
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-6">
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Teléfono / WhatsApp *</label>
-              <input type="tel" name="telefono" required placeholder="Ej. 271 152 8442" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-accent-green">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Correo Electrónico (Email) *</label>
-              <input type="email" name="email" required placeholder="ejemplo@empresa.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-accent-green">
-            </div>
-
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-6">
-            
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Ciudad / Municipio *</label>
-              <select name="ciudad" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-accent-green">
-                <option value="Córdoba">Córdoba</option>
-                <option value="Fortín">Fortín</option>
-                <option value="Orizaba">Orizaba</option>
-                <option value="Veracruz Puerto">Veracruz Puerto</option>
-                <option value="Boca del Río">Boca del Río</option>
-                <option value="Xalapa">Xalapa</option>
-                <option value="Tierra Blanca">Tierra Blanca</option>
-                <option value="Otra Zona en Veracruz">Otra Zona en Veracruz</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Servicio Requerido *</label>
-              <select name="servicio" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-accent-green">
-                <option value="Fumigación de Silos / Granos">Fumigación de Silos / Granos</option>
-                <option value="Desinfección de Transporte de Carga">Desinfección de Transporte de Carga</option>
-                <option value="MIP Industria Alimentaria">MIP Industria Alimentaria</option>
-                <option value="Fumigación Comercial / Hoteles / Restaurantes">Fumigación Comercial / Hoteles</option>
-                <option value="Fumigación Residencial">Fumigación Residencial</option>
-              </select>
-            </div>
-
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Detalles o Notas de la Solicitud</label>
-            <textarea id="lead-comentarios" name="comentarios" rows="3" placeholder="Indica tipo de plaga detectada, m² aproximados o requerimientos de certificado COFEPRIS..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-accent-green"></textarea>
-          </div>
-
-          <div>
-            <button type="submit" id="form-submit-btn" class="w-full bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold py-4 px-6 rounded-xl text-base transition-all shadow-xl shadow-orange-900/20 flex items-center justify-center gap-3">
-              <span id="form-btn-text">Solicitar Inspección y Cotización</span>
-              <div id="form-btn-spinner" class="spinner hidden"></div>
-            </button>
-          </div>
-
-          <!-- Alert Output Message -->
-          <div id="form-status-alert" class="hidden"></div>
-
-        </form>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Regional Coverage Section -->
-  <section id="cobertura" class="py-16 bg-white border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-10">
-        <span class="text-xs font-bold text-accent-green uppercase tracking-wider bg-green-50 border border-green-200 px-3 py-1 rounded-full">Atención Técnica Inmediata</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-navy-900 mt-2">
-          Cobertura Regional en el Estado de Veracruz
-        </h2>
-        <p class="text-sm text-slate-600 mt-2">
-          Despliegue operativo con técnicos locales en los principales corredores industriales y agropecuarios de la entidad.
-        </p>
-      </div>
-
-      <!-- City Pills Interactive Row -->
-      <div class="flex flex-wrap justify-center gap-3 mb-8">
-        <button type="button" data-city="Córdoba" class="city-pill px-5 py-2.5 rounded-xl border text-sm font-bold transition-all bg-navy-900 text-white border-accent-green shadow-sm">
-          📍 Córdoba (Matriz)
-        </button>
-        <button type="button" data-city="Fortín" class="city-pill px-5 py-2.5 rounded-xl border text-sm font-bold transition-all bg-white text-slate-700 border-slate-200 hover:border-accent-green">
-          📍 Fortín
-        </button>
-        <button type="button" data-city="Orizaba" class="city-pill px-5 py-2.5 rounded-xl border text-sm font-bold transition-all bg-white text-slate-700 border-slate-200 hover:border-accent-green">
-          📍 Orizaba
-        </button>
-        <button type="button" data-city="Veracruz Puerto" class="city-pill px-5 py-2.5 rounded-xl border text-sm font-bold transition-all bg-white text-slate-700 border-slate-200 hover:border-accent-green">
-          📍 Veracruz Puerto
-        </button>
-        <button type="button" data-city="Boca del Río" class="city-pill px-5 py-2.5 rounded-xl border text-sm font-bold transition-all bg-white text-slate-700 border-slate-200 hover:border-accent-green">
-          📍 Boca del Río
-        </button>
-        <button type="button" data-city="Xalapa" class="city-pill px-5 py-2.5 rounded-xl border text-sm font-bold transition-all bg-white text-slate-700 border-slate-200 hover:border-accent-green">
-          📍 Xalapa
-        </button>
-        <button type="button" data-city="Tierra Blanca" class="city-pill px-5 py-2.5 rounded-xl border text-sm font-bold transition-all bg-white text-slate-700 border-slate-200 hover:border-accent-green">
-          📍 Tierra Blanca
-        </button>
-      </div>
-
-      <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center max-w-2xl mx-auto">
-        <h3 id="selected-city-name" class="text-lg font-bold text-navy-900">Córdoba</h3>
-        <p id="selected-city-phone" class="text-sm font-semibold text-accent-green mt-1">
-          Atención directa: 271 140 7953 / 271 715 7830
-        </p>
-        <p class="text-xs text-slate-500 mt-2">
-          Atención de urgencias sanitarias y programación de servicios de fumigación en menos de 24 horas.
-        </p>
-      </div>
-
-    </div>
-  </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="bg-navy-950 text-slate-400 py-12 border-t border-navy-900 text-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="grid md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-navy-900">
-        
-        <!-- Col 1: Brand Info -->
-        <div class="space-y-3">
-          <div class="flex items-center gap-2">
-            <img src="./logo_transparent.png" alt="ALM Logo" class="h-10 w-auto filter drop-shadow-md">
-            <span class="font-heading font-bold text-white text-base">ALM Control de Plagas</span>
-          </div>
-          <p class="text-slate-400 leading-relaxed">
-            Control de Plagas y Blindaje Sanitario en Veracruz. Licencia COFEPRIS y apego total a la NOM-256-SSA1-2012.
-          </p>
-        </div>
-
-        <!-- Col 2: NAP Data -->
-        <div>
-          <h4 class="font-bold text-white mb-3 text-sm">Dirección & Contacto</h4>
-          <p class="leading-relaxed">CALLE 13 #906 ENTRE AV 7 Y 11, COLONIA CENTRO, C.P. 94500 CORDOBA, VERACRUZ</p>
-          <div class="mt-2 space-y-1 text-slate-300">
-            <p>WhatsApp & Tel: <a href="https://wa.me/522711528442" target="_blank" class="hover:text-accent-green font-bold text-emerald-400">271 152 8442</a></p>
-            <p>Oficina: <a href="tel:2711407953" class="hover:text-accent-green font-bold">271 140 7953</a></p>
-          </div>
-        </div>
-
-        <!-- Col 3: Hours & Coverage -->
-        <div>
-          <h4 class="font-bold text-white mb-3 text-sm">Horario de Atención</h4>
-          <p>Lunes a Viernes: 09:00 - 18:00</p>
-          <p>Sábados: 09:00 - 15:00</p>
-          <p class="mt-2 text-accent-green font-semibold">Servicios de urgencia industrial 24/7 previo convenio.</p>
-        </div>
-
-        <!-- Col 4: Legal Disclaimer -->
-        <div>
-          <h4 class="font-bold text-white mb-3 text-sm">Aviso Legal</h4>
-          <p class="leading-relaxed">
-            Todas las aplicaciones de plaguicidas son ejecutadas por personal acreditado con productos registrados ante COFEPRIS. Los certificados emitidos son válidos para autoridades sanitarias.
-          </p>
-        </div>
-
+  <footer class="w-full py-12 px-4 sm:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 bg-navy-950 text-white border-t border-navy-800">
+    <div class="space-y-4">
+      <div class="flex items-center gap-3">
+        <img alt="ALM Control Logo" class="h-12 w-auto object-contain" src="./logo_transparent.png"/>
+        <span class="font-heading font-extrabold text-white text-base">ALM CONTROL</span>
       </div>
+      <p class="text-slate-400 text-xs leading-relaxed">
+        Control de Plagas y Blindaje Sanitario en Veracruz.<br/>
+        Licencia Sanitaria COFEPRIS Vigente.<br/>
+        Cumplimiento NOM-256-SSA1-2012.
+      </p>
+    </div>
 
-      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
-        <p>© 2026 ALM CONTROL DE PLAGAS. Todos los derechos reservados.</p>
-        <p>Desarrollado con alto rendimiento por <span class="text-slate-300 font-bold">NegocioUp</span> (Lead Dev: Gastón)</p>
+    <div>
+      <h5 class="text-primary-fixed-dim font-bold mb-3 uppercase text-xs">Sedes &amp; Cobertura</h5>
+      <ul class="space-y-1.5 text-xs text-slate-400">
+        <li><a class="hover:text-white transition-colors" href="#cobertura">Córdoba (Central)</a></li>
+        <li><a class="hover:text-white transition-colors" href="#cobertura">Orizaba &amp; Fortín</a></li>
+        <li><a class="hover:text-white transition-colors" href="#cobertura">Veracruz Puerto &amp; Boca del Río</a></li>
+        <li><a class="hover:text-white transition-colors" href="#cobertura">Xalapa &amp; Tierra Blanca</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5 class="text-primary-fixed-dim font-bold mb-3 uppercase text-xs">Legal &amp; Normativa</h5>
+      <ul class="space-y-1.5 text-xs text-slate-400">
+        <li><span>Licencia Sanitaria COFEPRIS</span></li>
+        <li><span>Norma Oficial NOM-256-SSA1-2012</span></li>
+        <li><span>Norma Oficial NOM-251-SSA1-2009</span></li>
+        <li><span>Desarrollo: NegocioUp</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5 class="text-primary-fixed-dim font-bold mb-3 uppercase text-xs">Contacto Directo</h5>
+      <div class="space-y-2 text-xs text-slate-300">
+        <p>WhatsApp &amp; Tel: <a href="https://wa.me/522711528442" target="_blank" class="text-emerald-400 font-bold hover:underline">271 152 8442</a></p>
+        <p>Oficina Directa: <a href="tel:2711407953" class="hover:underline font-bold">271 140 7953</a></p>
+        <p class="text-[11px] text-slate-400 mt-2">Lunes a Viernes: 09:00 - 18:00 | Sábado: 09:00 - 15:00</p>
       </div>
-
     </div>
   </footer>
 
@@ -959,14 +826,13 @@
             </span>
           </div>
         </div>
-        <button id="ai-chat-close" class="text-slate-400 hover:text-white p-1 text-lg">✕</button>
+        <button id="ai-chat-close" type="button" class="text-slate-400 hover:text-white text-lg">✕</button>
       </div>
 
       <!-- Quick Action Pills -->
-      <div class="bg-slate-50 p-2.5 border-b border-slate-200 flex gap-2 overflow-x-auto text-[11px] whitespace-nowrap custom-scrollbar">
-        <button type="button" class="ai-quick-btn bg-white hover:bg-slate-100 text-slate-700 px-3 py-1 rounded-full border border-slate-200 font-medium" data-query="¿Qué requisitos exige COFEPRIS y la NOM-256?">📜 Requisitos COFEPRIS</button>
-        <button type="button" class="ai-quick-btn bg-white hover:bg-slate-100 text-slate-700 px-3 py-1 rounded-full border border-slate-200 font-medium" data-query="Información de fumigación para silos y transporte de carga">🚛 Silos y Transporte</button>
-        <button type="button" class="ai-quick-btn bg-white hover:bg-slate-100 text-slate-700 px-3 py-1 rounded-full border border-slate-200 font-medium" data-query="¿Cuáles son los tiempos de reingreso y seguridad?">🌱 Tiempos de Reingreso</button>
+      <div class="p-2.5 bg-slate-100 border-b border-slate-200 flex gap-1.5 overflow-x-auto custom-scrollbar text-[11px]">
+        <button type="button" class="ai-quick-btn bg-white hover:bg-slate-200 text-slate-700 px-3 py-1 rounded-full border border-slate-200 font-medium whitespace-nowrap" data-query="¿Qué requisitos exige COFEPRIS y la NOM-256?">📜 Requisitos COFEPRIS</button>
+        <button type="button" class="ai-quick-btn bg-white hover:bg-slate-200 text-slate-700 px-3 py-1 rounded-full border border-slate-200 font-medium whitespace-nowrap" data-query="Información de fumigación para silos y transporte de carga">🚛 Silos y Transporte</button>
       </div>
 
       <!-- Messages Log Container -->
@@ -986,7 +852,7 @@
 
   </div>
 
-  <!-- Mobile Sticky CTA Bar -->
+  <!-- Mobile Bottom Sticky Bar -->
   <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-navy-950/95 backdrop-blur-md border-t border-navy-800 p-2.5 flex items-center justify-around gap-2">
     <a href="https://wa.me/522711528442?text=Hola,%20requiero%20una%20cotización%20de%20fumigación." target="_blank" class="flex-1 bg-emerald-600 text-white py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-md">
       <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
@@ -1004,7 +870,6 @@
   <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-navy-950/90 backdrop-blur-md p-4 transition-all duration-300">
     <div class="relative w-full max-w-4xl bg-navy-900 rounded-3xl overflow-hidden shadow-2xl border border-navy-700 flex flex-col max-h-[90vh]">
       
-      <!-- Modal Header -->
       <div class="p-4 sm:p-5 bg-navy-950 border-b border-navy-800 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <span class="bg-accent-orange text-white text-xs font-bold px-3 py-1 rounded-full">Caso en Video ALM</span>
@@ -1016,7 +881,6 @@
         </button>
       </div>
 
-      <!-- Modal Video Player Container -->
       <div class="relative bg-black flex-1 flex items-center justify-center overflow-hidden">
         <video id="vlog-player" class="w-full max-h-[65vh] object-contain rounded-xl" controls playsinline webkit-playsinline preload="metadata">
           <source src="./videos/video_silos.mp4" type="video/mp4">
@@ -1024,7 +888,6 @@
         </video>
       </div>
 
-      <!-- Modal Footer CTA -->
       <div class="p-4 bg-navy-950 border-t border-navy-800 flex flex-wrap items-center justify-between gap-3 text-xs">
         <p class="text-slate-300">
           ¿Requieres fumigación o desgasificación en tus silos o bodegas?

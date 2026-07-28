@@ -235,8 +235,13 @@ function initCitySelector() {
 function initVideoModal() {
   const openSilosCardBtn = document.getElementById('open-video-btn-silos');
   const openSilosLinkBtn = document.getElementById('open-video-link-silos');
+  const openSilosCardBtn2 = document.getElementById('open-video-btn-silos-card');
+  const openSilosLinkBtn2 = document.getElementById('open-video-link-silos-btn');
+
   const openPipasCardBtn = document.getElementById('open-video-btn-pipas');
   const openPipasLinkBtn = document.getElementById('open-video-link-pipas');
+  const openPipasCardBtn2 = document.getElementById('open-video-btn-pipas-card');
+  const openPipasLinkBtn2 = document.getElementById('open-video-link-pipas-btn');
 
   const videoModal = document.getElementById('video-modal');
   const vlogPlayer = document.getElementById('vlog-player');
@@ -272,7 +277,6 @@ function initVideoModal() {
     if (playPromise !== undefined) {
       playPromise.catch(err => {
         console.warn('Reproducción asistida por política de navegador:', err);
-        // If unmuted playback is restricted, play muted as fallback
         vlogPlayer.muted = true;
         vlogPlayer.play().catch(e => console.error('Play error:', e));
       });
@@ -286,10 +290,13 @@ function initVideoModal() {
     videoModal.classList.remove('flex');
   }
 
-  if (openSilosCardBtn) openSilosCardBtn.addEventListener('click', () => openModal('silos'));
-  if (openSilosLinkBtn) openSilosLinkBtn.addEventListener('click', () => openModal('silos'));
-  if (openPipasCardBtn) openPipasCardBtn.addEventListener('click', () => openModal('pipas'));
-  if (openPipasLinkBtn) openPipasLinkBtn.addEventListener('click', () => openModal('pipas'));
+  [openSilosCardBtn, openSilosLinkBtn, openSilosCardBtn2, openSilosLinkBtn2].forEach(btn => {
+    if (btn) btn.addEventListener('click', () => openModal('silos'));
+  });
+
+  [openPipasCardBtn, openPipasLinkBtn, openPipasCardBtn2, openPipasLinkBtn2].forEach(btn => {
+    if (btn) btn.addEventListener('click', () => openModal('pipas'));
+  });
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (closeBtnBottom) closeBtnBottom.addEventListener('click', closeModal);
