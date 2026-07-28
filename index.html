@@ -230,10 +230,6 @@
         <a href="#normativa" class="hover:text-accent-green transition-colors">NOM-256</a>
         <a href="#casos-exito" class="hover:text-accent-green transition-colors">Casos de Éxito</a>
         <a href="#resenas" class="hover:text-accent-green transition-colors">Opiniones Google</a>
-        <a href="#calculadora" class="hover:text-accent-green transition-colors flex items-center gap-1">
-          <span class="w-2 h-2 rounded-full bg-accent-orange"></span>
-          Calculadora UMA
-        </a>
       </nav>
 
       <!-- Header CTA Buttons -->
@@ -302,10 +298,6 @@
             <a href="#cotizacion" class="bg-accent-orange hover:bg-accent-orange-hover text-white font-extrabold px-7 py-4 rounded-xl shadow-xl shadow-orange-900/30 text-center text-base transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
               <span>Solicitar Inspección (5% OFF)</span>
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </a>
-            <a href="#calculadora" class="bg-navy-800/80 hover:bg-navy-800 text-white font-semibold px-6 py-4 rounded-xl border border-slate-700 text-center text-base transition-all flex items-center justify-center gap-2">
-              <svg class="w-5 h-5 text-accent-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-              <span>Calcular Riesgo COFEPRIS</span>
             </a>
           </div>
 
@@ -723,122 +715,6 @@
           <svg class="w-4 h-4 fill-current text-accent-green" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           <span>Ver Ficha y Opiniones en Google Maps</span>
         </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Interactive COFEPRIS Risk & Fine Calculator -->
-  <section id="calculadora" class="py-16 bg-navy-900 text-white relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        
-        <div class="lg:col-span-5 space-y-4">
-          <span class="text-xs font-bold text-accent-orange uppercase tracking-wider bg-orange-950/80 border border-orange-800/60 px-3 py-1 rounded-full inline-block">Herramienta Interactiva COFEPRIS</span>
-          <h2 class="text-2xl sm:text-4xl font-extrabold font-heading leading-tight">
-            Calculadora de Riesgo Sanitario y Sanción UMA
-          </h2>
-          <p class="text-sm text-slate-300 leading-relaxed">
-            Evalúa en tiempo real el nivel de vulnerabilidad legal de tu establecimiento o flota de transporte ante visitas de verificación sanitaria de <strong>SESVER / COFEPRIS</strong>.
-          </p>
-
-          <div class="bg-navy-950/80 border border-slate-800 p-4 rounded-2xl space-y-2 text-xs text-slate-300">
-            <div class="flex items-start gap-2">
-              <span class="text-accent-orange font-bold">•</span>
-              <span>Base legal: Ley General de Salud Art. 194, 198, 282 y NOM-256-SSA1-2012.</span>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-accent-orange font-bold">•</span>
-              <span>Rango de sanción oficial: 2,000 a 6,000 UMAS (Equivalente 2025/2026: $226,280 a $678,840 MXN).</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Calculator Interactive Card -->
-        <div class="lg:col-span-7">
-          <div class="glass-panel text-slate-800 p-6 sm:p-8 rounded-3xl shadow-2xl border border-white">
-            
-            <div class="space-y-5">
-              
-              <!-- Sector Selector -->
-              <div>
-                <label class="block text-xs font-bold text-navy-900 uppercase tracking-wider mb-2">1. Selecciona el Giro o Sector</label>
-                <select id="calc-sector" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-accent-green">
-                  <option value="industrial_silos">Silos / Almacenes de Granos (Sector Agroindustrial)</option>
-                  <option value="transporte">Transporte de Carga / Pipas Alimentarias / Tolvas</option>
-                  <option value="alimentos_restaurantes">Planta Procesadora / Comedores / Restaurantes</option>
-                  <option value="salud_hospitales">Salud / Hospitales / Escuelas / Hoteles</option>
-                  <option value="comercio_general">Locales Comerciales / Bodegas / Residencia</option>
-                </select>
-              </div>
-
-              <!-- Area Range Input -->
-              <div>
-                <div class="flex justify-between items-center mb-2">
-                  <label class="text-xs font-bold text-navy-900 uppercase tracking-wider">2. Superficie o Capacidad Instalada</label>
-                  <span id="calc-size-val" class="text-xs font-extrabold text-accent-orange bg-orange-50 px-2.5 py-1 rounded-lg border border-orange-200">500 m² / m³</span>
-                </div>
-                <input type="range" id="calc-size" min="50" max="5000" step="50" value="500" class="w-full">
-                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
-                  <span>50 m²</span>
-                  <span>2,500 m²</span>
-                  <span>5,000+ m²</span>
-                </div>
-              </div>
-
-              <!-- Last Fumigation Input -->
-              <div>
-                <label class="block text-xs font-bold text-navy-900 uppercase tracking-wider mb-2">3. Frecuencia del Último Servicio Fitosanitario</label>
-                <select id="calc-last-fumigation" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-accent-green">
-                  <option value="1">Menos de 1 mes (Al día)</option>
-                  <option value="2">Hace 2 meses</option>
-                  <option value="3">Hace 3 a 6 meses</option>
-                  <option value="7">Más de 6 meses / Sin servicio previo</option>
-                </select>
-              </div>
-
-              <!-- License & Logbook Status Input -->
-              <div>
-                <label class="block text-xs font-bold text-navy-900 uppercase tracking-wider mb-2">4. Estado de Licencia Sanitaria &amp; Bitácora NOM-256</label>
-                <select id="calc-license" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-accent-green">
-                  <option value="vigente">Licencia y Bitácora Vigentes ante COFEPRIS</option>
-                  <option value="incompleta">Bitácora Incompleta / Licencia Vencida</option>
-                  <option value="ninguna">Sin Licencia Sanitaria ni Bitácora Oficial</option>
-                </select>
-              </div>
-
-              <!-- Result Box -->
-              <div class="mt-6 pt-6 border-t border-slate-200 bg-slate-50/80 p-5 rounded-2xl">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                  <span class="text-xs font-bold text-slate-600">Nivel de Riesgo Calculado:</span>
-                  <div id="calc-risk-badge" class="px-3 py-1 text-xs font-bold rounded-full border text-red-600 bg-red-50 border-red-300">
-                    CRÍTICO - ALTO RIESGO
-                  </div>
-                </div>
-
-                <div class="space-y-1 mb-3">
-                  <span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">Exposición Estimada a Sanción UMA (Arts. 417 y 421 Ley General de Salud):</span>
-                  <div id="calc-fine-estimate" class="text-lg sm:text-xl font-extrabold text-navy-900 font-heading">
-                    $226,280 - $678,840 MXN
-                  </div>
-                </div>
-
-                <p id="calc-recommendation" class="text-xs text-slate-700 leading-relaxed font-medium bg-white p-3 rounded-xl border border-slate-200">
-                  Cálculo listo.
-                </p>
-
-                <button type="button" id="calc-cta-btn" class="w-full mt-4 bg-navy-900 hover:bg-navy-950 text-white font-bold py-3.5 px-4 rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2">
-                  <span>Regularizar Estatus Sanitario Ahora (5% OFF)</span>
-                  <svg class="w-4 h-4 text-accent-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-
       </div>
 
     </div>

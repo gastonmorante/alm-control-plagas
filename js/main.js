@@ -7,7 +7,6 @@ window.scrollTo(0, 0);
 document.addEventListener('DOMContentLoaded', () => {
   window.scrollTo(0, 0);
   initLogoRevealIntro();
-  initSanityCalculator();
   initFormHandler();
   initSmoothScroll();
   initCitySelector();
@@ -94,94 +93,7 @@ function initLogoRevealIntro() {
 }
 
 /* ==========================================
-   1. CALCULADORA INTERACTIVA DE RIESGO COFEPRIS
-   ========================================== */function initSanityCalculator() {
-  const sectorSelect = document.getElementById('calc-sector');
-  const sizeInput = document.getElementById('calc-size');
-  const sizeValueDisplay = document.getElementById('calc-size-val');
-  const lastFumigationSelect = document.getElementById('calc-last-fumigation');
-  const licenseSelect = document.getElementById('calc-license');
-
-  const riskBadge = document.getElementById('calc-risk-badge');
-  const fineEstimateDisplay = document.getElementById('calc-fine-estimate');
-  const actionRecommendation = document.getElementById('calc-recommendation');
-  const calcCtaBtn = document.getElementById('calc-cta-btn');
-
-  if (!sectorSelect || !sizeInput) return;
-
-  function calculateRisk() {
-    const sector = sectorSelect.value;
-    const size = parseInt(sizeInput.value, 10);
-    const monthsSince = parseInt(lastFumigationSelect.value, 10);
-    const license = licenseSelect ? licenseSelect.value : 'incompleta';
-
-    sizeValueDisplay.textContent = size.toLocaleString('es-MX') + ' m² / m³';
-
-    // Legal parameters calculation based on Ley General de Salud Arts 194, 198, 417, 421 & NOM-256-SSA1-2012
-    let riskLevel = 'MEDIO - REQUIERE PREVENCIÓN';
-    let minFine = 226280; // 2,000 UMAS
-    let maxFine = 678840; // 6,000 UMAS
-    let riskColor = 'text-amber-600 bg-amber-50 border-amber-300';
-    let recommendation = 'Se recomienda inspección técnica y actualización de bitácora sanitaria en los próximos 15 días.';
-
-    const isIndustrialOrLogistics = (sector === 'industrial_silos' || sector === 'transporte');
-
-    if (license === 'ninguna' || (isIndustrialOrLogistics && monthsSince >= 2) || (monthsSince >= 7)) {
-      riskLevel = '🚨 CRÍTICO - RIESGO DE CLAUSURA E INMOVILIZACIÓN';
-      riskColor = 'text-red-600 bg-red-50 border-red-300 font-extrabold animate-pulse';
-      minFine = 350000;
-      maxFine = 678840;
-      recommendation = '⚠️ EXPOSICIÓN ALTA A SANCIÓN (Arts. 417 y 421 Ley General de Salud). Carecer de certificado mensual/trimestral o bitácora NOM-256 autoriza a COFEPRIS/SESVER a suspender actividades o inmovilizar granos/mercancía. ¡Regularízate hoy con 5% OFF!';
-    } else if (license === 'incompleta' || monthsSince >= 3) {
-      riskLevel = '⚠️ ALTO - VULNERABLE A INSPECION SESVER';
-      riskColor = 'text-orange-600 bg-orange-50 border-orange-300 font-bold';
-      minFine = 226280;
-      maxFine = 450000;
-      recommendation = 'Excedido el periodo de mantenimiento recomendado. Se requiere emisión urgente de Certificado Fitosanitario Oficial con validez COFEPRIS para evitar observaciones en bitácora.';
-    } else if (license === 'vigente' && monthsSince === 1) {
-      riskLevel = '✅ ESTATUS EN REGLA (PROTEGIDO)';
-      riskColor = 'text-emerald-700 bg-emerald-50 border-emerald-300 font-bold';
-      minFine = 0;
-      maxFine = 0;
-      recommendation = '¡Excelente! Tu establecimiento cuenta con blindaje sanitario activo. Recuerda renovar tu certificado según la frecuencia de tu giro (mensual para silos/transporte, trimestral comercial).';
-    }
-
-    // Format Fine output
-    let fineText = `${new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(minFine)} - ${new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(maxFine)} MXN (2,000 a 6,000 UMA)`;
-    if (minFine === 0) {
-      fineText = '$0 MXN (Sin Exposición a Sanción Sanitaria)';
-    }
-
-    riskBadge.className = `inline-block px-3 py-1 text-xs sm:text-sm rounded-full border ${riskColor}`;
-    riskBadge.textContent = riskLevel;
-
-    fineEstimateDisplay.textContent = fineText;
-    actionRecommendation.textContent = recommendation;
-  }
-
-  sectorSelect.addEventListener('change', calculateRisk);
-  sizeInput.addEventListener('input', calculateRisk);
-  lastFumigationSelect.addEventListener('change', calculateRisk);
-  if (licenseSelect) licenseSelect.addEventListener('change', calculateRisk);
-
-  if (calcCtaBtn) {
-    calcCtaBtn.addEventListener('click', () => {
-      const formSection = document.getElementById('cotizacion');
-      if (formSection) {
-        formSection.scrollIntoView({ behavior: 'smooth' });
-        const commentsField = document.querySelector('textarea[name="comentarios"]');
-        if (commentsField) {
-          commentsField.value = `[Evaluación desde Calculadora COFEPRIS]\nGiro: ${sectorSelect.options[sectorSelect.selectedIndex].text}\nSuperficie/Capacidad: ${sizeInput.value}m²\nÚltima Fumigación: ${lastFumigationSelect.options[lastFumigationSelect.selectedIndex].text}\nEstatus Licencia: ${licenseSelect ? licenseSelect.options[licenseSelect.selectedIndex].text : 'N/A'}`;
-        }
-      }
-    });
-  }
-
-  calculateRisk();
-}
-
-/* ==========================================
-   2. CAPTURA Y ENVÍO DE FORMULARIO DE LEADS
+   1. CAPTURA Y ENVÍO DE FORMULARIO DE LEADS
    ========================================== */
 function initFormHandler() {
   const form = document.getElementById('alm-lead-form');
