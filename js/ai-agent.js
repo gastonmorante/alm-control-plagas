@@ -198,11 +198,10 @@
     showTypingIndicator();
     const qLower = query.toLowerCase();
 
-    // Check if Gemini API key is configured globally or assemble default key
-    const defaultKey = ['AQ.Ab8RN6IMo0myfjzm4imEkfqvvSTkho9V', '6DkIkhn89hlqe7AjIQ'].join('');
-    const apiKey = window.ALM_GEMINI_API_KEY || localStorage.getItem('ALM_GEMINI_API_KEY') || defaultKey;
+    // Check if valid Gemini API key is configured globally or in localStorage
+    const apiKey = (window.ALM_GEMINI_API_KEY || localStorage.getItem('ALM_GEMINI_API_KEY') || '').trim();
 
-    if (apiKey) {
+    if (apiKey && apiKey.length > 20) {
       try {
         const responseText = await callGeminiApi(query, apiKey);
         removeTypingIndicator();
