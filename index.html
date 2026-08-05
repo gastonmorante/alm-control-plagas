@@ -257,15 +257,15 @@
   </div>
 
   <!-- Top Navigation Bar -->
-  <header class="bg-navy-900/95 backdrop-blur-md text-white sticky top-0 z-40 border-b border-navy-800 shadow-xl transition-all">
-    <div class="flex justify-between items-center w-full px-4 sm:px-8 max-w-7xl mx-auto h-22 sm:h-24 py-2">
-      <a href="#inicio" class="flex items-center gap-3.5 group">
-        <div class="bg-white p-2 sm:p-2.5 rounded-2xl shadow-lg border border-white/60 ring-2 ring-emerald-400/20 flex items-center justify-center transform group-hover:scale-105 transition-all duration-300">
-          <img alt="ALM Control Logo" class="h-12 sm:h-16 w-auto object-contain" src="./logo_transparent.png"/>
+  <header class="bg-navy-900/95 backdrop-blur-md text-white sticky top-0 z-40 border-b border-navy-800 shadow-xl transition-all w-full max-w-full overflow-x-hidden">
+    <div class="flex justify-between items-center w-full px-3 sm:px-8 max-w-7xl mx-auto h-20 sm:h-24 py-1.5 sm:py-2">
+      <a href="#inicio" class="flex items-center gap-2.5 sm:gap-3.5 group min-w-0">
+        <div class="bg-white p-1.5 sm:p-2.5 rounded-xl sm:rounded-2xl shadow-lg border border-white/60 ring-2 ring-emerald-400/20 flex items-center justify-center transform group-hover:scale-105 transition-all duration-300 shrink-0">
+          <img alt="ALM Control Logo" class="h-9 sm:h-16 w-auto object-contain" src="./logo_transparent.png"/>
         </div>
-        <div class="flex flex-col">
-          <span class="font-heading font-extrabold text-white text-lg sm:text-2xl tracking-tight leading-none group-hover:text-emerald-300 transition-colors">ALM CONTROL</span>
-          <span class="text-xs sm:text-sm text-emerald-400 font-extrabold tracking-widest uppercase mt-1">Blindaje Sanitario</span>
+        <div class="flex flex-col min-w-0">
+          <span class="font-heading font-extrabold text-white text-sm sm:text-2xl tracking-tight leading-none group-hover:text-emerald-300 transition-colors truncate">ALM CONTROL</span>
+          <span class="text-[9px] sm:text-sm text-emerald-400 font-extrabold tracking-wider sm:tracking-widest uppercase mt-0.5 sm:mt-1 truncate">Blindaje Sanitario</span>
         </div>
       </a>
       
@@ -280,18 +280,18 @@
         <a href="#cotizacion" class="hover:text-emerald-400 transition-colors">Contacto</a>
       </nav>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         <a href="https://wa.me/522711528442" target="_blank" class="hidden lg:inline-flex text-emerald-400 font-bold text-xs hover:underline items-center gap-1">
           <span class="material-symbols-outlined text-sm">call</span> 271 152 8442
         </a>
-        <a href="#cotizacion" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm transition-all shadow-md">
+        <a href="#cotizacion" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold text-[11px] sm:text-sm transition-all shadow-md whitespace-nowrap">
           COTIZAR -5%
         </a>
       </div>
     </div>
   </header>
 
-  <main>
+  <main class="w-full max-w-full overflow-x-hidden">
     <!-- Hero Section -->
     <section id="inicio" class="relative w-full min-h-[88vh] flex items-center overflow-hidden bg-primary text-white">
       <div class="absolute inset-0 z-0">
@@ -656,10 +656,10 @@
               <img class="w-full aspect-[4/5] object-cover max-h-[500px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA33eSs825HzVOP8nQ_jvc9FM8b1jic5291zOtyGkiKjKv346Qz0bwesY8R_msPB6DwOUYNHH4KlPvI8ayzuJShpu7HsSOyutxo7V_SOVbIY2YXGONJcLcTC9vTrpNFMPhkkrhMjAdArwRWGAYofJs3rREvYz_YWpBEoQwoaNLmAY0H54zm4mYkiKKehSwSCOWyurFvH2nAcCEm7q-chNTGaymoYmGvhRfOYnMuUU9G_hkzR15C0oM83w" alt="Equipo Técnico ALM Control de Plagas"/>
             </div>
             <!-- Floating Stat Card -->
-            <div class="absolute -bottom-6 -right-6 glass-card p-6 rounded-2xl shadow-xl z-20 border border-white/60 max-w-[240px]">
-              <p class="text-3xl font-extrabold font-heading text-secondary mb-0.5">10+</p>
-              <p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Años de Experiencia</p>
-              <p class="text-[11px] text-on-surface-variant">Líderes en blindaje sanitario y servicios de fumigación en Veracruz.</p>
+            <div class="absolute bottom-2 right-2 sm:-bottom-6 sm:-right-6 glass-card p-4 sm:p-6 rounded-2xl shadow-xl z-20 border border-white/60 max-w-[200px] sm:max-w-[240px]">
+              <p class="text-2xl sm:text-3xl font-extrabold font-heading text-secondary mb-0.5">10+</p>
+              <p class="text-[10px] sm:text-xs font-bold text-primary uppercase tracking-wider mb-1">Años de Experiencia</p>
+              <p class="text-[10px] sm:text-[11px] text-on-surface-variant leading-tight">Líderes en blindaje sanitario y fumigación en Veracruz.</p>
             </div>
           </div>
 
@@ -868,13 +868,13 @@
           <div class="w-full lg:w-1/2">
             <div class="relative">
               <img class="rounded-3xl shadow-2xl w-full aspect-square object-cover max-h-[480px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbM_PTEc-nBzmJiHgpcQGc3gp4Ocwna7p9PgZUOB5xlNTw8PDKxf_VVgERenihDZsizLgapoceIiAbOwqNP0CzT4G_5WUCrH1IPgA8IkgBNtMA2MgcPw9iVmFva74PJTUgTUqey2rL7NoH63BMmZoYZDn52g6o7zAqa23rsIR6l_V1oE-HJ6LsVVlNNeJ2zeJ81BQnn05QnZA3ogk-NOutA_rTA6FkioQR4lzt7rYWBS871Jwx8EGlXg" alt="Inspección Profesional ALM"/>
-              <div class="absolute -bottom-6 -left-6 bg-white p-5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-4">
-                <div class="w-12 h-12 bg-secondary-container/40 rounded-full flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-secondary text-2xl">verified_user</span>
+              <div class="absolute bottom-2 left-2 sm:-bottom-6 sm:-left-6 bg-white p-3 sm:p-5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 sm:gap-4 max-w-[calc(100%-1rem)] sm:max-w-none">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-secondary-container/40 rounded-full flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-secondary text-xl sm:text-2xl">verified_user</span>
                 </div>
                 <div>
                   <p class="font-bold text-primary text-xs sm:text-sm">Servicio Certificado</p>
-                  <p class="text-[11px] text-on-surface-variant">Licencia Sanitaria COFEPRIS</p>
+                  <p class="text-[10px] sm:text-[11px] text-on-surface-variant">Licencia Sanitaria COFEPRIS</p>
                 </div>
               </div>
             </div>
@@ -1055,7 +1055,7 @@
     </button>
 
     <!-- Chat Modal Window -->
-    <div id="ai-chat-modal" role="dialog" aria-modal="true" aria-label="Asistente Técnico Virtual" class="ai-widget-modal fixed bottom-24 right-4 sm:bottom-20 sm:right-6 w-[92vw] sm:w-[380px] h-[520px] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden z-50">
+    <div id="ai-chat-modal" role="dialog" aria-modal="true" aria-label="Asistente Técnico Virtual" class="ai-widget-modal fixed bottom-20 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-auto sm:right-6 w-[92vw] max-w-[380px] h-[490px] sm:h-[520px] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden z-50">
       
       <!-- Chat Header -->
       <div class="bg-primary text-white p-4 flex items-center justify-between border-b border-primary-container">

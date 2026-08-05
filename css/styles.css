@@ -23,11 +23,24 @@
   --shadow-glow-orange: 0 0 20px rgba(230, 126, 34, 0.35);
 }
 
+html {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--text-main);
   background-color: var(--bg-light);
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+}
+
+img, video, iframe, canvas, svg {
+  max-width: 100%;
 }
 
 section[id] {
