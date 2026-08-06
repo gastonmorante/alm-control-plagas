@@ -259,7 +259,7 @@ function initVideoModal() {
     },
     pipas: {
       src: './videos/video_pipas.mp4',
-      title: 'Demostración Técnica: Blindaje Fitosanitario en Pipas y Tolvas'
+      title: 'Demostración Técnica: Tratamientos Fitosanitarios en Pipas y Tolvas'
     }
   };
 
