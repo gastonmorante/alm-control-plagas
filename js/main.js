@@ -420,19 +420,13 @@ function initAntCursorFollower() {
   const antFollowerEl = antContainer.querySelector('#ant-follower');
   const avatarContainerEl = document.getElementById('justino-avatar-container');
   const avatarImgEl = document.getElementById('justino-avatar-img');
-  const eyelidsOverlayEl = document.getElementById('justino-eyelids-overlay');
 
-  // Option A Preload Check: Detect if optional closed-eyes image asset exists
-  let closedEyesImgObj = null;
-  let hasClosedEyesImage = false;
-  if (avatarContainerEl) {
-    const testImg = new Image();
-    testImg.onload = () => {
-      hasClosedEyesImage = true;
-      closedEyesImgObj = testImg;
-    };
-    testImg.src = './ing_justino_gonzalez_closed.jpg';
-  }
+  // Preload reaction image immediately to guarantee zero-latency, zero-flicker swap
+  const reactionImgObj = new Image();
+  reactionImgObj.src = './justino_reaccion.jpg';
+
+  const defaultImgSrc = './ing_justino_gonzalez.jpg';
+  const reactionImgSrc = './justino_reaccion.jpg';
 
   /**
    * Continuous 2D Bounding Box (AABB) Collision Detection
@@ -440,7 +434,7 @@ function initAntCursorFollower() {
    * Runs in animation loop (requestAnimationFrame) independent of raw mouse pointer hover.
    */
   function checkAntAvatarCollision() {
-    if (!antFollowerEl || !avatarContainerEl) return;
+    if (!antFollowerEl || !avatarContainerEl || !avatarImgEl) return;
 
     // Fetch live screen viewport bounding rectangles
     const antRect = antFollowerEl.getBoundingClientRect();
@@ -455,27 +449,17 @@ function initAntCursorFollower() {
     );
 
     if (isColliding) {
-      if (hasClosedEyesImage && avatarImgEl) {
-        // Option A: Swap src to closed-eyes image if asset is present
-        if (!avatarImgEl.src.includes('ing_justino_gonzalez_closed.jpg')) {
-          avatarImgEl.src = './ing_justino_gonzalez_closed.jpg';
-        }
-      } else if (eyelidsOverlayEl) {
-        // Option B: Programmatic SVG Eyelid Mask Fallback (Fade in closed eyes overlay)
-        eyelidsOverlayEl.classList.remove('opacity-0');
-        eyelidsOverlayEl.classList.add('opacity-100');
+      // Swap avatar image to reaction photo when ant physically touches the avatar
+      if (!avatarImgEl.src.includes('justino_reaccion.jpg')) {
+        avatarImgEl.src = reactionImgSrc;
       }
-      avatarContainerEl.classList.add('ring-4', 'ring-emerald-400/50');
+      avatarContainerEl.classList.add('ring-4', 'ring-emerald-400/60', 'scale-105');
     } else {
-      // Restore open eyes when ant moves away
-      if (avatarImgEl && avatarImgEl.src.includes('ing_justino_gonzalez_closed.jpg')) {
-        avatarImgEl.src = './ing_justino_gonzalez.jpg';
+      // Immediately restore original avatar photo when ant steps away
+      if (avatarImgEl.src.includes('justino_reaccion.jpg')) {
+        avatarImgEl.src = defaultImgSrc;
       }
-      if (eyelidsOverlayEl) {
-        eyelidsOverlayEl.classList.remove('opacity-100');
-        eyelidsOverlayEl.classList.add('opacity-0');
-      }
-      avatarContainerEl.classList.remove('ring-4', 'ring-emerald-400/50');
+      avatarContainerEl.classList.remove('ring-4', 'ring-emerald-400/60', 'scale-105');
     }
   }
 
