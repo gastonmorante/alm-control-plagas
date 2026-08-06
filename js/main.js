@@ -416,7 +416,70 @@ function initAntCursorFollower() {
     }
   }, { passive: true });
 
-  // Smooth Motion Loop with Realistic Ant Leg Wiggling Animation
+  // --- EASTER EGG: Ant Physical Collision Detection Engine with Ing. Justino Avatar ---
+  const antFollowerEl = antContainer.querySelector('#ant-follower');
+  const avatarContainerEl = document.getElementById('justino-avatar-container');
+  const avatarImgEl = document.getElementById('justino-avatar-img');
+  const eyelidsOverlayEl = document.getElementById('justino-eyelids-overlay');
+
+  // Option A Preload Check: Detect if optional closed-eyes image asset exists
+  let closedEyesImgObj = null;
+  let hasClosedEyesImage = false;
+  if (avatarContainerEl) {
+    const testImg = new Image();
+    testImg.onload = () => {
+      hasClosedEyesImage = true;
+      closedEyesImgObj = testImg;
+    };
+    testImg.src = './ing_justino_gonzalez_closed.jpg';
+  }
+
+  /**
+   * Continuous 2D Bounding Box (AABB) Collision Detection
+   * Evaluates physical overlap between ant follower DOM bounding rect and Justino's avatar DOM bounding rect.
+   * Runs in animation loop (requestAnimationFrame) independent of raw mouse pointer hover.
+   */
+  function checkAntAvatarCollision() {
+    if (!antFollowerEl || !avatarContainerEl) return;
+
+    // Fetch live screen viewport bounding rectangles
+    const antRect = antFollowerEl.getBoundingClientRect();
+    const avatarRect = avatarContainerEl.getBoundingClientRect();
+
+    // Check 2D Axis-Aligned Bounding Box Overlap
+    const isColliding = !(
+      antRect.right < avatarRect.left ||
+      antRect.left > avatarRect.right ||
+      antRect.bottom < avatarRect.top ||
+      antRect.top > avatarRect.bottom
+    );
+
+    if (isColliding) {
+      if (hasClosedEyesImage && avatarImgEl) {
+        // Option A: Swap src to closed-eyes image if asset is present
+        if (!avatarImgEl.src.includes('ing_justino_gonzalez_closed.jpg')) {
+          avatarImgEl.src = './ing_justino_gonzalez_closed.jpg';
+        }
+      } else if (eyelidsOverlayEl) {
+        // Option B: Programmatic SVG Eyelid Mask Fallback (Fade in closed eyes overlay)
+        eyelidsOverlayEl.classList.remove('opacity-0');
+        eyelidsOverlayEl.classList.add('opacity-100');
+      }
+      avatarContainerEl.classList.add('ring-4', 'ring-emerald-400/50');
+    } else {
+      // Restore open eyes when ant moves away
+      if (avatarImgEl && avatarImgEl.src.includes('ing_justino_gonzalez_closed.jpg')) {
+        avatarImgEl.src = './ing_justino_gonzalez.jpg';
+      }
+      if (eyelidsOverlayEl) {
+        eyelidsOverlayEl.classList.remove('opacity-100');
+        eyelidsOverlayEl.classList.add('opacity-0');
+      }
+      avatarContainerEl.classList.remove('ring-4', 'ring-emerald-400/50');
+    }
+  }
+
+  // Smooth Motion Loop with Realistic Ant Leg Wiggling Animation & Collision Detection
   function animLoop() {
     const dx = targetX - posX;
     const dy = targetY - posY;
@@ -442,6 +505,10 @@ function initAntCursorFollower() {
     }
 
     antContainer.style.transform = `translate3d(${posX}px, ${posY}px, 0px) rotate(${currentAngle}deg)`;
+    
+    // Evaluate Easter Egg collision on every animation frame
+    checkAntAvatarCollision();
+
     requestAnimationFrame(animLoop);
   }
 
