@@ -785,40 +785,45 @@
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           
-          <div id="open-video-btn-silos-card" class="group relative aspect-square overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-outline-variant/30">
+          <!-- Columna 1 (Extremo Izquierdo): Tarjeta Video Silos -->
+          <div id="open-video-btn-silos-card" class="group relative aspect-square overflow-hidden rounded-2xl shadow-md cursor-pointer border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
             <img alt="Servicio Industrial y Silos" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="./img_silos_case.jpg"/>
-            <div class="absolute inset-0 bg-primary/40 opacity-80 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-2 text-center">
-              <span class="material-symbols-outlined text-white text-4xl mb-1">play_circle</span>
-              <span class="text-[10px] font-bold">Ver Video Silos</span>
+            <div class="absolute inset-0 bg-primary/40 opacity-85 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-2 text-center">
+              <span class="material-symbols-outlined text-white text-4xl mb-1 drop-shadow-md">play_circle</span>
+              <span class="text-[10px] font-bold tracking-wide">Ver Video Silos</span>
             </div>
           </div>
 
-          <div id="open-video-btn-pipas-card" class="group relative aspect-square overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-outline-variant/30">
+          <!-- Columna 2: Sustitución A (Fachada Exterior Verde Oliva) -->
+          <div class="group relative aspect-square overflow-hidden rounded-2xl shadow-md border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
+            <img alt="Fumigación de Fachadas y Exteriores ALM" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" src="./galeria_fachada_oliva.jpg"/>
+            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-3 bg-gradient-to-t from-navy-950/80 to-transparent">
+              <span class="text-white text-[11px] font-bold leading-tight">Exteriores &amp; Perímetros</span>
+            </div>
+          </div>
+
+          <!-- Columna 3 (Centro): Sustitución B (Desinfección Interior de Autobús) -->
+          <div class="group relative aspect-square overflow-hidden rounded-2xl shadow-md border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
+            <img alt="Desinfección de Transporte Público ALM" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" src="./galeria_autobus.jpg"/>
+            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-3 bg-gradient-to-t from-navy-950/80 to-transparent">
+              <span class="text-white text-[11px] font-bold leading-tight">Transporte de Pasajeros</span>
+            </div>
+          </div>
+
+          <!-- Columna 4: Sustitución C (Aplicación en Sala de Espera Naranja) -->
+          <div class="group relative aspect-square overflow-hidden rounded-2xl shadow-md border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
+            <img alt="Tratamiento en Interiores Comerciales ALM" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" src="./galeria_sala_naranja.jpg"/>
+            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-3 bg-gradient-to-t from-navy-950/80 to-transparent">
+              <span class="text-white text-[11px] font-bold leading-tight">Interiores &amp; Oficinas</span>
+            </div>
+          </div>
+
+          <!-- Columna 5 (Extremo Derecho): Tarjeta Video Pipas -->
+          <div id="open-video-btn-pipas-card" class="group relative aspect-square overflow-hidden rounded-2xl shadow-md cursor-pointer border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
             <img alt="Sanitización de Pipas" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="./img_pipas_case.jpg"/>
-            <div class="absolute inset-0 bg-primary/40 opacity-80 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-2 text-center">
-              <span class="material-symbols-outlined text-white text-4xl mb-1">play_circle</span>
-              <span class="text-[10px] font-bold">Ver Video Pipas</span>
-            </div>
-          </div>
-
-          <div class="group relative aspect-square overflow-hidden rounded-2xl shadow-sm border border-outline-variant/30">
-            <img alt="Servicio Comercial" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARSDKnSP29VyhfEyGqu2YVSKOM0p9YBaU7GN388qL9gCL4khxe-wG4ikbGzXiO3BvLuYy45f1DSIGkUfB214Vf_oSpW967ZhXZXYHhNsi9RTU2-nkItMZat1Flg9IjuKxqODA57VNhuLFsseRreKpkHPdBaL45AsrWDEB10R_G-To0lmfbaBdqeMsFen7U6pis5W5bgYFjDN5EcCgIhdPi0Ti9dGD-Q1O1mHlAMkCOQ5Rl0_Rkj4Z1vg"/>
-            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <span class="material-symbols-outlined text-white text-3xl">visibility</span>
-            </div>
-          </div>
-
-          <div class="group relative aspect-square overflow-hidden rounded-2xl shadow-sm border border-outline-variant/30">
-            <img alt="Servicio Residencial" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaotsV6ugYQgd7rRWrUDpkwJoYBN-bpNSKsP9FfBsOTJQy25iA4vHpRn16snRaCEZgw-t1MZaoTyDuD8vZ5mtfUVu5YzmjkW4Jnfa0lFHyIjMRNJHmZWKWngTpnqbaTRtLeg_XJ6DUlVe5Z2NP18AnGBOHgiHw9QtxTCIK095rxIcddib9UmbUEjy-iXreV6N6nN6ZFyAx3hgnkFBhYCV7J9WpTSkNeBvwUC6HjFiKDGJZiZxDsx_iGQ"/>
-            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <span class="material-symbols-outlined text-white text-3xl">visibility</span>
-            </div>
-          </div>
-
-          <div class="group relative aspect-square overflow-hidden rounded-2xl shadow-sm border border-outline-variant/30">
-            <img alt="Técnico ALM" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbM_PTEc-nBzmJiHgpcQGc3gp4Ocwna7p9PgZUOB5xlNTw8PDKxf_VVgERenihDZsizLgapoceIiAbOwqNP0CzT4G_5WUCrH1IPgA8IkgBNtMA2MgcPw9iVmFva74PJTUgTUqey2rL7NoH63BMmZoYZDn52g6o7zAqa23rsIR6l_V1oE-HJ6LsVVlNNeJ2zeJ81BQnn05QnZA3ogk-NOutA_rTA6FkioQR4lzt7rYWBS871Jwx8EGlXg"/>
-            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <span class="material-symbols-outlined text-white text-3xl">visibility</span>
+            <div class="absolute inset-0 bg-primary/40 opacity-85 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-2 text-center">
+              <span class="material-symbols-outlined text-white text-4xl mb-1 drop-shadow-md">play_circle</span>
+              <span class="text-[10px] font-bold tracking-wide">Ver Video Pipas</span>
             </div>
           </div>
 
