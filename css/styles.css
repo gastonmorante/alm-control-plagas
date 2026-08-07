@@ -187,106 +187,90 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 
 /* ==========================================================================
-   AFTER EFFECTS STYLE LOGO REVEAL INTRO ANIMATIONS
+   6-SECOND LUXURY LOGO INTRO ANIMATIONS
    ========================================================================== */
 
 #intro-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: radial-gradient(circle at center, #0F2352 0%, #081129 60%, #030712 100%);
+  background: radial-gradient(circle at center, #132759 0%, #081129 60%, #020617 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 #intro-overlay.fade-out {
   opacity: 0;
-  transform: scale(1.08);
+  transform: scale(1.06);
   pointer-events: none;
 }
 
-
-
-/* Isologo Container & Glow */
+/* Ambient Radial Aura Behind Intro Logo */
 .isologo-wrapper {
   position: relative;
   z-index: 10;
-  transform: scale(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 90vw;
+  padding: 1.5rem;
   opacity: 0;
-  animation: isologoReveal 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s forwards;
-  filter: drop-shadow(0 0 25px rgba(76, 175, 80, 0.6)) drop-shadow(0 0 50px rgba(230, 126, 34, 0.4));
+  transform: scale(0.88);
+  animation: logoSmoothReveal 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s forwards, logoGentlePulse 4s ease-in-out 1.4s infinite alternate;
 }
 
-@keyframes isologoReveal {
-  0% {
-    transform: scale(0) rotate(-15deg);
-    opacity: 0;
-    filter: blur(15px) drop-shadow(0 0 0px var(--accent-green));
-  }
-  60% {
-    transform: scale(1.12) rotate(2deg);
-    opacity: 1;
-    filter: blur(0px) drop-shadow(0 0 40px var(--accent-green));
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-    filter: drop-shadow(0 0 25px rgba(76, 175, 80, 0.6)) drop-shadow(0 0 50px rgba(230, 126, 34, 0.4));
-  }
-}
-
-/* Metallic Light Sweep Effect on Isologo */
-.isologo-wrapper::after {
+/* Luminous Ambient Backdrop Behind Logo for Maximum Crisp Contrast */
+.isologo-wrapper::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(60deg, transparent 40%, rgba(255, 255, 255, 0.7) 50%, transparent 60%);
-  transform: translateX(-100%);
-  animation: lightSweep 1.8s ease-in-out 0.8s infinite;
+  width: min(440px, 85vw);
+  height: min(440px, 85vw);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(240, 245, 255, 0.9) 35%, rgba(255, 255, 255, 0.3) 65%, transparent 75%);
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.4), 0 0 100px rgba(76, 175, 80, 0.3);
+  z-index: -1;
   pointer-events: none;
+  animation: ambientAuraPulse 3.5s ease-in-out infinite alternate;
 }
 
-@keyframes lightSweep {
-  0% { transform: translateX(-100%); }
-  50%, 100% { transform: translateX(100%); }
-}
-
-/* Cinematic Tagline Reveal */
-.intro-tagline {
-  margin-top: 1.2rem;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: #FFFFFF;
-  opacity: 0;
-  transform: translateY(15px);
-  animation: taglineFadeIn 0.6s ease 0.8s forwards;
-  text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
-}
-
-@keyframes taglineFadeIn {
-  to {
+/* Premium Fluid Entry */
+@keyframes logoSmoothReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+    filter: blur(8px) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
+    filter: blur(0px) drop-shadow(0 15px 35px rgba(0, 0, 0, 0.35));
   }
 }
 
-/* Sub-headline text reveal */
-.intro-subtext {
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
-  color: #94A3B8;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: taglineFadeIn 0.8s ease 1.6s forwards;
+/* Gentle Breathing Motion During 6-Second Appreciation */
+@keyframes logoGentlePulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.025);
+  }
+}
+
+@keyframes ambientAuraPulse {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
 }
 

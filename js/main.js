@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================
-   0. AFTER EFFECTS STYLE INTRO LOGO REVEAL
+   0. AFTER EFFECTS STYLE INTRO LOGO REVEAL (6 SECONDS TOTAL DURATION)
    ========================================== */
 function initLogoRevealIntro() {
   const overlay = document.getElementById('intro-overlay');
@@ -35,16 +35,16 @@ function initLogoRevealIntro() {
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  // Particle Engine
-  const colors = ['#4CAF50', '#E67E22', '#3498DB', '#FFFFFF'];
-  for (let i = 0; i < 45; i++) {
+  // Calibrated Particle Engine for 6-Second Presentation
+  const colors = ['#4CAF50', '#E67E22', '#3498DB', '#FFFFFF', '#81C784'];
+  for (let i = 0; i < 50; i++) {
     particles.push({
-      x: canvas.width / 2 + (Math.random() - 0.5) * 200,
-      y: canvas.height / 2 + (Math.random() - 0.5) * 200,
-      radius: Math.random() * 3 + 1,
+      x: canvas.width / 2 + (Math.random() - 0.5) * 300,
+      y: canvas.height / 2 + (Math.random() - 0.5) * 300,
+      radius: Math.random() * 2.5 + 0.8,
       color: colors[Math.floor(Math.random() * colors.length)],
-      vx: (Math.random() - 0.5) * 2.5,
-      vy: (Math.random() - 0.5) * 2.5,
+      vx: (Math.random() - 0.5) * 1.0,
+      vy: (Math.random() - 0.5) * 1.0,
       alpha: Math.random() * 0.7 + 0.3
     });
   }
@@ -58,18 +58,18 @@ function initLogoRevealIntro() {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       ctx.fillStyle = p.color;
-      ctx.shadowBlur = 15;
+      ctx.shadowBlur = 12;
       ctx.shadowColor = p.color;
       ctx.fill();
       ctx.restore();
 
       p.x += p.vx;
       p.y += p.vy;
-      p.alpha -= 0.003;
+      p.alpha -= 0.0018; // Smooth, slow fade suited for 6-second presentation
 
       if (p.alpha <= 0) {
-        p.x = canvas.width / 2 + (Math.random() - 0.5) * 150;
-        p.y = canvas.height / 2 + (Math.random() - 0.5) * 150;
+        p.x = canvas.width / 2 + (Math.random() - 0.5) * 250;
+        p.y = canvas.height / 2 + (Math.random() - 0.5) * 250;
         p.alpha = Math.random() * 0.7 + 0.3;
       }
     });
@@ -85,11 +85,11 @@ function initLogoRevealIntro() {
     setTimeout(() => {
       overlay.style.display = 'none';
       cancelAnimationFrame(animationFrameId);
-    }, 600);
+    }, 900); // 0.9s cubic-bezier fade-out finishes smoothly
   }
 
-  // Auto dismiss triggers fade-out at 2.4s and fully completes at 3.0s total
-  setTimeout(dismissIntro, 2400);
+  // Exact 6.0 Seconds Total Duration (Triggers fade-out at 5.1s, fully dismisses at 6.0s)
+  setTimeout(dismissIntro, 5100);
 }
 
 /* ==========================================
