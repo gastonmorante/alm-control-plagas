@@ -276,8 +276,8 @@
   <!-- Top Navigation Bar -->
   <header class="bg-[#D5FCD7] text-navy-950 sticky top-0 z-40 border-b border-emerald-300/80 shadow-md transition-all w-full max-w-full overflow-x-hidden backdrop-blur-md">
     <div class="flex justify-between items-center w-full px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto h-16 sm:h-20">
-      <a href="#inicio" class="flex items-center gap-2.5 sm:gap-3.5 group min-w-0 shrink-0 h-full py-1">
-        <img alt="ALM Manejo de Plagas y Fumigaciones" class="h-[52px] sm:h-[64px] max-h-[82%] w-auto object-contain transform group-hover:scale-105 transition-transform duration-300 shrink-0" src="./logo_transparent.png"/>
+      <a href="#inicio" class="flex items-center gap-3 sm:gap-4 group min-w-0 shrink-0 h-full py-1">
+        <img alt="ALM Manejo de Plagas y Fumigaciones" class="h-9 sm:h-11 md:h-12 w-auto object-contain transform scale-[2.0] origin-center transition-transform duration-300 shrink-0 mx-3 sm:mx-5" src="./logo_transparent.png"/>
         <div class="flex flex-col items-center justify-center text-center min-w-0">
           <span class="font-heading font-black text-navy-950 text-sm sm:text-base md:text-lg tracking-tight leading-tight group-hover:text-emerald-800 transition-colors truncate">ALM CONTROL</span>
           <span class="text-[8px] sm:text-[9.5px] md:text-[10px] text-emerald-900 font-extrabold tracking-wider uppercase mt-0.5 leading-tight truncate">LICENCIA SANITARIA COFEPRIS</span>
@@ -786,7 +786,7 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           
           <!-- Columna 1 (Extremo Izquierdo): Tarjeta Video Silos -->
-          <div id="open-video-btn-silos-card" class="group relative aspect-square overflow-hidden rounded-2xl shadow-md cursor-pointer border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
+          <div id="open-video-btn-silos-card" class="gallery-media-card group relative aspect-square overflow-hidden rounded-2xl shadow-md cursor-pointer border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1" data-type="video" data-key="silos" data-title="Demostración Técnica: Fitosanidad y Control en Silos de Granos">
             <img alt="Servicio Industrial y Silos" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="./img_silos_case.jpg"/>
             <div class="absolute inset-0 bg-primary/40 opacity-85 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-2 text-center">
               <span class="material-symbols-outlined text-white text-4xl mb-1 drop-shadow-md">play_circle</span>
@@ -795,31 +795,34 @@
           </div>
 
           <!-- Columna 2: Sustitución A (Fachada Exterior Verde Oliva) -->
-          <div class="group relative aspect-square overflow-hidden rounded-2xl shadow-md border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
+          <div class="gallery-media-card group relative aspect-square overflow-hidden rounded-2xl shadow-md cursor-pointer border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1" data-type="image" data-src="./galeria_fachada_oliva.jpg" data-title="Fumigación y Tratamiento Perimetral en Fachadas Exteriores">
             <img alt="Fumigación de Fachadas y Exteriores ALM" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" src="./galeria_fachada_oliva.jpg"/>
-            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-3 bg-gradient-to-t from-navy-950/80 to-transparent">
+            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-between p-3 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent">
+              <span class="material-symbols-outlined text-white text-3xl mt-auto mb-1 drop-shadow">zoom_in</span>
               <span class="text-white text-[11px] font-bold leading-tight">Exteriores &amp; Perímetros</span>
             </div>
           </div>
 
           <!-- Columna 3 (Centro): Sustitución B (Desinfección Interior de Autobús) -->
-          <div class="group relative aspect-square overflow-hidden rounded-2xl shadow-md border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
+          <div class="gallery-media-card group relative aspect-square overflow-hidden rounded-2xl shadow-md cursor-pointer border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1" data-type="image" data-src="./galeria_autobus.jpg" data-title="Desinfección y Control de Plagas en Flotillas de Transporte de Pasajeros">
             <img alt="Desinfección de Transporte Público ALM" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" src="./galeria_autobus.jpg"/>
-            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-3 bg-gradient-to-t from-navy-950/80 to-transparent">
+            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-between p-3 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent">
+              <span class="material-symbols-outlined text-white text-3xl mt-auto mb-1 drop-shadow">zoom_in</span>
               <span class="text-white text-[11px] font-bold leading-tight">Transporte de Pasajeros</span>
             </div>
           </div>
 
           <!-- Columna 4: Sustitución C (Aplicación en Sala de Espera Naranja) -->
-          <div class="group relative aspect-square overflow-hidden rounded-2xl shadow-md border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
+          <div class="gallery-media-card group relative aspect-square overflow-hidden rounded-2xl shadow-md cursor-pointer border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1" data-type="image" data-src="./galeria_sala_naranja.jpg" data-title="Sanitización y Control de Vectores en Salas de Espera e Interiores Comerciales">
             <img alt="Tratamiento en Interiores Comerciales ALM" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" src="./galeria_sala_naranja.jpg"/>
-            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-3 bg-gradient-to-t from-navy-950/80 to-transparent">
+            <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-between p-3 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent">
+              <span class="material-symbols-outlined text-white text-3xl mt-auto mb-1 drop-shadow">zoom_in</span>
               <span class="text-white text-[11px] font-bold leading-tight">Interiores &amp; Oficinas</span>
             </div>
           </div>
 
           <!-- Columna 5 (Extremo Derecho): Tarjeta Video Pipas -->
-          <div id="open-video-btn-pipas-card" class="group relative aspect-square overflow-hidden rounded-2xl shadow-md cursor-pointer border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1">
+          <div id="open-video-btn-pipas-card" class="gallery-media-card group relative aspect-square overflow-hidden rounded-2xl shadow-md cursor-pointer border border-outline-variant/30 transition-transform duration-300 hover:-translate-y-1" data-type="video" data-key="pipas" data-title="Demostración Técnica: Tratamientos Fitosanitarios en Pipas y Tolvas">
             <img alt="Sanitización de Pipas" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="./img_pipas_case.jpg"/>
             <div class="absolute inset-0 bg-primary/40 opacity-85 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-2 text-center">
               <span class="material-symbols-outlined text-white text-4xl mb-1 drop-shadow-md">play_circle</span>
@@ -970,17 +973,8 @@
         <div class="flex flex-col lg:flex-row gap-12 items-center">
           
           <div class="w-full lg:w-1/2">
-            <div class="relative">
-              <img class="rounded-3xl shadow-2xl w-full aspect-square object-cover max-h-[480px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbM_PTEc-nBzmJiHgpcQGc3gp4Ocwna7p9PgZUOB5xlNTw8PDKxf_VVgERenihDZsizLgapoceIiAbOwqNP0CzT4G_5WUCrH1IPgA8IkgBNtMA2MgcPw9iVmFva74PJTUgTUqey2rL7NoH63BMmZoYZDn52g6o7zAqa23rsIR6l_V1oE-HJ6LsVVlNNeJ2zeJ81BQnn05QnZA3ogk-NOutA_rTA6FkioQR4lzt7rYWBS871Jwx8EGlXg" alt="Inspección Profesional ALM"/>
-              <div class="absolute bottom-2 left-2 sm:-bottom-6 sm:-left-6 bg-white p-3 sm:p-5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 sm:gap-4 max-w-[calc(100%-1rem)] sm:max-w-none">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-secondary-container/40 rounded-full flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-secondary text-xl sm:text-2xl">verified_user</span>
-                </div>
-                <div>
-                  <p class="font-bold text-primary text-xs sm:text-sm">Servicio Certificado</p>
-                  <p class="text-[10px] sm:text-[11px] text-on-surface-variant">Licencia Sanitaria COFEPRIS</p>
-                </div>
-              </div>
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-outline-variant/30 group max-h-[520px]">
+              <img class="rounded-3xl shadow-2xl w-full aspect-[4/5] sm:aspect-square object-cover object-center max-h-[520px] transition-transform duration-700 group-hover:scale-105" src="./form_fumigacion_escalera.jpg" alt="Técnico Especialista en Fumigación y Tratamiento Fitosanitario en Altura ALM" loading="lazy"/>
             </div>
           </div>
 
@@ -1214,38 +1208,45 @@
     </a>
   </div>
 
-  <!-- Video Lightbox Modal -->
-  <div id="video-modal" role="dialog" aria-modal="true" aria-label="Reproductor de Video de Demostración ALM" class="fixed inset-0 z-50 hidden items-center justify-center bg-primary/95 backdrop-blur-md p-4 transition-all duration-300">
-    <div class="relative w-full max-w-4xl bg-primary-container rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex flex-col max-h-[90vh]">
+  <!-- Media Lightbox Modal (React-Style Video Player & Photo Zoom) -->
+  <div id="video-modal" role="dialog" aria-modal="true" aria-label="Visor Multimedia de Demostraciones y Operaciones ALM" class="fixed inset-0 z-50 hidden items-center justify-center bg-navy-950/90 backdrop-blur-xl p-3 sm:p-6 transition-all duration-300">
+    <div class="relative w-full max-w-4xl bg-navy-900 rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex flex-col max-h-[92vh]">
       
-      <div class="p-4 sm:p-5 bg-primary border-b border-white/10 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <span class="bg-accent-orange text-white text-xs font-bold px-3 py-1 rounded-full">Caso en Video ALM</span>
-          <h3 class="text-xs sm:text-sm md:text-base font-bold text-white leading-tight">Demostración Técnica: Fitosanidad y Control en Silos de Granos</h3>
+      <!-- Modal Header -->
+      <div class="p-3.5 sm:p-5 bg-primary border-b border-white/10 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <span id="modal-media-badge" class="bg-accent-orange text-white text-[10px] sm:text-xs font-extrabold px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wider shrink-0 shadow">Caso en Video ALM</span>
+          <h3 id="modal-media-title" class="text-xs sm:text-sm md:text-base font-bold text-white leading-tight truncate">Demostración Técnica: Fitosanidad y Control en Silos de Granos</h3>
         </div>
-        <button id="close-video-btn" type="button" class="text-slate-300 hover:text-white bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1 border border-white/10">
-          <span>✕</span>
-          <span>Cerrar Video</span>
+        <button id="close-video-btn" type="button" class="text-slate-300 hover:text-white bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 border border-white/15 shrink-0">
+          <span class="text-sm font-bold">✕</span>
+          <span class="hidden sm:inline">Cerrar</span>
         </button>
       </div>
 
-      <div class="relative bg-black flex-1 flex items-center justify-center overflow-hidden">
-        <video id="vlog-player" class="w-full max-h-[65vh] object-contain rounded-xl" controls playsinline webkit-playsinline preload="metadata">
+      <!-- Modal Content Body -->
+      <div class="relative bg-black flex-1 flex items-center justify-center overflow-hidden min-h-[260px] sm:min-h-[380px] max-h-[70vh]">
+        <!-- Video Player View -->
+        <video id="vlog-player" class="w-full max-h-[70vh] object-contain rounded-xl" controls playsinline webkit-playsinline preload="metadata">
           <source src="./videos/video_silos.mp4" type="video/mp4">
           Tu navegador no soporta el formato de video HTML5.
         </video>
+
+        <!-- Photo Viewer View -->
+        <img id="lightbox-photo-player" class="hidden w-full max-h-[70vh] object-contain rounded-xl p-2 select-none" src="" alt="Fotografía de Operación en Campo ALM"/>
       </div>
 
-      <div class="p-4 bg-primary border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
-        <p class="text-white/90">
-          ¿Requieres fumigación o desgasificación en tus silos o bodegas?
+      <!-- Modal Footer -->
+      <div class="p-3.5 sm:p-4 bg-primary border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <p id="modal-media-caption" class="text-white/90 text-[11px] sm:text-xs">
+          ¿Requieres fumigación o desgasificación profesional en tus instalaciones?
         </p>
         <div class="flex items-center gap-2">
-          <a href="#cotizacion" id="video-modal-cta" class="bg-accent-orange hover:bg-accent-orange-hover text-white font-bold px-4 py-2 rounded-xl transition-all">
+          <a href="#cotizacion" id="video-modal-cta" class="bg-accent-orange hover:bg-accent-orange-hover text-white font-bold px-4 py-2 rounded-xl transition-all shadow text-xs whitespace-nowrap">
             Solicitar Cotización 5% OFF
           </a>
-          <button id="close-video-btn-bottom" type="button" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-4 py-2 rounded-xl transition-colors">
-            Seguir viendo la página
+          <button id="close-video-btn-bottom" type="button" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-3 sm:px-4 py-2 rounded-xl transition-colors text-xs whitespace-nowrap">
+            Continuar
           </button>
         </div>
       </div>
