@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%" aria-label="ALM Manejo de Plagas y Fumigaciones Fitosanitarias">
+  <defs>
+    <!-- Leaf Green Gradient -->
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="60%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </linearGradient>
+
+    <!-- Shield Blue Gradient -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#29B6F6"/>
+      <stop offset="50%" stop-color="#0288D1"/>
+      <stop offset="100%" stop-color="#01579B"/>
+    </linearGradient>
+
+    <!-- Canister Orange Gradient -->
+    <linearGradient id="canisterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9800"/>
+      <stop offset="60%" stop-color="#F57C00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+
+    <!-- Metallic Highlight -->
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CFD8DC"/>
+      <stop offset="50%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#B0BEC5"/>
+    </linearGradient>
+
+    <!-- Soft Drop Shadow -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softGlow)" transform="translate(0, -10)">
+    <!-- Central Shield Base (Blue) -->
+    <path d="M 250 85 C 290 85 340 100 350 145 C 350 235 295 295 250 325 C 205 295 150 235 150 145 C 160 100 210 85 250 85 Z" fill="url(#shieldGrad)"/>
+    
+    <!-- Water / Purity Droplet Inside Shield -->
+    <path d="M 250 155 C 250 155 228 190 228 215 C 228 227 238 237 250 237 C 262 237 272 227 272 215 C 272 190 250 155 250 155 Z" fill="#FFFFFF" opacity="0.95"/>
+
+    <!-- Left Organic Leaf (Green) -->
+    <path d="M 235 110 C 150 130 115 220 160 300 C 190 320 230 315 240 280 C 255 220 240 160 235 110 Z" fill="url(#leafGrad)"/>
+    <!-- Leaf Spine & Veins -->
+    <path d="M 235 115 Q 190 220 165 295" stroke="#A5D6A7" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <path d="M 205 185 Q 165 195 150 210" stroke="#A5D6A7" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M 190 235 Q 155 250 145 265" stroke="#A5D6A7" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- Right Pressurized Canister (Orange) -->
+    <!-- Canister Body -->
+    <rect x="315" y="160" width="60" height="120" rx="20" fill="url(#canisterGrad)"/>
+    <!-- Canister Metal Dome & Valve -->
+    <path d="M 330 160 C 330 145 360 145 360 160 Z" fill="url(#metalGrad)"/>
+    <rect x="340" y="125" width="10" height="22" rx="3" fill="url(#metalGrad)"/>
+    <path d="M 335 125 L 355 125 L 360 115 L 330 115 Z" fill="#78909C"/>
+    <!-- Nozzle Wand & Spray Lance -->
+    <path d="M 350 115 Q 365 95 385 85 L 390 92" stroke="#ECEFF1" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+    <!-- Emblem Highlights and Gloss Curves -->
+    <path d="M 250 95 C 280 95 320 108 335 140 C 315 130 280 125 250 125 Z" fill="#FFFFFF" opacity="0.25"/>
+    <path d="M 322 175 L 322 265" stroke="#FFE082" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <!-- Typography ALM -->
+  <text x="250" y="420" font-family="'Outfit', 'Inter', 'Segoe UI', sans-serif" font-size="76" font-weight="900" text-anchor="middle" fill="#081129" letter-spacing="4px">
+    ALM
+  </text>
+</svg>
