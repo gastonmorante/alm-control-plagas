@@ -123,11 +123,11 @@
       -webkit-backdrop-filter: blur(12px);
     }
     .hero-gradient {
-      background: linear-gradient(90deg, rgba(0, 52, 43, 0.96) 0%, rgba(0, 52, 43, 0.8) 50%, rgba(0, 52, 43, 0.2) 100%);
+      background: linear-gradient(90deg, rgba(0, 38, 30, 0.94) 0%, rgba(0, 48, 38, 0.82) 48%, rgba(0, 48, 38, 0.45) 80%, rgba(0, 48, 38, 0.25) 100%);
     }
     @media (max-width: 768px) {
       .hero-gradient {
-        background: linear-gradient(180deg, rgba(0, 52, 43, 0.97) 0%, rgba(0, 52, 43, 0.75) 100%);
+        background: linear-gradient(180deg, rgba(0, 38, 30, 0.95) 0%, rgba(0, 48, 38, 0.75) 60%, rgba(0, 48, 38, 0.45) 100%);
       }
     }
     .problem-card {
@@ -299,25 +299,25 @@
 
   <main class="w-full max-w-full overflow-x-hidden">
     <!-- Hero Section -->
-    <section id="inicio" class="relative w-full min-h-[88vh] flex items-center overflow-hidden bg-primary text-white">
+    <section id="inicio" class="relative w-full min-h-[85vh] flex items-center overflow-hidden bg-primary text-white">
       <div class="absolute inset-0 z-0">
-        <img class="w-full h-full object-cover object-center opacity-25 filter brightness-90" src="./hero_fumigacion_alm.jpg" alt="Fumigación Profesional ALM" fetchpriority="high" loading="eager"/>
+        <img class="w-full h-full object-cover object-center sm:object-[center_35%] opacity-80 filter brightness-105 contrast-105" src="./hero_fumigacion_alm.jpg" alt="Fumigación Profesional y Control de Plagas ALM" fetchpriority="high" loading="eager"/>
         <div class="absolute inset-0 hero-gradient"></div>
       </div>
 
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         
-        <div class="md:col-span-7 space-y-6">
+        <div class="max-w-3xl lg:max-w-4xl space-y-6">
           <div class="inline-flex gap-3 items-center px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
             <span class="text-white font-extrabold text-xs tracking-wider uppercase">COFEPRIS &amp; SENASICA</span>
             <span class="text-white/90 font-bold text-xs">LICENCIA SANITARIA COFEPRIS</span>
           </div>
 
-          <h1 class="font-heading text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight uppercase tracking-tight">
+          <h1 class="font-heading text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight uppercase tracking-tight drop-shadow-md">
             PROFESIONALES EN CONTROL INTEGRAL DE PLAGAS URBANAS
           </h1>
 
-          <p class="text-white/90 text-xs sm:text-sm md:text-base max-w-xl leading-relaxed text-justify hyphens-auto font-normal">
+          <p class="text-white/95 text-xs sm:text-sm md:text-base max-w-2xl leading-relaxed text-justify hyphens-auto font-normal drop-shadow-sm">
             Eliminamos todo tipo de plagas urbanas de manera oportuna, eficaz y segura, ofreciendo servicios de control contra roedores, insectos rastreros, voladores, murciélagos, palomas, reptiles, reubicación de enjambres de abejas y servicios afines para: casas habitación, establecimientos comerciales, hoteles, restaurantes, oficinas, escuelas, industrias, almacenes, hospitales, instituciones, gobierno y transporte de carga y pasajeros. Personal Certificado y Garantía por escrito.
           </p>
 
@@ -326,45 +326,39 @@
               <span>SOLICITAR COTIZACIÓN</span>
               <span class="material-symbols-outlined">arrow_forward</span>
             </a>
-            <a href="https://wa.me/522711528442?text=Hola%20ALM,%20deseo%20agendar%20una%20inspección." target="_blank" class="bg-white/10 backdrop-blur text-white border border-white/30 px-7 py-3.5 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-primary transition-all">
+            <a href="https://wa.me/522711528442?text=Hola%20ALM,%20deseo%20agendar%20una%20inspección." target="_blank" class="bg-white/10 backdrop-blur-md text-white border border-white/30 px-7 py-3.5 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-primary transition-all">
               <span class="material-symbols-outlined">calendar_today</span>
               <span>Agendar Inspección</span>
             </a>
           </div>
 
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-8 border-t border-white/15">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-white/20 max-w-3xl">
             <div class="flex items-center gap-3">
               <div class="w-9 h-9 rounded-full bg-secondary-fixed/20 flex items-center justify-center shrink-0">
                 <span class="material-symbols-outlined text-secondary-fixed text-xl">bolt</span>
               </div>
-              <span class="text-xs font-semibold text-white/90">Atención Inmediata</span>
+              <span class="text-xs font-semibold text-white/95">Atención Inmediata</span>
             </div>
             <div class="flex items-center gap-3">
               <div class="w-9 h-9 rounded-full bg-secondary-fixed/20 flex items-center justify-center shrink-0">
                 <span class="material-symbols-outlined text-secondary-fixed text-xl">eco</span>
               </div>
-              <span class="text-xs font-semibold text-white/90">Uso Urbano COFEPRIS</span>
+              <span class="text-xs font-semibold text-white/95">Uso Urbano COFEPRIS</span>
             </div>
             <div class="flex items-center gap-3">
               <div class="w-9 h-9 rounded-full bg-secondary-fixed/20 flex items-center justify-center shrink-0">
                 <span class="material-symbols-outlined text-secondary-fixed text-xl">assignment_turned_in</span>
               </div>
-              <span class="text-xs font-semibold text-white/90">Garantía Escrita</span>
+              <span class="text-xs font-semibold text-white/95">Garantía Escrita</span>
             </div>
             <div class="flex items-center gap-3">
               <div class="w-9 h-9 rounded-full bg-secondary-fixed/20 flex items-center justify-center shrink-0">
                 <span class="material-symbols-outlined text-secondary-fixed text-xl">verified</span>
               </div>
-              <span class="text-xs font-semibold text-white/90">Licencia Sanitaria</span>
+              <span class="text-xs font-semibold text-white/95">Licencia Sanitaria</span>
             </div>
           </div>
 
-        </div>
-
-        <div class="md:col-span-5 hidden md:block">
-          <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 ring-1 ring-white/30 group max-h-[490px]">
-            <img class="w-full h-full object-cover object-center max-h-[490px] transition-transform duration-700 group-hover:scale-105" src="./hero_fumigacion_alm.jpg" alt="Técnico Certificado ALM en Desinfección y Control de Plagas" fetchpriority="high" loading="eager"/>
-          </div>
         </div>
 
       </div>
