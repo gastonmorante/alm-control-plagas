@@ -61,6 +61,7 @@ export function initLogoRevealIntro() {
     animationFrameId = requestAnimationFrame(renderParticles);
   }
 
+  document.body.classList.add('intro-active');
   renderParticles();
 
   // Exactly 2.0s after intro begins, smoothly reveal the logo
@@ -75,12 +76,17 @@ export function initLogoRevealIntro() {
     if (isDismissed) return;
     isDismissed = true;
     clearTimeout(revealTimer);
+    
+    // Smooth opacity cross-fade transition to the main website
+    document.body.classList.remove('intro-active');
+    document.body.classList.add('intro-complete');
+
     overlay.style.pointerEvents = 'none';
     overlay.classList.add('fade-out');
     setTimeout(() => {
       overlay.style.display = 'none';
       cancelAnimationFrame(animationFrameId);
-    }, 900);
+    }, 1300);
   }
 
   // Allow immediate skip on click, touch or escape key
@@ -89,6 +95,6 @@ export function initLogoRevealIntro() {
     if (e.key === 'Escape' || e.key === ' ') dismissIntro();
   }, { once: true });
 
-  // Total presentation timing: logo reveals at 2.0s, full appreciation until 5.5s, then smooth fade-out
-  setTimeout(dismissIntro, 5500);
+  // Total presentation timing: logo reveals at 2.0s, centered appreciation until 5.2s, then smooth opacity transition to page
+  setTimeout(dismissIntro, 5200);
 }
