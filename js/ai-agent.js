@@ -119,8 +119,8 @@
 
     msgDiv.innerHTML = `
       <div class="flex items-start gap-2 max-w-[90%]">
-        <div class="w-7 h-7 rounded-full bg-navy-900 text-accent-green flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5 border border-accent-green/30">
-          ALM
+        <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center p-0.5 flex-shrink-0 mt-0.5 border border-slate-200 shadow-sm">
+          <img src="./isologo_transparent.png" class="w-full h-full object-contain" alt="ALM">
         </div>
         <div class="bg-white text-slate-800 rounded-2xl rounded-tl-none px-4 py-3 text-sm shadow-sm border border-slate-100">
           <p class="whitespace-pre-line">${escapeHtml(text)}</p>
@@ -142,7 +142,9 @@
     typingDiv.className = 'flex justify-start mb-3';
     typingDiv.innerHTML = `
       <div class="flex items-center gap-2">
-        <div class="w-7 h-7 rounded-full bg-navy-900 text-accent-green flex items-center justify-center font-bold text-xs border border-accent-green/30">ALM</div>
+        <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center p-0.5 flex-shrink-0 border border-slate-200 shadow-sm">
+          <img src="./isologo_transparent.png" class="w-full h-full object-contain" alt="ALM">
+        </div>
         <div class="bg-slate-100 rounded-full px-4 py-2 flex items-center gap-1.5">
           <span class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></span>
           <span class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></span>

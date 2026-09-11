@@ -44,7 +44,7 @@ def points_to_smooth_path(pts, tension=1.0/6.0):
     d.append('Z')
     return ' '.join(d)
 
-def trace_cycles(mask, min_len=12):
+def trace_cycles(mask, min_len=25):
     h, w = mask.shape
     edges = set()
     for y in range(h):
@@ -83,7 +83,7 @@ def build_vector_and_raster():
     arr = np.array(img, dtype=np.float32)
     h, w, _ = arr.shape
 
-    # Contrast & Color Optimization
+    # Color & Contrast Enhancement
     rgb_pil = img.convert('RGB')
     enh_color = ImageEnhance.Color(rgb_pil).enhance(1.18)
     enh_contrast = ImageEnhance.Contrast(enh_color).enhance(1.10)
@@ -107,7 +107,7 @@ def build_vector_and_raster():
                 visited[y, x] = True
                 q.append((y, x))
 
-    # Seeds for interior open spaces: handle loop, hose loop, 'A' hole
+    # Seeds for interior open cavities: handle loop, hose loop, 'A' hole
     for sy, sx in [(175, 725), (424, 773), (600, 352)]:
         if dist_white[sy, sx] < 32 and not visited[sy, sx]:
             visited[sy, sx] = True
@@ -134,62 +134,65 @@ def build_vector_and_raster():
     debleed = (result[:, :, :3] - (1.0 - a_norm) * 254.0) / a_norm
     result[:, :, :3] = np.clip(debleed, 0.0, 255.0)
 
-    # Master 1024x1024 canvas
-    master = Image.new('RGBA', (1024, 1024), (0, 0, 0, 0))
-    y_off = (1024 - h) // 2
-    x_off = (1024 - w) // 2
-    fg = Image.fromarray(result.astype(np.uint8))
-    master.paste(fg, (x_off, y_off), fg)
+    # Tight crop: bounds are x: 245 to 845, y: 94 to 678 (600w x 584h)
+    crop_x1, crop_y1 = 245, 94
+    crop_x2, crop_y2 = 845, 679
+    W_view = crop_x2 - crop_x1 # 600
+    H_view = crop_y2 - crop_y1 # 585
 
-    # Isologo (emblem only, text erased)
-    arr_master = np.array(master)
-    isologo_arr = arr_master.copy()
-    isologo_arr[520 + y_off:, :, 3] = 0
-    isologo = Image.fromarray(isologo_arr)
+    fg_full = Image.fromarray(result.astype(np.uint8))
+    fg_tight = fg_full.crop((crop_x1, crop_y1, crop_x2, crop_y2))
 
-    m_alpha = arr_master[:, :, 3]
-    H, W = 1024, 1024
+    arr_tight = np.array(fg_tight)
+    t_alpha = arr_tight[:, :, 3]
+    H, W = H_view, W_view
 
-    # 1. Leaf Body (x < 525, y 250..600)
-    is_leaf = (m_alpha > 140) & (np.arange(W)[None, :] < 525) & (np.arange(H)[:, None] >= 250) & (np.arange(H)[:, None] <= 600) & (arr_master[:, :, 1] > arr_master[:, :, 0] + 5) & (arr_master[:, :, 1] > arr_master[:, :, 2] + 5)
-    leaf_cycles = trace_cycles(is_leaf, min_len=20)
+    # 1. Leaf Body (x < 280, y < 420)
+    is_leaf = (t_alpha > 140) & (np.arange(W)[None, :] < 280) & (np.arange(H)[:, None] < 420) & \
+              (arr_tight[:, :, 1] > arr_tight[:, :, 0] + 5) & (arr_tight[:, :, 1] > arr_tight[:, :, 2] + 5)
+    leaf_cycles = trace_cycles(is_leaf, min_len=30)
     leaf_paths = [points_to_smooth_path(rdp(c + [c[0]], 1.8), tension=0.15) for c in leaf_cycles]
 
     # 2. Leaf Veins (within leaf area, brightness > 200)
-    is_leaf_area = (m_alpha > 140) & (np.arange(W)[None, :] < 525) & (np.arange(H)[:, None] >= 250) & (np.arange(H)[:, None] <= 600)
-    is_vein = is_leaf_area & (arr_master[:, :, :3].mean(axis=-1) > 200)
-    vein_cycles = trace_cycles(is_vein, min_len=8)
+    is_vein = (t_alpha > 140) & (np.arange(W)[None, :] < 280) & (np.arange(H)[:, None] < 420) & (arr_tight[:, :, :3].mean(axis=-1) > 200)
+    vein_cycles = trace_cycles(is_vein, min_len=15)
     vein_paths = [points_to_smooth_path(rdp(c + [c[0]], 1.0), tension=0.12) for c in vein_cycles]
 
-    # 3. Sprayer (x > 520, y 250..665)
-    is_sprayer = (m_alpha > 140) & (np.arange(W)[None, :] > 520) & (np.arange(H)[:, None] >= 250) & (np.arange(H)[:, None] <= 665) & (arr_master[:, :, 0] > 175) & (arr_master[:, :, 1] < 160) & (arr_master[:, :, 2] < 80)
-    sprayer_cycles = trace_cycles(is_sprayer, min_len=15)
+    # 3. Sprayer (x > 270, y < 450)
+    is_sprayer = (t_alpha > 140) & (np.arange(W)[None, :] > 270) & (np.arange(H)[:, None] < 450) & \
+                 (arr_tight[:, :, 0] > 175) & (arr_tight[:, :, 1] < 160) & (arr_tight[:, :, 2] < 80)
+    sprayer_cycles = trace_cycles(is_sprayer, min_len=25)
     sprayer_paths = [points_to_smooth_path(rdp(c + [c[0]], 1.5), tension=0.14) for c in sprayer_cycles]
 
     # 4. Pressure Gauge Face (within sprayer upper shoulder)
-    is_gauge = (m_alpha > 140) & (np.arange(W)[None, :] >= 660) & (np.arange(W)[None, :] <= 720) & (np.arange(H)[:, None] >= 340) & (np.arange(H)[:, None] <= 410) & (arr_master[:, :, :3].mean(axis=-1) > 200)
-    gauge_cycles = trace_cycles(is_gauge, min_len=8)
+    is_gauge = (t_alpha > 140) & (np.arange(W)[None, :] >= 410) & (np.arange(W)[None, :] <= 475) & \
+               (np.arange(H)[:, None] >= 110) & (np.arange(H)[:, None] <= 180) & (arr_tight[:, :, :3].mean(axis=-1) > 200)
+    gauge_cycles = trace_cycles(is_gauge, min_len=12)
     gauge_paths = [points_to_smooth_path(rdp(c + [c[0]], 1.0), tension=0.15) for c in gauge_cycles]
 
-    # 5. Droplet (x 445..570, y 270..460)
-    is_droplet = (m_alpha > 140) & (np.arange(W)[None, :] >= 445) & (np.arange(W)[None, :] <= 570) & (np.arange(H)[:, None] >= 270) & (np.arange(H)[:, None] <= 460) & ((arr_master[:, :, 0] >= 40) | (arr_master[:, :, 1] >= 75)) & (arr_master[:, :, 2] >= 120)
-    drop_cycles = trace_cycles(is_droplet, min_len=20)
+    # 5. Droplet (x 195..325, y 50..250)
+    is_droplet = (t_alpha > 140) & (np.arange(W)[None, :] >= 195) & (np.arange(W)[None, :] <= 325) & \
+                 (np.arange(H)[:, None] >= 50) & (np.arange(H)[:, None] <= 250) & \
+                 ((arr_tight[:, :, 0] >= 40) | (arr_tight[:, :, 1] >= 75)) & (arr_tight[:, :, 2] >= 120)
+    drop_cycles = trace_cycles(is_droplet, min_len=25)
     drop_paths = [points_to_smooth_path(rdp(c + [c[0]], 1.5), tension=0.15) for c in drop_cycles]
 
     # Droplet Specular Highlight
-    is_drop_area = (m_alpha > 140) & (np.arange(W)[None, :] >= 445) & (np.arange(W)[None, :] <= 570) & (np.arange(H)[:, None] >= 270) & (np.arange(H)[:, None] <= 460)
-    is_hl = is_drop_area & (arr_master[:, :, :3].mean(axis=-1) > 200)
-    hl_cycles = trace_cycles(is_hl, min_len=8)
+    is_hl = (t_alpha > 140) & (np.arange(W)[None, :] >= 200) & (np.arange(W)[None, :] <= 275) & \
+            (np.arange(H)[:, None] >= 60) & (np.arange(H)[:, None] <= 170) & (arr_tight[:, :, :3].mean(axis=-1) > 200)
+    hl_cycles = trace_cycles(is_hl, min_len=10)
     hl_paths = [points_to_smooth_path(rdp(c + [c[0]], 1.0), tension=0.12) for c in hl_cycles]
 
-    # 6. Shield (x 350..665, y 220..660, navy, excluding leaf and droplet)
-    is_shield = (m_alpha > 140) & (np.arange(W)[None, :] >= 350) & (np.arange(W)[None, :] <= 665) & (np.arange(H)[:, None] >= 220) & (np.arange(H)[:, None] < 660) & (arr_master[:, :, :3].mean(axis=-1) < 115) & (arr_master[:, :, 2] >= arr_master[:, :, 0] - 5) & (~is_leaf)
+    # 6. Shield (x 100..420, y 0..420, navy, excluding leaf and droplet)
+    is_shield = (t_alpha > 140) & (np.arange(W)[None, :] >= 100) & (np.arange(W)[None, :] <= 420) & \
+                (np.arange(H)[:, None] < 430) & (arr_tight[:, :, :3].mean(axis=-1) < 115) & \
+                (arr_tight[:, :, 2] >= arr_tight[:, :, 0] - 5) & (~is_leaf)
     shield_cycles = trace_cycles(is_shield, min_len=25)
     shield_paths = [points_to_smooth_path(rdp(c + [c[0]], 2.0), tension=0.15) for c in shield_cycles]
 
-    # 7. Typography ALM (y >= 660)
-    is_text = (m_alpha > 140) & (np.arange(H)[:, None] >= 660) & (arr_master[:, :, :3].mean(axis=-1) < 90)
-    text_cycles = trace_cycles(is_text, min_len=20)
+    # 7. Typography ALM (y >= 430)
+    is_text = (t_alpha > 140) & (np.arange(H)[:, None] >= 430) & (arr_tight[:, :, :3].mean(axis=-1) < 90)
+    text_cycles = trace_cycles(is_text, min_len=25)
     text_paths = [points_to_smooth_path(rdp(c + [c[0]], 1.4), tension=0.10) for c in text_cycles]
 
     shield_svg = "\n    ".join(f'<path d="{p}" fill-rule="evenodd"/>' for p in shield_paths)
@@ -201,7 +204,7 @@ def build_vector_and_raster():
     gauge_svg = "\n    ".join(f'<path d="{p}"/>' for p in gauge_paths)
     text_svg = "\n    ".join(f'<path d="{p}" fill-rule="evenodd"/>' for p in text_paths)
 
-    svg_content = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%" aria-label="ALM Manejo de Plagas y Fumigaciones Fitosanitarias">
+    svg_content = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W_view} {H_view}" width="100%" height="100%" aria-label="ALM Manejo de Plagas y Fumigaciones Fitosanitarias">
   <defs>
     <!-- Deep Navy Shield Gradient -->
     <linearGradient id="almShieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -234,7 +237,7 @@ def build_vector_and_raster():
 
     <!-- Soft Ambient Elevation Filter -->
     <filter id="almShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.12"/>
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000000" flood-opacity="0.12"/>
     </filter>
   </defs>
 
@@ -281,34 +284,37 @@ def build_vector_and_raster():
         f.write(svg_content)
     with open('assets/logos/logo_alm.svg', 'w', encoding='utf-8') as f:
         f.write(svg_content)
-    print('Vector SVG generated successfully!')
+    print('Vector SVG generated with tight viewBox: logo_alm.svg & assets/logos/logo_alm.svg')
 
-    # 1. logo_transparent.png
-    master.save('logo_transparent.png', 'PNG', optimize=True)
-    master.save('assets/logos/logo_transparent.png', 'PNG', optimize=True)
+    # Save tight transparent PNGs (perfectamente recortados sin margen vacío)
+    # 1. Master tight transparent PNG
+    fg_tight.save('logo_transparent.png', 'PNG', optimize=True)
+    fg_tight.save('assets/logos/logo_transparent.png', 'PNG', optimize=True)
 
-    # 2. logo_alm_intro.png (500x500 version for splash screen)
-    intro_img = master.resize((500, 500), Image.Resampling.LANCZOS)
-    intro_img.save('logo_alm_intro.png', 'PNG', optimize=True)
-    intro_img.save('assets/logos/logo_alm_intro.png', 'PNG', optimize=True)
+    # 2. Intro splash PNG (high res)
+    fg_tight.save('logo_alm_intro.png', 'PNG', optimize=True)
+    fg_tight.save('assets/logos/logo_alm_intro.png', 'PNG', optimize=True)
 
-    # 3. logo_alm_main.png
-    master.save('logo_alm_main.png', 'PNG', optimize=True)
-    master.save('assets/logos/logo_alm_main.png', 'PNG', optimize=True)
+    # 3. Main logo
+    fg_tight.save('logo_alm_main.png', 'PNG', optimize=True)
+    fg_tight.save('assets/logos/logo_alm_main.png', 'PNG', optimize=True)
 
-    # 4. isologo_transparent.png
-    isologo.save('isologo_transparent.png', 'PNG', optimize=True)
-    isologo.save('assets/logos/isologo_transparent.png', 'PNG', optimize=True)
+    # 4. Isologo (tight emblem without text)
+    arr_tight_iso = arr_tight.copy()
+    arr_tight_iso[430:, :, 3] = 0 # erase text
+    # Crop to non-transparent pixels
+    y_iso, x_iso = np.where(arr_tight_iso[:, :, 3] > 20)
+    iso_tight = Image.fromarray(arr_tight_iso).crop((x_iso.min(), y_iso.min(), x_iso.max()+1, y_iso.max()+1))
+    iso_tight.save('isologo_transparent.png', 'PNG', optimize=True)
+    iso_tight.save('assets/logos/isologo_transparent.png', 'PNG', optimize=True)
 
-    # 5. isologo.png (with white background for compatibility)
-    isologo_white = Image.new('RGB', (1024, 1024), (255, 255, 255))
-    isologo_white.paste(isologo, (0, 0), isologo)
-    isologo_white.save('isologo.png', 'PNG', optimize=True)
-    isologo_white.save('assets/logos/isologo.png', 'PNG', optimize=True)
+    iso_white = Image.new('RGB', iso_tight.size, (255, 255, 255))
+    iso_white.paste(iso_tight, (0, 0), iso_tight)
+    iso_white.save('isologo.png', 'PNG', optimize=True)
+    iso_white.save('assets/logos/isologo.png', 'PNG', optimize=True)
 
-    # 6. aml logo.png
-    master.save('aml logo.png', 'PNG', optimize=True)
-    print('All raster and vector files updated!')
+    fg_tight.save('aml logo.png', 'PNG', optimize=True)
+    print('All tight transparent raster assets saved successfully!')
 
 if __name__ == '__main__':
     build_vector_and_raster()
