@@ -67,7 +67,7 @@ export function initLeadForm() {
       `;
     } finally {
       submitBtn.disabled = false;
-      btnText.textContent = 'SOLICITAR COTIZACIÓN CON 5% OFF';
+      btnText.textContent = 'SOLICITAR COTIZACIÓN CON 5% DE DESCUENTO';
       btnSpinner.classList.add('hidden');
     }
   });
