@@ -7,3 +7,7 @@ Thumbs.db
 # Archivos de respaldo o datos sensibles
 .env
 .env.local
+
+# Archivos multimedia crudos locales
+Fotos contenido/
+logos/
