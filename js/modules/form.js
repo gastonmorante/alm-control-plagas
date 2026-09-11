@@ -35,17 +35,33 @@ export function initLeadForm() {
     };
 
     const GAS_WEBAPP_URL = window.ALM_GAS_ENDPOINT || '';
+    const GHL_WEBHOOK_URL = window.ALM_GHL_WEBHOOK_URL || window.GHL_WEBHOOK_URL || '';
 
     try {
+      const promises = [];
+
       if (GAS_WEBAPP_URL && GAS_WEBAPP_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL') {
-        await fetch(GAS_WEBAPP_URL, {
+        promises.push(fetch(GAS_WEBAPP_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
-        });
+        }));
+      }
+
+      if (GHL_WEBHOOK_URL) {
+        promises.push(fetch(GHL_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).catch(err => console.warn('GHL form dispatch notification:', err)));
+      }
+
+      if (promises.length > 0) {
+        await Promise.allSettled(promises);
       } else {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 800));
       }
 
       statusAlert.className = 'mt-4 p-4 rounded-xl text-sm font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 block';

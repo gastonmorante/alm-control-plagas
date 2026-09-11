@@ -335,7 +335,7 @@ body.intro-complete main {
   width: max-content;
   align-items: center;
   gap: 3.5rem;
-  animation: logoMarqueeScroll 28s linear infinite;
+  animation: logoMarqueeScroll 38s linear infinite;
   will-change: transform;
 }
 
@@ -348,7 +348,7 @@ body.intro-complete main {
     transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-33.33333%, 0, 0);
   }
 }
 
