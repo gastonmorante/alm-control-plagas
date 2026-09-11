@@ -8,6 +8,7 @@ export function initLogoRevealIntro() {
 
   if (!overlay || !canvas) return;
 
+  const isologoWrapper = overlay.querySelector('.isologo-wrapper');
   const ctx = canvas.getContext('2d');
   let animationFrameId;
   const particles = [];
@@ -62,7 +63,18 @@ export function initLogoRevealIntro() {
 
   renderParticles();
 
+  // Exactly 2.0s after intro begins, smoothly reveal the logo
+  let revealTimer = setTimeout(() => {
+    if (isologoWrapper) {
+      isologoWrapper.classList.add('reveal');
+    }
+  }, 2000);
+
+  let isDismissed = false;
   function dismissIntro() {
+    if (isDismissed) return;
+    isDismissed = true;
+    clearTimeout(revealTimer);
     overlay.style.pointerEvents = 'none';
     overlay.classList.add('fade-out');
     setTimeout(() => {
@@ -71,6 +83,12 @@ export function initLogoRevealIntro() {
     }, 900);
   }
 
-  // Exact 6.0 Seconds Total Presentation (Triggers fade-out at 5.1s)
-  setTimeout(dismissIntro, 5100);
+  // Allow immediate skip on click, touch or escape key
+  overlay.addEventListener('click', dismissIntro);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === ' ') dismissIntro();
+  }, { once: true });
+
+  // Total presentation timing: logo reveals at 2.0s, full appreciation until 5.5s, then smooth fade-out
+  setTimeout(dismissIntro, 5500);
 }
