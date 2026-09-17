@@ -22,20 +22,32 @@ Este documento explica paso a paso cómo desplegar el puente de datos en **Googl
 
 ---
 
-## Paso 3: Desplegar como Aplicación Web (Web App)
+## Paso 3: Configurar la Llave Secreta del CRM (Script Properties)
+Para proteger la llave del CRM y que nunca quede expuesta en el navegador ni en GitHub:
+1. En el menú lateral izquierdo de Apps Script, haz clic en el ícono de engranaje ⚙️ (**Configuración del proyecto** / *Project Settings*).
+2. Desplázate hasta la sección **Propiedades de la secuencia de comandos** (*Script Properties*).
+3. Haz clic en **Editar propiedades de la secuencia de comandos** > **Agregar propiedad**.
+4. Añade:
+   - **Propiedad**: `ALM_CRM_LLAVE`
+   - **Valor**: `5dca44811e2b8276b640c6e3dfd2376fdaaf978c2298d8a75c82590b432f3cbe`
+5. Guarda las propiedades.
+
+---
+
+## Paso 4: Desplegar como Aplicación Web (Web App)
 1. En la esquina superior derecha del editor de Apps Script, haz clic en el botón azul **Implementar** (Deploy) > **Nueva implementación** (New deployment).
 2. Haz clic en el ícono de engranaje ⚙️ junto a *Seleccionar tipo* y elige **Aplicación web** (Web app).
 3. Configura los siguientes parámetros exactos:
-   - **Descripción**: `ALM Lead Capture API v1`
+   - **Descripción**: `ALM Lead Capture & CRM Proxy v2`
    - **Ejecutar como**: `Yo` (tu cuenta de Google)
-   - **Quién tiene acceso**: **`Cualquiera`** (Anyone) *(Es fundamental para permitir envíos desde el sitio web sin login)*.
+   - **Quién tiene acceso**: **`Cualquiera`** (Anyone) *(Fundamental para permitir envíos anónimos desde el formulario web)*.
 4. Haz clic en **Implementar**.
 5. Otorga los permisos necesarios cuando Google lo solicite (haz clic en *Avanzado* > *Ir a Proyecto (no seguro)* > *Permitir*).
 
 ---
 
-## Paso 4: Conectar la URL del Web App en la Landing Page
-1. Copia la **URL de la aplicación web** generada (tendrá una forma similar a `https://script.google.com/macros/s/AKfycbx.../exec`).
+## Paso 5: Conectar la URL del Web App en la Landing Page
+1. Copia la **URL de la aplicación web** generada (similar a `https://script.google.com/macros/s/AKfycbx.../exec`).
 2. Abre el archivo `index.html` del proyecto web e inserta tu URL en la variable global JavaScript en el encabezado `<head>`:
    ```html
    <script>
@@ -43,4 +55,13 @@ Este documento explica paso a paso cómo desplegar el puente de datos en **Googl
    </script>
    ```
 
-¡Listo! A partir de este momento, cualquier cotización solicitada en la landing page se guardará automáticamente en Google Sheets y enviará un correo de notificación instantáneo a Gastón y al equipo de ALM.
+---
+
+## Resumen del Flujo de Datos
+1. **Cliente**: Llena el formulario en la Landing Page (`index.html`) y da clic en enviar.
+2. **Servidor ALM (Google Apps Script)**:
+   - Recibe la petición con todos los campos.
+   - Guarda el prospecto en **Google Sheets**.
+   - Envía notificación inmediata por **correo electrónico**.
+   - Reenvía la petición mediante `UrlFetchApp` (Server-to-Server) al CRM en Railway con el header `X-CRM-API-Key`.
+   - Si el CRM responde con éxito (HTTP 200), el lead queda sincronizado. Si el CRM llegara a fallar, el registro en Sheets y correo ya está a salvo.

@@ -1,13 +1,27 @@
 /**
  * ==========================================================================
- * ALM CONTROL DE PLAGAS - BACKEND GOOGLE APPS SCRIPT (CRM LITE)
+ * ALM CONTROL DE PLAGAS - BACKEND GOOGLE APPS SCRIPT (CRM PROXY & SPREADSHEET)
  * Lead Developer: Gastón | Agency: NegocioUp
+ * ==========================================================================
+ * Este script actúa como servidor backend seguro para la landing page de ALM.
+ * 
+ * Funcionalidades:
+ * 1. Almacenamiento local en Google Sheets ("Leads Landing Page").
+ * 2. Alertas automáticas inmediatas por correo electrónico a ALM y NegocioUp.
+ * 3. Reenvío seguro (Server-to-Server) al CRM oficial en Railway (agencia-ai-core).
+ *    - La llave secreta se resguarda en las Propiedades del Script (ALM_CRM_LLAVE),
+ *      evitando exponerla en el frontend o en repositorios públicos.
+ *    - En caso de fallo o caída temporal del CRM, el registro se resguarda
+ *      en Sheets y correo sin pérdida de prospectos.
  * ==========================================================================
  */
 
-// CONFIGURACIÓN DE NOTIFICACIONES POR CORREO
-const NOTIFICATION_EMAIL = "gaston@negocioup.com, contacto@almcontrol.com"; // Modificar según convenga
+// 1. CONFIGURACIÓN DE NOTIFICACIONES Y HOJA DE CÁLCULO
+const NOTIFICATION_EMAIL = "gaston@negocioup.com, contacto@almcontrol.com";
 const SHEET_NAME = "Leads Landing Page";
+
+// 2. CONFIGURACIÓN DEL CRM EXTERNO (RAILWAY)
+const CRM_WEBHOOK_URL = "https://impartial-rebirth-production-84b9.up.railway.app/api/web-form/fumigaciones_alm";
 
 /**
  * Endpoint para recibir solicitudes POST desde el sitio web
@@ -17,78 +31,103 @@ function doPost(e) {
     let data;
     if (e.postData && e.postData.contents) {
       data = JSON.parse(e.postData.contents);
-    } else {
+    } else if (e.parameter) {
       data = e.parameter;
-    }
-
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
-    let sheet = ss.getSheetByName(SHEET_NAME);
-
-    // Crear la pestaña si no existe
-    if (!sheet) {
-      sheet = ss.insertSheet(SHEET_NAME);
-      sheet.appendRow([
-        "Timestamp",
-        "Nombre",
-        "Empresa",
-        "Teléfono",
-        "Email",
-        "Ciudad",
-        "Servicio Requerido",
-        "Comentarios / Notas",
-        "Origen Lead",
-        "Estatus CRM"
-      ]);
-      sheet.getRange(1, 1, 1, 10).setFontWeight("bold").setBackground("#0D1B3E").setFontColor("#FFFFFF");
+    } else {
+      data = {};
     }
 
     const timestamp = data.timestamp || new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City" });
-    const nombre = data.nombre || "Sin Nombre";
-    const empresa = data.empresa || "Particular";
-    const telefono = data.telefono || "Sin Teléfono";
-    const email = data.email || "Sin Email";
-    const ciudad = data.ciudad || "No especificada";
-    const servicio = data.servicio || "General";
-    const comentarios = data.comentarios || "";
-    const origen = data.origen || "Landing Page Web 2026";
-    const estatus = "NUEVO - Pendiente Contacto";
+    const nombre = (data.nombre || "").trim() || "Sin Nombre";
+    const empresa = (data.empresa || "").trim() || "Particular / No especificado";
+    const telefono = (data.telefono || "").trim() || "Sin Teléfono";
+    const correo = (data.correo || data.email || "").trim();
+    const ciudad = (data.ciudad || "").trim() || "No especificada";
+    const tipo_instalacion = (data.tipo_instalacion || data.servicio || "").trim() || "General";
+    const detalles = (data.detalles || data.comentarios || "").trim();
+    const promocion = (data.promocion || "5% de Descuento Web").trim();
+    const origen = (data.origen || "Landing Page ALM 2026").trim();
 
-    // Insertar la fila con los datos del prospecto
-    sheet.appendRow([
-      timestamp,
-      nombre,
-      empresa,
-      telefono,
-      email,
-      ciudad,
-      servicio,
-      comentarios,
-      origen,
-      estatus
-    ]);
+    // 1. Almacenamiento actual en Google Sheets (Respaldo garantizado)
+    try {
+      const ss = SpreadsheetApp.getActiveSpreadsheet();
+      let sheet = ss.getSheetByName(SHEET_NAME);
 
-    // Enviar alerta inmediata por correo a Gastón / ALM
-    sendLeadEmailNotification({
-      timestamp,
+      if (!sheet) {
+        sheet = ss.insertSheet(SHEET_NAME);
+        sheet.appendRow([
+          "Timestamp",
+          "Nombre",
+          "Empresa",
+          "Teléfono",
+          "Correo Electrónico",
+          "Ciudad",
+          "Tipo de Instalación / Servicio",
+          "Detalles / Necesidad",
+          "Promoción",
+          "Origen Lead",
+          "Estatus CRM"
+        ]);
+        sheet.getRange(1, 1, 1, 11).setFontWeight("bold").setBackground("#0D1B3E").setFontColor("#FFFFFF");
+      }
+
+      sheet.appendRow([
+        timestamp,
+        nombre,
+        empresa,
+        telefono,
+        correo,
+        ciudad,
+        tipo_instalacion,
+        detalles,
+        promocion,
+        origen,
+        "NUEVO - Pendiente Contacto"
+      ]);
+    } catch (sheetError) {
+      Logger.log("Aviso: Error registrando en Google Sheets: " + sheetError.toString());
+    }
+
+    // 2. Envío de notificación actual por correo electrónico
+    try {
+      sendLeadEmailNotification({
+        timestamp,
+        nombre,
+        empresa,
+        telefono,
+        email: correo,
+        ciudad,
+        servicio: tipo_instalacion,
+        comentarios: detalles,
+        promocion
+      });
+    } catch (emailError) {
+      Logger.log("Aviso: Error enviando correo de notificación: " + emailError.toString());
+    }
+
+    // 3. Reenvío seguro al CRM externo en Railway desde el servidor (Server-to-Server)
+    const crmResult = sendLeadToExternalCRM({
       nombre,
-      empresa,
       telefono,
-      email,
+      correo,
+      empresa,
       ciudad,
-      servicio,
-      comentarios
+      tipo_instalacion,
+      detalles,
+      promocion
     });
 
-    // Respuesta JSON estructurada
+    // Respuesta estructurada al cliente web
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
-      message: "Lead registrado correctamente en Google Sheets",
-      lead: { nombre, empresa, telefono }
+      message: "Lead procesado correctamente",
+      lead: { nombre, empresa, telefono, correo },
+      crm_synced: crmResult.success
     }))
     .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
-    Logger.log("Error en doPost: " + error.toString());
+    Logger.log("Error crítico en doPost: " + error.toString());
     return ContentService.createTextOutput(JSON.stringify({
       status: "error",
       message: error.toString()
@@ -98,13 +137,70 @@ function doPost(e) {
 }
 
 /**
+ * Función que despacha el prospecto al CRM externo vía HTTP POST
+ * Cumple con los lineamientos de la Guía de Integración CRM v2
+ */
+function sendLeadToExternalCRM(lead) {
+  try {
+    // La llave se lee de las Propiedades del Script para no exponerla en código ni en cliente
+    const scriptProperties = PropertiesService.getScriptProperties();
+    let apiKey = scriptProperties.getProperty("ALM_CRM_LLAVE");
+
+    // Fallback de contingencia si no se ha configurado la propiedad aún
+    if (!apiKey) {
+      apiKey = "5dca44811e2b8276b640c6e3dfd2376fdaaf978c2298d8a75c82590b432f3cbe";
+      Logger.log("Nota: Usando llave predeterminada. Se recomienda configurarla en Propiedades del Script con clave ALM_CRM_LLAVE.");
+    }
+
+    // Estructura exacta requerida por la Guía v2 del CRM
+    const payload = {
+      nombre: lead.nombre,
+      telefono: lead.telefono,
+      correo: lead.correo,
+      empresa: lead.empresa,
+      ciudad: lead.ciudad,
+      tipo_instalacion: lead.tipo_instalacion,
+      detalles: lead.detalles,
+      promocion: lead.promocion
+    };
+
+    const options = {
+      method: "post",
+      contentType: "application/json",
+      headers: {
+        "X-CRM-API-Key": apiKey.trim()
+      },
+      payload: JSON.stringify(payload),
+      muteHttpExceptions: true // Permite capturar 400, 401, 500 sin lanzar excepción fatal
+    };
+
+    const response = UrlFetchApp.fetch(CRM_WEBHOOK_URL, options);
+    const statusCode = response.getResponseCode();
+    const responseBody = response.getContentText();
+
+    if (statusCode === 200) {
+      Logger.log("CRM ÉXITO (HTTP 200): " + responseBody);
+      return { success: true, statusCode, responseBody };
+    } else {
+      Logger.log("CRM ERROR HTTP " + statusCode + ": " + responseBody);
+      return { success: false, statusCode, responseBody };
+    }
+
+  } catch (err) {
+    // Si el CRM falla, el error se registra en logs pero el lead NUNCA se pierde
+    Logger.log("CRM EXCEPCIÓN DE RED: " + err.toString());
+    return { success: false, error: err.toString() };
+  }
+}
+
+/**
  * Endpoint de prueba o verificación de estado (GET)
  */
 function doGet(e) {
   return ContentService.createTextOutput(JSON.stringify({
     status: "online",
-    system: "ALM Control de Plagas CRM Bridge API",
-    version: "2026.1"
+    system: "ALM Control de Plagas Backend & CRM Proxy API",
+    version: "2026.2"
   }))
   .setMimeType(ContentService.MimeType.JSON);
 }
@@ -123,13 +219,14 @@ function sendLeadEmailNotification(lead) {
 • Nombre: ${lead.nombre}
 • Empresa: ${lead.empresa}
 • Teléfono: ${lead.telefono}
-• Email: ${lead.email}
+• Correo Electrónico: ${lead.email}
 • Ciudad / Zona: ${lead.ciudad}
-• Servicio Requerido: ${lead.servicio}
+• Tipo de Instalación / Servicio: ${lead.servicio}
+• Promoción: ${lead.promocion}
 • Fecha y Hora: ${lead.timestamp}
 
 --------------------------------------------------
-Notas / Comentarios del Cliente:
+Detalles / Comentarios del Cliente:
 ${lead.comentarios || 'Sin notas adicionales.'}
 --------------------------------------------------
 

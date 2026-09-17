@@ -1,0 +1,72 @@
+/**
+ * Servidor proxy opcional en Node.js / Express para ALM Control de Plagas
+ * Uso opcional si se prefiere desplegar en Railway, Vercel, Render o VPS en lugar de Google Apps Script.
+ */
+
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const CRM_URL = 'https://impartial-rebirth-production-84b9.up.railway.app/api/web-form/fumigaciones_alm';
+const CRM_KEY = process.env.ALM_CRM_LLAVE || '';
+
+app.post('/api/contact', async (req, res) => {
+  const body = req.body || {};
+
+  // Formato exacto conforme a la Guía v2
+  const crmPayload = {
+    nombre: (body.nombre || '').trim(),
+    telefono: (body.telefono || '').trim(),
+    correo: (body.correo || body.email || '').trim(),
+    empresa: (body.empresa || '').trim(),
+    ciudad: (body.ciudad || '').trim(),
+    tipo_instalacion: (body.tipo_instalacion || body.servicio || '').trim(),
+    detalles: (body.detalles || body.comentarios || '').trim(),
+    promocion: (body.promocion || '5% de Descuento Web').trim()
+  };
+
+  try {
+    if (!CRM_KEY) {
+      console.warn('ALM_CRM_LLAVE no configurada en variables de entorno');
+    }
+
+    const crmResponse = await fetch(CRM_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CRM-API-Key': CRM_KEY.trim()
+      },
+      body: JSON.stringify(crmPayload)
+    });
+
+    const status = crmResponse.status;
+    const data = await crmResponse.json().catch(() => ({}));
+
+    if (status !== 200) {
+      console.error(`CRM respondió ${status}:`, data);
+    } else {
+      console.log('Lead registrado en CRM:', data);
+    }
+
+    // Siempre responder éxito al usuario para no perder el prospecto
+    return res.status(200).json({ ok: true, crmStatus: status });
+  } catch (err) {
+    console.error('Error al contactar al CRM:', err);
+    return res.status(200).json({ ok: true, error: err.message });
+  }
+});
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', service: 'ALM CRM Proxy Server' });
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor proxy de ALM activo en el puerto ${PORT}`);
+});

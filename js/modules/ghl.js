@@ -18,8 +18,6 @@ export function initGHLServiceIntegration() {
    * Dispatches lead/event telemetry to GoHighLevel webhook and Google Apps Script
    */
   async function dispatchGHLQuoteLead(serviceName, customMsg) {
-    const crmWebhook = window.ALM_CRM_WEBHOOK_URL || '';
-    const crmKey = window.ALM_CRM_API_KEY || '';
     const ghlWebhook = window.ALM_GHL_WEBHOOK_URL || window.GHL_WEBHOOK_URL || '';
     const payload = {
       event: 'service_quote_request',
@@ -32,31 +30,7 @@ export function initGHLServiceIntegration() {
       source: 'Landing Page ALM - Ficha de Servicios'
     };
 
-    // 1. Dispatch to ALM CRM on Railway (agencia-ai-core)
-    if (crmWebhook) {
-      try {
-        const crmPayload = {
-          nombre: 'Prospecto WhatsApp (' + serviceName + ')',
-          correo: 'prospecto_whatsapp@almcontrol.com',
-          telefono: WHATSAPP_PHONE,
-          servicio: serviceName,
-          comentarios: customMsg,
-          origen: 'Ficha de Servicio ALM',
-          timestamp: new Date().toISOString()
-        };
-        const crmHeaders = { 'Content-Type': 'application/json' };
-        if (crmKey) crmHeaders['x-crm-api-key'] = crmKey;
-        fetch(crmWebhook, {
-          method: 'POST',
-          headers: crmHeaders,
-          body: JSON.stringify(crmPayload)
-        }).catch(err => console.warn('CRM service quote dispatch warning:', err));
-      } catch (err) {
-        console.warn('CRM quote error:', err);
-      }
-    }
-
-    // 2. Dispatch to GoHighLevel (GHL) Webhook if configured
+    // 1. Dispatch to GoHighLevel (GHL) Webhook if configured
     if (ghlWebhook) {
       try {
         if (navigator.sendBeacon) {

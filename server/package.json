@@ -1,0 +1,13 @@
+{
+  "name": "alm-crm-proxy",
+  "version": "1.0.0",
+  "description": "Proxy seguro para conectar el formulario de ALM con el CRM en Railway",
+  "main": "crm-proxy.js",
+  "scripts": {
+    "start": "node crm-proxy.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

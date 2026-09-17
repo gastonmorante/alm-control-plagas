@@ -189,18 +189,7 @@
         timestamp: new Date().toISOString()
       };
 
-      // 1. Dispatch to ALM CRM on Railway (agencia-ai-core)
-      if (window.ALM_CRM_WEBHOOK_URL) {
-        const crmHeaders = { 'Content-Type': 'application/json' };
-        if (window.ALM_CRM_API_KEY) crmHeaders['x-crm-api-key'] = window.ALM_CRM_API_KEY;
-        fetch(window.ALM_CRM_WEBHOOK_URL, {
-          method: 'POST',
-          headers: crmHeaders,
-          body: JSON.stringify(payload)
-        }).catch(err => console.warn('CRM Chat Lead dispatch warning:', err));
-      }
-
-      // 2. Dispatch to Google Apps Script
+      // Dispatch al servidor seguro de ALM (Google Apps Script)
       if (window.ALM_GAS_ENDPOINT) {
         fetch(window.ALM_GAS_ENDPOINT, {
           method: 'POST',

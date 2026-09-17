@@ -22,51 +22,41 @@ export function initLeadForm() {
     btnSpinner.classList.remove('hidden');
 
     const formData = new FormData(form);
-    const emailVal = formData.get('email') || '';
+    const emailVal = (formData.get('email') || '').trim();
+    const telVal = (formData.get('telefono') || '').trim();
+    const nombreVal = (formData.get('nombre') || '').trim();
+    const empresaVal = (formData.get('empresa') || '').trim() || 'Particular / No especificado';
+    const ciudadVal = (formData.get('ciudad') || '').trim();
+    const servicioVal = (formData.get('servicio') || '').trim();
+    const detallesVal = (formData.get('comentarios') || '').trim();
+
+    // Payload conforme a la Guía de Integración CRM v2
     const data = {
-      nombre: formData.get('nombre'),
-      empresa: formData.get('empresa') || 'Particular / No especificado',
-      telefono: formData.get('telefono'),
+      nombre: nombreVal,
+      telefono: telVal,
+      correo: emailVal,
       email: emailVal,
-      correo: emailVal, // Campo requerido por agencia-ai-core CRM
-      ciudad: formData.get('ciudad'),
-      servicio: formData.get('servicio'),
-      comentarios: formData.get('comentarios') || '',
+      empresa: empresaVal,
+      ciudad: ciudadVal,
+      tipo_instalacion: servicioVal,
+      servicio: servicioVal,
+      detalles: detallesVal,
+      comentarios: detallesVal,
+      promocion: '5% de Descuento Web',
       origen: 'Landing Page ALM 2026',
       timestamp: new Date().toISOString()
     };
 
-    const CRM_WEBHOOK_URL = window.ALM_CRM_WEBHOOK_URL || '';
-    const CRM_API_KEY = window.ALM_CRM_API_KEY || '';
-    const GAS_WEBAPP_URL = window.ALM_GAS_ENDPOINT || '';
+    const SERVER_ENDPOINT = window.ALM_GAS_ENDPOINT || window.ALM_SERVER_ENDPOINT || '';
     const GHL_WEBHOOK_URL = window.ALM_GHL_WEBHOOK_URL || window.GHL_WEBHOOK_URL || '';
 
     try {
       const promises = [];
 
-      // 1. Envío al CRM oficial en Railway (agencia-ai-core)
-      if (CRM_WEBHOOK_URL) {
-        const crmHeaders = { 'Content-Type': 'application/json' };
-        if (CRM_API_KEY) {
-          crmHeaders['x-crm-api-key'] = CRM_API_KEY;
-        }
-        promises.push(
-          fetch(CRM_WEBHOOK_URL, {
-            method: 'POST',
-            headers: crmHeaders,
-            body: JSON.stringify(data)
-          }).then(async (res) => {
-            if (!res.ok) {
-              const errText = await res.text().catch(() => '');
-              console.warn('Respuesta CRM no OK:', res.status, errText);
-            }
-          }).catch(err => console.warn('Notificación envío CRM (posible preflight CORS):', err))
-        );
-      }
-
-      // 2. Google Apps Script CRM (si está configurado)
-      if (GAS_WEBAPP_URL && GAS_WEBAPP_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL') {
-        promises.push(fetch(GAS_WEBAPP_URL, {
+      // 1. Envío al Servidor Backend (Google Apps Script / Cloud Function / Node)
+      // El servidor procesa el correo, guarda en Sheets y reenvía con la llave secreta al CRM
+      if (SERVER_ENDPOINT && SERVER_ENDPOINT !== 'YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL') {
+        promises.push(fetch(SERVER_ENDPOINT, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
@@ -74,7 +64,7 @@ export function initLeadForm() {
         }));
       }
 
-      // 3. GoHighLevel (si está configurado)
+      // 2. GoHighLevel (si está configurado)
       if (GHL_WEBHOOK_URL) {
         promises.push(fetch(GHL_WEBHOOK_URL, {
           method: 'POST',
