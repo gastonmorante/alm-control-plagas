@@ -22,11 +22,13 @@ export function initLeadForm() {
     btnSpinner.classList.remove('hidden');
 
     const formData = new FormData(form);
+    const emailVal = formData.get('email') || '';
     const data = {
       nombre: formData.get('nombre'),
       empresa: formData.get('empresa') || 'Particular / No especificado',
       telefono: formData.get('telefono'),
-      email: formData.get('email') || 'No especificado',
+      email: emailVal,
+      correo: emailVal, // Campo requerido por agencia-ai-core CRM
       ciudad: formData.get('ciudad'),
       servicio: formData.get('servicio'),
       comentarios: formData.get('comentarios') || '',
@@ -34,12 +36,35 @@ export function initLeadForm() {
       timestamp: new Date().toISOString()
     };
 
+    const CRM_WEBHOOK_URL = window.ALM_CRM_WEBHOOK_URL || '';
+    const CRM_API_KEY = window.ALM_CRM_API_KEY || '';
     const GAS_WEBAPP_URL = window.ALM_GAS_ENDPOINT || '';
     const GHL_WEBHOOK_URL = window.ALM_GHL_WEBHOOK_URL || window.GHL_WEBHOOK_URL || '';
 
     try {
       const promises = [];
 
+      // 1. Envío al CRM oficial en Railway (agencia-ai-core)
+      if (CRM_WEBHOOK_URL) {
+        const crmHeaders = { 'Content-Type': 'application/json' };
+        if (CRM_API_KEY) {
+          crmHeaders['x-crm-api-key'] = CRM_API_KEY;
+        }
+        promises.push(
+          fetch(CRM_WEBHOOK_URL, {
+            method: 'POST',
+            headers: crmHeaders,
+            body: JSON.stringify(data)
+          }).then(async (res) => {
+            if (!res.ok) {
+              const errText = await res.text().catch(() => '');
+              console.warn('Respuesta CRM no OK:', res.status, errText);
+            }
+          }).catch(err => console.warn('Notificación envío CRM (posible preflight CORS):', err))
+        );
+      }
+
+      // 2. Google Apps Script CRM (si está configurado)
       if (GAS_WEBAPP_URL && GAS_WEBAPP_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL') {
         promises.push(fetch(GAS_WEBAPP_URL, {
           method: 'POST',
@@ -49,6 +74,7 @@ export function initLeadForm() {
         }));
       }
 
+      // 3. GoHighLevel (si está configurado)
       if (GHL_WEBHOOK_URL) {
         promises.push(fetch(GHL_WEBHOOK_URL, {
           method: 'POST',

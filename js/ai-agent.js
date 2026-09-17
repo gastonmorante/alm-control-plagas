@@ -174,25 +174,41 @@
       capturedLead.telefono = phoneMatch[0];
     }
 
-    if ((capturedLead.email || capturedLead.telefono) && window.ALM_GAS_ENDPOINT) {
+    if (capturedLead.email || capturedLead.telefono) {
+      const emailVal = capturedLead.email || 'pendiente@chat.alm';
       const payload = {
         nombre: 'Lead Conversacional Chat IA',
         empresa: 'Por Clasificar',
         telefono: capturedLead.telefono || 'Ver Chat',
-        email: capturedLead.email || 'Ver Chat',
-        ciudad: 'Veracruz',
+        email: emailVal,
+        correo: emailVal,
+        ciudad: 'Córdoba / Veracruz',
         servicio: 'Consulta Chat IA',
         comentarios: `[Lead capturado por Chatbot Gemini IA]\nMensaje: ${text}`,
         origen: 'Widget Gemini IA 2026',
         timestamp: new Date().toISOString()
       };
 
-      fetch(window.ALM_GAS_ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(err => console.warn('GAS Auto Post Error:', err));
+      // 1. Dispatch to ALM CRM on Railway (agencia-ai-core)
+      if (window.ALM_CRM_WEBHOOK_URL) {
+        const crmHeaders = { 'Content-Type': 'application/json' };
+        if (window.ALM_CRM_API_KEY) crmHeaders['x-crm-api-key'] = window.ALM_CRM_API_KEY;
+        fetch(window.ALM_CRM_WEBHOOK_URL, {
+          method: 'POST',
+          headers: crmHeaders,
+          body: JSON.stringify(payload)
+        }).catch(err => console.warn('CRM Chat Lead dispatch warning:', err));
+      }
+
+      // 2. Dispatch to Google Apps Script
+      if (window.ALM_GAS_ENDPOINT) {
+        fetch(window.ALM_GAS_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(err => console.warn('GAS Auto Post Error:', err));
+      }
     }
   }
 
