@@ -8,11 +8,11 @@ export function initCitySelector() {
   const cityPhoneLink = document.getElementById('city-phone-link');
 
   const CITIES = {
-    cordoba: { phone: '271 152 8442', raw: '522711528442', name: 'Córdoba' },
-    orizaba: { phone: '272 123 4567', raw: '522711528442', name: 'Orizaba' },
-    veracruz: { phone: '229 987 6543', raw: '522711528442', name: 'Veracruz Puerto' },
-    bocadelrio: { phone: '229 987 6543', raw: '522711528442', name: 'Boca del Río' },
-    fortin: { phone: '271 152 8442', raw: '522711528442', name: 'Fortín' }
+    cordoba: { phone: '271 126 6662', raw: '5212711266662', name: 'Córdoba' },
+    orizaba: { phone: '272 123 4567', raw: '5212711266662', name: 'Orizaba' },
+    veracruz: { phone: '229 987 6543', raw: '5212711266662', name: 'Veracruz Puerto' },
+    bocadelrio: { phone: '229 987 6543', raw: '5212711266662', name: 'Boca del Río' },
+    fortin: { phone: '271 126 6662', raw: '5212711266662', name: 'Fortín' }
   };
 
   if (!citySelect) return;

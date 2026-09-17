@@ -79,7 +79,7 @@ export function initLeadForm() {
       statusAlert.className = 'mt-4 p-4 rounded-xl text-sm font-medium bg-amber-50 text-amber-900 border border-amber-200 block';
       statusAlert.innerHTML = `
         <p class="font-bold">Hubo un detalle temporal de conexión.</p>
-        <p class="text-xs mt-1">Por favor contáctanos directamente a nuestro WhatsApp oficial para atención inmediata: <a href="https://wa.me/522711528442" class="underline font-bold">271 152 8442</a>.</p>
+        <p class="text-xs mt-1">Por favor contáctanos directamente a nuestro WhatsApp oficial para atención inmediata: <a href="https://wa.me/5212711266662" class="underline font-bold">+52 1 271 126 6662</a>.</p>
       `;
     } finally {
       submitBtn.disabled = false;

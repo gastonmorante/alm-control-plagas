@@ -5,7 +5,7 @@
  */
 
 export function initGHLServiceIntegration() {
-  const WHATSAPP_PHONE = window.ALM_WHATSAPP_PHONE || '522711528442';
+  const WHATSAPP_PHONE = window.ALM_WHATSAPP_PHONE || '5212711266662';
 
   const SERVICE_MESSAGES = {
     'Residencial': 'Hola ALM Control de Plagas, me interesa solicitar una cotización para el servicio Residencial (casas y departamentos).',

@@ -9,7 +9,7 @@
     silos: "Para el sector industrial, silos y transporte de carga en Veracruz, realizamos tratamientos especializados de fumigación y desinfección sanitaria. Recomendamos mantener un programa mensual de protección para asegurar el cumplimiento fitosanitario.",
     seguridad: "Utilizamos exclusivamente productos ecológicos de baja toxicidad registrados ante COFEPRIS. Marisela Reyes y nuestro equipo técnico te proporcionarán la ficha técnica y tiempos de reingreso seguros.",
     cobertura: "Brindamos atención inmediata en Córdoba, Fortín, Orizaba, Veracruz puerto, Boca del Río, Xalapa y Tierra Blanca.",
-    contacto: "Puedes contactarnos directamente al WhatsApp 271 152 8442 o a nuestras oficinas 271 140 7953 / 271 715 7830. ¿Te gustaría que registremos tus datos para enviarte una cotización sin costo con el 5% de descuento?",
+    contacto: "Puedes contactarnos directamente al WhatsApp +52 1 271 126 6662 o a nuestras oficinas 271 140 7953 / 271 715 7830. ¿Te gustaría que registremos tus datos para enviarte una cotización sin costo con el 5% de descuento?",
     descuento: "¡Así es! Por solicitar tu servicio a través de nuestra web obtienes Cotización Sin Costo + 5% de Descuento en tu primer servicio."
   };
 
@@ -109,7 +109,7 @@
     if (showWaCta) {
       ctaHtml = `
         <div class="mt-2 pt-2 border-t border-slate-150">
-          <a href="https://wa.me/522711528442?text=${encodeURIComponent('Hola ALM, me gustaría agendar una inspección técnica con el 5% de descuento.')}" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-3 py-1.5 rounded-lg transition-colors">
+          <a href="https://wa.me/5212711266662?text=${encodeURIComponent('Hola ALM, me gustaría agendar una inspección técnica con el 5% de descuento.')}" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-3 py-1.5 rounded-lg transition-colors">
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
             Contactar por WhatsApp Directo
           </a>
