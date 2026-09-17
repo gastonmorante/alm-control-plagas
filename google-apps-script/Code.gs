@@ -142,14 +142,13 @@ function doPost(e) {
  */
 function sendLeadToExternalCRM(lead) {
   try {
-    // La llave se lee de las Propiedades del Script para no exponerla en código ni en cliente
+    // La llave se lee exclusivamente de las Propiedades del Script (Project Settings > Script Properties)
     const scriptProperties = PropertiesService.getScriptProperties();
-    let apiKey = scriptProperties.getProperty("ALM_CRM_LLAVE");
+    const apiKey = scriptProperties.getProperty("ALM_CRM_LLAVE");
 
-    // Fallback de contingencia si no se ha configurado la propiedad aún
     if (!apiKey) {
-      apiKey = "5dca44811e2b8276b640c6e3dfd2376fdaaf978c2298d8a75c82590b432f3cbe";
-      Logger.log("Nota: Usando llave predeterminada. Se recomienda configurarla en Propiedades del Script con clave ALM_CRM_LLAVE.");
+      Logger.log("CRM AVISO: La propiedad ALM_CRM_LLAVE no está configurada en las Propiedades del Script. Por favor agrégala en Configuración del Proyecto.");
+      return { success: false, error: "missing_api_key" };
     }
 
     // Estructura exacta requerida por la Guía v2 del CRM

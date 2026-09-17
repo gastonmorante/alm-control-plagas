@@ -10,9 +10,18 @@ export function initLeadForm() {
   const statusAlert = document.getElementById('form-status-alert');
 
   if (!form) return;
+  // Prevenir inicializaciones duplicadas del event listener
+  if (form.dataset.bound === 'true') return;
+  form.dataset.bound = 'true';
+
+  let isSubmitting = false;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Bloqueo estricto: evita disparos dobles o múltiples envíos accidentales
+    if (isSubmitting) return;
+    isSubmitting = true;
 
     statusAlert.classList.add('hidden');
     statusAlert.className = 'mt-4 p-4 rounded-xl text-sm font-medium hidden';
@@ -98,6 +107,7 @@ export function initLeadForm() {
         <p class="text-xs mt-1">Por favor contáctanos directamente a nuestro WhatsApp oficial para atención inmediata: <a href="https://wa.me/5212711266662" class="underline font-bold">+52 1 271 126 6662</a>.</p>
       `;
     } finally {
+      isSubmitting = false;
       submitBtn.disabled = false;
       btnText.textContent = 'SOLICITAR COTIZACIÓN CON 5% DE DESCUENTO';
       btnSpinner.classList.add('hidden');
