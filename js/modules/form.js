@@ -56,21 +56,24 @@ export function initLeadForm() {
       timestamp: new Date().toISOString()
     };
 
-    const SERVER_ENDPOINT = window.ALM_GAS_ENDPOINT || window.ALM_SERVER_ENDPOINT || '';
+    const SERVER_ENDPOINT = window.ALM_GAS_ENDPOINT || window.ALM_SERVER_ENDPOINT || 'send-crm.php';
     const GHL_WEBHOOK_URL = window.ALM_GHL_WEBHOOK_URL || window.GHL_WEBHOOK_URL || '';
 
     try {
       const promises = [];
 
-      // 1. Envío al Servidor Backend (Google Apps Script / Cloud Function / Node)
-      // El servidor procesa el correo, guarda en Sheets y reenvía con la llave secreta al CRM
+      // 1. Envío al Servidor Backend (PHP propio o Apps Script si existiera)
       if (SERVER_ENDPOINT && SERVER_ENDPOINT !== 'YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL') {
-        promises.push(fetch(SERVER_ENDPOINT, {
+        const isGas = SERVER_ENDPOINT.includes('script.google.com');
+        const fetchOptions = {
           method: 'POST',
-          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
-        }));
+        };
+        if (isGas) {
+          fetchOptions.mode = 'no-cors';
+        }
+        promises.push(fetch(SERVER_ENDPOINT, fetchOptions));
       }
 
       // 2. GoHighLevel (si está configurado)

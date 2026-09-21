@@ -48,45 +48,47 @@ function doPost(e) {
     const promocion = (data.promocion || "5% de Descuento Web").trim();
     const origen = (data.origen || "Landing Page ALM 2026").trim();
 
-    // 1. Almacenamiento actual en Google Sheets (Respaldo garantizado)
+    // 1. Google Sheets opcional (solo si el script estuviera vinculado a una hoja)
     let sheet = null;
     try {
       const ss = SpreadsheetApp.getActiveSpreadsheet();
-      sheet = ss.getSheetByName(SHEET_NAME);
+      if (ss) {
+        sheet = ss.getSheetByName(SHEET_NAME);
 
-      if (!sheet) {
-        sheet = ss.insertSheet(SHEET_NAME);
+        if (!sheet) {
+          sheet = ss.insertSheet(SHEET_NAME);
+          sheet.appendRow([
+            "Timestamp",
+            "Nombre",
+            "Empresa",
+            "Teléfono",
+            "Correo Electrónico",
+            "Ciudad",
+            "Tipo de Instalación / Servicio",
+            "Detalles / Necesidad",
+            "Promoción",
+            "Origen Lead",
+            "Estatus CRM"
+          ]);
+          sheet.getRange(1, 1, 1, 11).setFontWeight("bold").setBackground("#0D1B3E").setFontColor("#FFFFFF");
+        }
+
         sheet.appendRow([
-          "Timestamp",
-          "Nombre",
-          "Empresa",
-          "Teléfono",
-          "Correo Electrónico",
-          "Ciudad",
-          "Tipo de Instalación / Servicio",
-          "Detalles / Necesidad",
-          "Promoción",
-          "Origen Lead",
-          "Estatus CRM"
+          timestamp,
+          nombre,
+          empresa,
+          telefono,
+          correo,
+          ciudad,
+          tipo_instalacion,
+          detalles,
+          promocion,
+          origen,
+          "Procesando CRM..."
         ]);
-        sheet.getRange(1, 1, 1, 11).setFontWeight("bold").setBackground("#0D1B3E").setFontColor("#FFFFFF");
       }
-
-      sheet.appendRow([
-        timestamp,
-        nombre,
-        empresa,
-        telefono,
-        correo,
-        ciudad,
-        tipo_instalacion,
-        detalles,
-        promocion,
-        origen,
-        "Procesando CRM..."
-      ]);
     } catch (sheetError) {
-      Logger.log("Aviso: Error registrando en Google Sheets: " + sheetError.toString());
+      Logger.log("Aviso: Error registrando en Google Sheets (opcional): " + sheetError.toString());
     }
 
     // 2. Envío de notificación actual por correo electrónico
