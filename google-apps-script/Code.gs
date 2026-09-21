@@ -49,9 +49,10 @@ function doPost(e) {
     const origen = (data.origen || "Landing Page ALM 2026").trim();
 
     // 1. Almacenamiento actual en Google Sheets (Respaldo garantizado)
+    let sheet = null;
     try {
       const ss = SpreadsheetApp.getActiveSpreadsheet();
-      let sheet = ss.getSheetByName(SHEET_NAME);
+      sheet = ss.getSheetByName(SHEET_NAME);
 
       if (!sheet) {
         sheet = ss.insertSheet(SHEET_NAME);
@@ -82,7 +83,7 @@ function doPost(e) {
         detalles,
         promocion,
         origen,
-        "NUEVO - Pendiente Contacto"
+        "Procesando CRM..."
       ]);
     } catch (sheetError) {
       Logger.log("Aviso: Error registrando en Google Sheets: " + sheetError.toString());
@@ -116,6 +117,19 @@ function doPost(e) {
       detalles,
       promocion
     });
+
+    // Actualizar estatus CRM en la fila de Google Sheets
+    if (sheet) {
+      try {
+        const lastRow = sheet.getLastRow();
+        const crmLabel = crmResult.success 
+          ? "Sincronizado CRM (200)" 
+          : "Fallo CRM (" + (crmResult.statusCode ? "HTTP " + crmResult.statusCode : crmResult.error || "Error") + ")";
+        sheet.getRange(lastRow, 11).setValue(crmLabel);
+      } catch (sheetUpdateErr) {
+        Logger.log("Aviso al actualizar estatus CRM en fila: " + sheetUpdateErr.toString());
+      }
+    }
 
     // Respuesta estructurada al cliente web
     return ContentService.createTextOutput(JSON.stringify({
@@ -173,20 +187,35 @@ function sendLeadToExternalCRM(lead) {
       muteHttpExceptions: true // Permite capturar 400, 401, 500 sin lanzar excepción fatal
     };
 
-    const response = UrlFetchApp.fetch(CRM_WEBHOOK_URL, options);
-    const statusCode = response.getResponseCode();
-    const responseBody = response.getContentText();
+    let response = UrlFetchApp.fetch(CRM_WEBHOOK_URL, options);
+    let statusCode = response.getResponseCode();
+    let responseBody = response.getContentText();
+
+    // 500: Falla del lado del CRM. Reintentar una vez pasados unos segundos (Guía v2)
+    if (statusCode >= 500) {
+      Logger.log("CRM respondió " + statusCode + ". Reintentando una vez pasados 2 segundos...");
+      Utilities.sleep(2000);
+      response = UrlFetchApp.fetch(CRM_WEBHOOK_URL, options);
+      statusCode = response.getResponseCode();
+      responseBody = response.getContentText();
+    }
 
     if (statusCode === 200) {
-      Logger.log("CRM ÉXITO (HTTP 200): " + responseBody);
+      Logger.log("CRM ÉXITO (HTTP 200): Prospecto guardado - " + responseBody);
       return { success: true, statusCode, responseBody };
+    } else if (statusCode === 400) {
+      Logger.log("CRM ERROR HTTP 400 (Dato inválido): " + responseBody);
+      return { success: false, statusCode, responseBody };
+    } else if (statusCode === 401) {
+      Logger.log("CRM ERROR HTTP 401 (Llave o header no coincide): " + responseBody);
+      return { success: false, statusCode, responseBody };
     } else {
       Logger.log("CRM ERROR HTTP " + statusCode + ": " + responseBody);
       return { success: false, statusCode, responseBody };
     }
 
   } catch (err) {
-    // Si el CRM falla, el error se registra en logs pero el lead NUNCA se pierde
+    // Si el CRM falla por red, el error se registra en logs pero el lead NUNCA se pierde
     Logger.log("CRM EXCEPCIÓN DE RED: " + err.toString());
     return { success: false, error: err.toString() };
   }

@@ -37,7 +37,7 @@ app.post('/api/contact', async (req, res) => {
       console.warn('ALM_CRM_LLAVE no configurada en variables de entorno');
     }
 
-    const crmResponse = await fetch(CRM_URL, {
+    let crmResponse = await fetch(CRM_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,17 +46,37 @@ app.post('/api/contact', async (req, res) => {
       body: JSON.stringify(crmPayload)
     });
 
-    const status = crmResponse.status;
+    let status = crmResponse.status;
+
+    // Si responde 500, reintentar una vez pasados unos segundos (Guía v2)
+    if (status >= 500) {
+      console.warn(`CRM respondió ${status}. Reintentando una vez en 2 segundos...`);
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      crmResponse = await fetch(CRM_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CRM-API-Key': CRM_KEY.trim()
+        },
+        body: JSON.stringify(crmPayload)
+      });
+      status = crmResponse.status;
+    }
+
     const data = await crmResponse.json().catch(() => ({}));
 
-    if (status !== 200) {
-      console.error(`CRM respondió ${status}:`, data);
+    if (status === 200) {
+      console.log('Lead registrado con éxito en CRM:', data);
+    } else if (status === 400) {
+      console.error('CRM Error 400 (Dato inválido):', data);
+    } else if (status === 401) {
+      console.error('CRM Error 401 (Llave o header no coincide):', data);
     } else {
-      console.log('Lead registrado en CRM:', data);
+      console.error(`CRM respondió ${status}:`, data);
     }
 
     // Siempre responder éxito al usuario para no perder el prospecto
-    return res.status(200).json({ ok: true, crmStatus: status });
+    return res.status(200).json({ ok: true, crmStatus: status, crmResponse: data });
   } catch (err) {
     console.error('Error al contactar al CRM:', err);
     return res.status(200).json({ ok: true, error: err.message });
