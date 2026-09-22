@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3000;
 
 function resolveRootDir() {
   const candidates = [
+    path.resolve(__dirname, '..', 'public_html'),
+    path.resolve(process.cwd(), '..', 'public_html'),
     path.resolve(__dirname, '..'),
     __dirname,
     process.cwd(),
