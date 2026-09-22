@@ -11,11 +11,24 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Determinar el directorio raíz del proyecto (donde están index.html, assets, js, css)
-let rootDir = path.resolve(__dirname, '..');
-if (!fs.existsSync(path.join(rootDir, 'index.html')) && fs.existsSync(path.join(__dirname, 'index.html'))) {
-  rootDir = __dirname;
+function resolveRootDir() {
+  const candidates = [
+    path.resolve(__dirname, '..'),
+    __dirname,
+    process.cwd(),
+    path.resolve(process.cwd(), '..'),
+    path.join(process.cwd(), 'public_html'),
+    path.join(__dirname, 'public_html'),
+  ];
+  for (const dir of candidates) {
+    if (fs.existsSync(path.join(dir, 'index.html'))) {
+      return dir;
+    }
+  }
+  return path.resolve(__dirname, '..');
 }
+
+let rootDir = resolveRootDir();
 
 // Middleware
 app.use(cors());
@@ -23,7 +36,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Servir archivos estáticos de la landing page
-app.use(express.static(rootDir));
+app.use((req, res, next) => {
+  const currentRoot = resolveRootDir();
+  express.static(currentRoot)(req, res, next);
+});
 
 const CRM_URL = 'https://impartial-rebirth-production-84b9.up.railway.app/api/web-form/fumigaciones_alm';
 const CRM_KEY = process.env.ALM_CRM_LLAVE || '5dca44811e2b8276b640c6e3dfd2376fdaaf978c2298d8a75c82590b432f3cbe';
@@ -96,18 +112,37 @@ app.post(['/api/contact', '/send-crm.php'], async (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', service: 'ALM CRM Proxy Server' });
+  const currentRoot = resolveRootDir();
+  res.json({
+    status: 'ok',
+    service: 'ALM CRM Proxy Server',
+    __dirname,
+    cwd: process.cwd(),
+    resolvedRoot: currentRoot,
+    hasIndexHtml: fs.existsSync(path.join(currentRoot, 'index.html')),
+    filesInCurrentRoot: fs.existsSync(currentRoot) ? fs.readdirSync(currentRoot).slice(0, 15) : []
+  });
 });
 
 // Servir la página principal
 app.get('/', (req, res) => {
-  res.sendFile(path.join(rootDir, 'index.html'));
+  const currentRoot = resolveRootDir();
+  const file = path.join(currentRoot, 'index.html');
+  if (fs.existsSync(file)) {
+    return res.sendFile(file);
+  }
+  res.status(404).send(`index.html no encontrado. Buscado en: ${file}. CWD: ${process.cwd()}, Dirname: ${__dirname}`);
 });
 
 // Fallback para cualquier otra ruta de navegación
 app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api')) return next();
-  res.sendFile(path.join(rootDir, 'index.html'));
+  if (req.path.startsWith('/api') || req.path.startsWith('/health')) return next();
+  const currentRoot = resolveRootDir();
+  const file = path.join(currentRoot, 'index.html');
+  if (fs.existsSync(file)) {
+    return res.sendFile(file);
+  }
+  next();
 });
 
 app.listen(PORT, () => {
