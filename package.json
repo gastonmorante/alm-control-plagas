@@ -1,0 +1,13 @@
+{
+  "name": "alm-control-plagas",
+  "version": "1.0.0",
+  "description": "ALM Control de Plagas Landing Page y Backend Proxy",
+  "main": "server/crm-proxy.js",
+  "scripts": {
+    "start": "node server/crm-proxy.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

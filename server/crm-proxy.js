@@ -5,19 +5,31 @@
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Determinar el directorio raíz del proyecto (donde están index.html, assets, js, css)
+let rootDir = path.resolve(__dirname, '..');
+if (!fs.existsSync(path.join(rootDir, 'index.html')) && fs.existsSync(path.join(__dirname, 'index.html'))) {
+  rootDir = __dirname;
+}
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const CRM_URL = 'https://impartial-rebirth-production-84b9.up.railway.app/api/web-form/fumigaciones_alm';
-const CRM_KEY = process.env.ALM_CRM_LLAVE || '';
+// Servir archivos estáticos de la landing page
+app.use(express.static(rootDir));
 
-app.post('/api/contact', async (req, res) => {
+const CRM_URL = 'https://impartial-rebirth-production-84b9.up.railway.app/api/web-form/fumigaciones_alm';
+const CRM_KEY = process.env.ALM_CRM_LLAVE || '5dca44811e2b8276b640c6e3dfd2376fdaaf978c2298d8a75c82590b432f3cbe';
+
+// Endpoint para el formulario (acepta tanto /api/contact como /send-crm.php)
+app.post(['/api/contact', '/send-crm.php'], async (req, res) => {
   const body = req.body || {};
 
   // Formato exacto conforme a la Guía v2
@@ -85,6 +97,17 @@ app.post('/api/contact', async (req, res) => {
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'ALM CRM Proxy Server' });
+});
+
+// Servir la página principal
+app.get('/', (req, res) => {
+  res.sendFile(path.join(rootDir, 'index.html'));
+});
+
+// Fallback para cualquier otra ruta de navegación
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api')) return next();
+  res.sendFile(path.join(rootDir, 'index.html'));
 });
 
 app.listen(PORT, () => {
