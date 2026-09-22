@@ -13,26 +13,19 @@ const PORT = process.env.PORT || 3000;
 
 function resolveRootDir() {
   const candidates = [
-    path.resolve(__dirname, '../../../last-source'),
-    path.resolve(__dirname, '../../../current'),
-    path.resolve(__dirname, '../../../../public_html'),
-    path.resolve(__dirname, '../../../public_html'),
-    path.resolve(process.cwd(), '../../../public_html'),
-    path.resolve(__dirname, '..', 'public_html'),
-    path.resolve(process.cwd(), '..', 'public_html'),
-    path.resolve(__dirname, '..'),
     __dirname,
-    process.cwd(),
+    path.resolve(__dirname, '..'),
     path.resolve(process.cwd(), '..'),
-    path.join(process.cwd(), 'public_html'),
-    path.join(__dirname, 'public_html'),
+    process.cwd(),
+    path.resolve(__dirname, '../../../public_html'),
+    path.resolve(__dirname, '../../../../public_html')
   ];
   for (const dir of candidates) {
     if (fs.existsSync(path.join(dir, 'index.html'))) {
       return dir;
     }
   }
-  return path.resolve(__dirname, '..');
+  return __dirname;
 }
 
 let rootDir = resolveRootDir();
@@ -120,19 +113,11 @@ app.post(['/api/contact', '/send-crm.php'], async (req, res) => {
 
 app.get('/health', (req, res) => {
   const currentRoot = resolveRootDir();
-  const domainDir = path.resolve(__dirname, '../../..');
-  const lastSource = path.resolve(domainDir, 'last-source');
-  const current = path.resolve(domainDir, 'current');
   res.json({
     status: 'ok',
     service: 'ALM CRM Proxy Server',
-    __dirname,
-    cwd: process.cwd(),
     resolvedRoot: currentRoot,
-    domainDir,
-    filesInDomainDir: fs.existsSync(domainDir) ? fs.readdirSync(domainDir) : [],
-    filesInLastSource: fs.existsSync(lastSource) ? fs.readdirSync(lastSource).slice(0, 20) : [],
-    filesInCurrent: fs.existsSync(current) ? fs.readdirSync(current).slice(0, 20) : []
+    hasIndexHtml: fs.existsSync(path.join(currentRoot, 'index.html'))
   });
 });
 
