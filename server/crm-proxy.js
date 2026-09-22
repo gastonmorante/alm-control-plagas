@@ -111,11 +111,17 @@ app.post(['/api/contact', '/send-crm.php'], async (req, res) => {
   }
 });
 
-app.get('/health', (req, res) => {
+app.get('/health', async (req, res) => {
   const currentRoot = resolveRootDir();
+  let serverIp = 'desconocida';
+  try {
+    const ipData = await fetch('https://api.ipify.org?format=json').then(r => r.json());
+    serverIp = ipData.ip;
+  } catch (e) {}
   res.json({
     status: 'ok',
     service: 'ALM CRM Proxy Server',
+    serverIp,
     resolvedRoot: currentRoot,
     hasIndexHtml: fs.existsSync(path.join(currentRoot, 'index.html'))
   });
