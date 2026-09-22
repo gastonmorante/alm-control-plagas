@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3000;
 
 function resolveRootDir() {
   const candidates = [
+    path.resolve(__dirname, '../../../public_html'),
+    path.resolve(process.cwd(), '../../../public_html'),
     path.resolve(__dirname, '..', 'public_html'),
     path.resolve(process.cwd(), '..', 'public_html'),
     path.resolve(__dirname, '..'),
@@ -115,16 +117,17 @@ app.post(['/api/contact', '/send-crm.php'], async (req, res) => {
 
 app.get('/health', (req, res) => {
   const currentRoot = resolveRootDir();
-  const publicHtml = path.resolve(__dirname, '..', 'public_html');
+  const domainDir = path.resolve(__dirname, '../../..');
+  const realPublicHtml = path.resolve(domainDir, 'public_html');
   res.json({
     status: 'ok',
     service: 'ALM CRM Proxy Server',
     __dirname,
     cwd: process.cwd(),
     resolvedRoot: currentRoot,
-    hasIndexHtml: fs.existsSync(path.join(currentRoot, 'index.html')),
-    filesInDirname: fs.existsSync(__dirname) ? fs.readdirSync(__dirname).slice(0, 20) : [],
-    filesInPublicHtml: fs.existsSync(publicHtml) ? fs.readdirSync(publicHtml).slice(0, 20) : []
+    domainDir,
+    filesInDomainDir: fs.existsSync(domainDir) ? fs.readdirSync(domainDir) : [],
+    filesInRealPublicHtml: fs.existsSync(realPublicHtml) ? fs.readdirSync(realPublicHtml).slice(0, 25) : []
   });
 });
 
