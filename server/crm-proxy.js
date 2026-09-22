@@ -121,7 +121,8 @@ app.post(['/api/contact', '/send-crm.php'], async (req, res) => {
 app.get('/health', (req, res) => {
   const currentRoot = resolveRootDir();
   const domainDir = path.resolve(__dirname, '../../..');
-  const realPublicHtml = path.resolve(domainDir, 'public_html');
+  const lastSource = path.resolve(domainDir, 'last-source');
+  const current = path.resolve(domainDir, 'current');
   res.json({
     status: 'ok',
     service: 'ALM CRM Proxy Server',
@@ -130,7 +131,8 @@ app.get('/health', (req, res) => {
     resolvedRoot: currentRoot,
     domainDir,
     filesInDomainDir: fs.existsSync(domainDir) ? fs.readdirSync(domainDir) : [],
-    filesInRealPublicHtml: fs.existsSync(realPublicHtml) ? fs.readdirSync(realPublicHtml).slice(0, 25) : []
+    filesInLastSource: fs.existsSync(lastSource) ? fs.readdirSync(lastSource).slice(0, 20) : [],
+    filesInCurrent: fs.existsSync(current) ? fs.readdirSync(current).slice(0, 20) : []
   });
 });
 
