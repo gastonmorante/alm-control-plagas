@@ -104,6 +104,7 @@ function initLegalModals() {
   document.querySelectorAll('[data-legal]').forEach(trigger => {
     trigger.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const targetType = trigger.getAttribute('data-legal');
       if (targetType === 'privacy') openModal('modal-privacy');
       if (targetType === 'terms') openModal('modal-terms');

@@ -1101,16 +1101,28 @@
                   <textarea class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:ring-2 focus:ring-secondary focus:outline-none text-xs" name="comentarios" placeholder="Describe brevemente el tipo de plaga o instalación..." rows="3"></textarea>
                 </div>
 
+                <!-- Checkbox de Consentimiento Expreso (LFPDPPP) -->
+                <div class="flex items-start gap-2.5 pt-2 pb-1">
+                  <input 
+                    type="checkbox" 
+                    id="consentimiento-privacidad" 
+                    name="consentimiento" 
+                    required 
+                    class="mt-0.5 w-4 h-4 rounded border-outline-variant text-secondary focus:ring-secondary focus:ring-offset-0 cursor-pointer accent-emerald-700 shrink-0"
+                  />
+                  <label for="consentimiento-privacidad" class="text-[11px] sm:text-xs text-slate-600 leading-snug cursor-pointer select-none">
+                    Acepto el <button type="button" data-legal="privacy" class="text-secondary font-bold underline hover:text-emerald-800">Aviso de Privacidad</button> y los <button type="button" data-legal="terms" class="text-secondary font-bold underline hover:text-emerald-800">Términos del Servicio</button>, y autorizo el uso de mis datos para ser contactado sobre mi cotización. *
+                  </label>
+                </div>
+
                 <button id="form-submit-btn" class="w-full bg-secondary text-on-secondary py-4 rounded-xl font-bold text-xs sm:text-sm hover:bg-on-secondary-container transition-all shadow-lg flex justify-center items-center gap-2" type="submit">
                   <span id="form-btn-text">SOLICITAR COTIZACIÓN CON 5% DE DESCUENTO</span>
                   <span id="form-btn-spinner" class="hidden w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
                   <span class="material-symbols-outlined text-base">send</span>
                 </button>
 
-                <p class="text-[11px] text-slate-500 text-center mt-2 leading-relaxed">
-                  Tus datos están protegidos conforme a la LFPDPPP. Al enviar tu solicitud aceptas nuestro 
-                  <button type="button" data-legal="privacy" class="text-secondary font-bold underline hover:text-emerald-700">Aviso de Privacidad</button> 
-                  y <button type="button" data-legal="terms" class="text-secondary font-bold underline hover:text-emerald-700">Términos del Servicio</button>.
+                <p class="text-[10.5px] text-slate-500 text-center mt-2 leading-relaxed">
+                  Tus datos personales están protegidos con cifrado y estricto apego a la LFPDPPP.
                 </p>
               </form>
 

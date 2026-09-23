@@ -30,6 +30,18 @@ export function initLeadForm() {
     btnText.textContent = 'Enviando Solicitud...';
     btnSpinner.classList.remove('hidden');
 
+    const consentCheck = form.querySelector('#consentimiento-privacidad');
+    if (consentCheck && !consentCheck.checked) {
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      btnText.textContent = 'SOLICITAR COTIZACIÓN CON 5% DE DESCUENTO';
+      btnSpinner.classList.add('hidden');
+      statusAlert.className = 'mt-4 p-4 rounded-xl text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200 block';
+      statusAlert.innerHTML = '<p class="font-bold">Por favor acepta el Aviso de Privacidad y Términos del Servicio para continuar.</p>';
+      consentCheck.focus();
+      return;
+    }
+
     const formData = new FormData(form);
     const emailVal = (formData.get('email') || '').trim();
     const telVal = (formData.get('telefono') || '').trim();
