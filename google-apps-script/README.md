@@ -17,7 +17,7 @@ Este documento explica paso a paso cómo desplegar el puente de datos en **Googl
 4. Pega el contenido en el editor de Apps Script.
 5. Ajusta la variable `NOTIFICATION_EMAIL` en la parte superior con los correos que deben recibir las alertas de nuevos prospectos:
    ```javascript
-   const NOTIFICATION_EMAIL = "gaston@negocioup.com, contacto@almcontrol.com";
+   const NOTIFICATION_EMAIL = "gaston@negocioup.com, contacto@almcontrol.com, info@almmexico.com.mx";
    ```
 
 ---

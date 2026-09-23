@@ -17,7 +17,7 @@
  */
 
 // 1. CONFIGURACIÓN DE NOTIFICACIONES Y HOJA DE CÁLCULO
-const NOTIFICATION_EMAIL = "gaston@negocioup.com, contacto@almcontrol.com";
+const NOTIFICATION_EMAIL = "gaston@negocioup.com, contacto@almcontrol.com, info@almmexico.com.mx";
 const SHEET_NAME = "Leads Landing Page";
 
 // 2. CONFIGURACIÓN DEL CRM EXTERNO (RAILWAY)
