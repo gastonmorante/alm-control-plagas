@@ -9,6 +9,7 @@ import { initAntEasterEgg } from './modules/easter-egg.js';
 import { initLeadForm } from './modules/form.js';
 import { initCitySelector } from './modules/city-selector.js';
 import { initGHLServiceIntegration } from './modules/ghl.js';
+import { initLegalSystem } from './modules/legal.js';
 
 // Enforce scroll to top on refresh
 if ('scrollRestoration' in history) {
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLeadForm();
   initCitySelector();
   initGHLServiceIntegration();
+  initLegalSystem();
   initSmoothScroll();
   initKeyboardGlobal();
 });

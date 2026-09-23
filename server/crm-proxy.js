@@ -137,6 +137,27 @@ app.get('/', (req, res) => {
   res.status(404).send(`index.html no encontrado. Buscado en: ${file}. CWD: ${process.cwd()}, Dirname: ${__dirname}`);
 });
 
+// SEO & Bots: robots.txt y sitemap.xml
+app.get('/robots.txt', (req, res) => {
+  const currentRoot = resolveRootDir();
+  const file = path.join(currentRoot, 'robots.txt');
+  if (fs.existsSync(file)) {
+    res.type('text/plain');
+    return res.sendFile(file);
+  }
+  res.type('text/plain').send("User-agent: *\nAllow: /\n\nSitemap: https://www.almmexico.com.mx/sitemap.xml\n");
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  const currentRoot = resolveRootDir();
+  const file = path.join(currentRoot, 'sitemap.xml');
+  if (fs.existsSync(file)) {
+    res.type('application/xml');
+    return res.sendFile(file);
+  }
+  res.status(404).send('Sitemap not found');
+});
+
 // Fallback para cualquier otra ruta de navegación
 app.get('*', (req, res, next) => {
   if (req.path.startsWith('/api') || req.path.startsWith('/health')) return next();

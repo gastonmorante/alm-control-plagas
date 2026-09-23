@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.almmexico.com.mx/</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.almmexico.com.mx/hero_fumigacion_alm.jpg</image:loc>
+      <image:title>ALM Control de Plagas con Licencia Sanitaria COFEPRIS en Veracruz</image:title>
+      <image:caption>Servicios certificados de control de plagas y fumigación bajo la NOM-256-SSA1-2012</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.almmexico.com.mx/logo_transparent.png</image:loc>
+      <image:title>Logotipo Oficial ALM Control de Plagas</image:title>
+    </image:image>
+  </url>
+</urlset>
